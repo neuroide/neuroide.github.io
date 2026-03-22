@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useful Frameworks and Domains in Robotics | Neuroide</title>
+    <meta name="description" content="A structured overview of useful frameworks and application domains in robotics, from control and planning to embodied learning and field deployment.">
+    <link rel="icon" type="image/png" href="/images/neuroide.png">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/index.html" class="logo" aria-label="Neuroide home">
+                <img src="/images/neuroide.png" alt="Neuroide">
+            </a>
+            <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <ul id="navLinks" class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/topics/signals/index.html">Signals</a></li>
+                <li><a href="/topics/ml/index.html">Machine Learning</a></li>
+                <li><a href="/topics/genai/index.html">GenAI</a></li>
+                <li><a href="/topics/robotics/index.html" class="active">Robotics</a></li>
+                <li><a href="/search.html" class="nav-search-link">Search</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="article-layout">
+        <article class="article-shell">
+            <div class="article-meta">
+                <span>Robotics</span>
+                <span>Research Note</span>
+                <span>Intermediate</span>
+            </div>
+            <h1 class="article-title">Useful Frameworks and Domains in Robotics</h1>
+            <div class="article-byline">
+                <span><strong>Author:</strong> Neuroide</span>
+                <span><strong>Published:</strong> March 2026</span>
+            </div>
+            <p class="article-lead">Robotics is best understood not as one topic but as a layered field that joins mechanics, control, software, perception, and deployment context. A useful way to study it is to separate the technical frameworks from the domains where those frameworks are applied.</p>
+            <div class="article-body">
+                <h2>A framework-first view</h2>
+                <p>One practical decomposition is to treat a robot as a pipeline with at least five layers: perception, state estimation, decision or planning, control, and execution. Different subfields of robotics emphasize different parts of this stack, but nearly all serious systems rely on the same structure.</p>
+                <div class="equation-block">
+                    $$\text{robot system} = \text{perception} + \text{estimation} + \text{planning} + \text{control} + \text{execution}.$$
+                </div>
+                <p>This equation is conceptual rather than literal, but it is useful because it prevents robotics from collapsing into either pure software or pure mechanics. The interesting work usually happens in the interfaces between the layers.</p>
+
+                <h2>Framework 1: Control and dynamics</h2>
+                <p>The most classical framework in robotics is the control-theoretic view. The central questions are stability, tracking, feedback, actuation limits, and how a system behaves under perturbation. This matters in manipulators, aerial systems, locomotion, and industrial automation.</p>
+                <p>For students and practitioners, this framework develops intuition about what can be guaranteed and what must be adapted online. It is also the language used when robots must operate under tight safety or timing constraints.</p>
+
+                <h2>Framework 2: Planning and decision making</h2>
+                <p>A second major framework is planning. Here the focus shifts from low-level stability to trajectories, task sequencing, collision avoidance, and long-horizon behavior. Motion planning, task planning, and decision-theoretic planning all belong here.</p>
+                <p>This framework is especially useful when the robot must choose among many feasible actions rather than merely track one reference command. It becomes central in manipulation, autonomous driving, warehouse systems, and multi-step embodied tasks.</p>
+
+                <h2>Framework 3: Perception and state estimation</h2>
+                <p>Robots rarely act from direct access to the world state. They infer it from cameras, lidar, force sensing, IMUs, proprioception, or physiological and environmental streams. That makes perception and estimation a distinct framework: sensor fusion, mapping, localization, object detection, scene understanding, and uncertainty-aware inference.</p>
+                <p>In modern systems, this layer often determines whether a robot fails gracefully or catastrophically. Good control cannot compensate for badly structured state estimates over long horizons.</p>
+
+                <h2>Framework 4: Learning and embodied intelligence</h2>
+                <p>Machine learning enters robotics when the system must generalize beyond hand-specified rules, encode high-dimensional perception, or adapt to variation in environment and morphology. Reinforcement learning, imitation learning, representation learning, and world models all sit inside this framework.</p>
+                <p>This is also where current interest in vision-language-action models and policy learning fits. Learning-based robotics is powerful, but its real difficulty is not benchmark performance alone. It is robustness, data efficiency, sim-to-real transfer, and interpretable failure analysis.</p>
+
+                <h2>Framework 5: Systems engineering and validation</h2>
+                <p>Robotics also has a systems framework: middleware, real-time interfaces, simulation, observability, data logging, deployment orchestration, and validation protocols. This is the layer that turns an isolated algorithm into a repeatable robotic system.</p>
+                <p>Without this framework, progress is hard to trust. The same planner or policy can appear strong in a demo and fail badly in sustained operation if timing, sensing, or recovery behavior are not engineered carefully.</p>
+
+                <h2>Useful application domains</h2>
+                <p>Once the frameworks are clear, the major domains become easier to compare. Industrial robotics emphasizes reliability, precision, and safety under structured conditions. Mobile robotics emphasizes navigation, localization, and uncertainty in open environments. Field robotics extends that difficulty to agriculture, mining, construction, and environmental inspection.</p>
+                <p>Medical robotics adds tight human safety constraints and difficult sensing environments. Service robotics introduces human interaction, partial observability, and diverse task structure. Swarm and multi-agent robotics shift attention toward coordination, distributed control, communication limits, and collective behavior.</p>
+
+                <h2>Why this decomposition is useful</h2>
+                <p>The benefit of a frameworks-and-domains view is that it keeps robotics legible. Someone interested in robot manipulation may still need control, perception, planning, and systems validation, but with different emphasis than someone working on autonomous exploration or multi-agent coordination.</p>
+                <p>It also gives a better way to learn the field. Rather than asking which single branch of robotics matters most, it is often more useful to ask which framework is dominant in a given domain and which adjacent frameworks become bottlenecks when the system leaves the lab.</p>
+
+                <div class="note">A practical rule: robotics work becomes more credible as soon as it names both the framework being advanced and the domain in which that framework must survive real constraints.</div>
+            </div>
+            <section class="reference-panel">
+                <span class="eyebrow">References</span>
+                <ol>
+                    <li><a href="https://modernrobotics.northwestern.edu/nu-gm-book-resource/" target="_blank" rel="noreferrer">Lynch and Park, <em>Modern Robotics</em> resources</a></li>
+                    <li><a href="https://underactuated.mit.edu/" target="_blank" rel="noreferrer">Tedrake, <em>Underactuated Robotics</em></a></li>
+                    <li><a href="https://probabilistic-robotics.org/" target="_blank" rel="noreferrer">Thrun, Burgard, and Fox, <em>Probabilistic Robotics</em></a></li>
+                    <li><a href="https://ieeexplore.ieee.org/document/9812241" target="_blank" rel="noreferrer">Billard and Kragic, "Trends and Challenges in Robot Manipulation" (Science, 2019/2022 indexed resources)</a></li>
+                </ol>
+            </section>
+            <div class="article-footer-links">
+                <a class="ghost-button" href="/topics/robotics/index.html">Back to Robotics</a>
+                <a class="ghost-button" href="/topics/robotics/kinematics.html">Next: Differential Inverse Kinematics</a>
+            </div>
+        </article>
+    </main>
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>&copy; 2026 Neuroide. All rights reserved.</div>
+            <div class="footer-social" aria-label="Social media links">
+                <a class="social-link" href="https://github.com/neuroide" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .08 1.53 1.05 1.53 1.05.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.64-1.38-2.22-.26-4.55-1.14-4.55-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.95-2.34 4.82-4.57 5.07.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/></svg></a>
+                <a class="social-link" href="https://youtube.com/neuroide" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.39.58A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.87.58 9.39.58 9.39.58s7.52 0 9.39-.58a3 3 0 0 0 2.11-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.7V8.3l6.3 3.7-6.3 3.7Z"/></svg></a>
+                <a class="social-link" href="https://www.linkedin.com/in/neuroide/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A1.98 1.98 0 1 0 5 7.46a1.98 1.98 0 0 0-.02-3.96ZM3.5 8.75h3V20.5h-3V8.75Zm5.5 0h2.88v1.6h.04c.4-.76 1.38-1.56 2.84-1.56 3.03 0 3.59 2 3.59 4.59v7.12h-3v-6.31c0-1.5-.03-3.43-2.09-3.43-2.1 0-2.42 1.64-2.42 3.32v6.42H9V8.75Z"/></svg></a>
+                <a class="social-link" href="https://x.com/neuroide_" aria-label="Twitter or X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.88-6.97L5.98 22H2.87l7.24-8.27L.5 2h6.4l4.4 6.3L18.9 2Zm-1.1 18h1.72L5.97 3.9H4.12L17.8 20Z"/></svg></a>
+            </div>
+        </div>
+    </footer>
+    <script src="/script.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] } };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+[
+    {
+        "title": "Signals",
+        "url": "/topics/signals/index.html",
+        "topic": "Perception",
+        "type": "Topic",
+        "excerpt": "Digital signal theory, biosignals, physiological signals, EEG, EDA, ECG, PPG, and multimodal sensing.",
+        "keywords": "signals biosignals physiology eeg eda ecg ppg dsp perception"
+    },
+    {
+        "title": "Machine Learning",
+        "url": "/topics/ml/index.html",
+        "topic": "Intelligence",
+        "type": "Topic",
+        "excerpt": "Inference, optimization, representation learning, robustness, and evaluation.",
+        "keywords": "machine learning inference optimization representation uncertainty intelligence"
+    },
+    {
+        "title": "GenAI",
+        "url": "/topics/genai/index.html",
+        "topic": "Intelligence",
+        "type": "Topic",
+        "excerpt": "Generative models, reasoning systems, multimodality, tooling, and evaluation.",
+        "keywords": "genai llm reasoning diffusion multimodal generation intelligence"
+    },
+    {
+        "title": "Robotics",
+        "url": "/topics/robotics/index.html",
+        "topic": "Action / Control",
+        "type": "Topic",
+        "excerpt": "Kinematics, control, planning, simulation, middleware, validation, and embodied intelligence.",
+        "keywords": "robotics action control planning simulation middleware embodied systems"
+    },
+    {
+        "title": "Variational Inference and the ELBO",
+        "url": "/topics/ml/variational-inference.html",
+        "topic": "Machine Learning",
+        "type": "Article",
+        "excerpt": "A technical note on variational inference, KL divergence, and the evidence lower bound.",
+        "keywords": "variational inference elbo kl latent variable bayesian"
+    },
+    {
+        "title": "Contrastive Representation Learning",
+        "url": "/topics/ml/contrastive-learning.html",
+        "topic": "Machine Learning",
+        "type": "Article",
+        "excerpt": "A technical note on InfoNCE, SimCLR, and the geometry of learned embeddings.",
+        "keywords": "contrastive learning infonce simclr embeddings representation"
+    },
+    {
+        "title": "Test-Time Compute for Reasoning Models",
+        "url": "/topics/genai/test-time-scaling.html",
+        "topic": "GenAI",
+        "type": "Article",
+        "excerpt": "Inference-time scaling for reasoning models, including self-consistency and verifier-guided decoding.",
+        "keywords": "test-time compute reasoning llm self-consistency verifier"
+    },
+    {
+        "title": "Multimodal Diffusion in Latent Space",
+        "url": "/topics/genai/latent-diffusion.html",
+        "topic": "GenAI",
+        "type": "Article",
+        "excerpt": "A technical note on DDPMs, latent diffusion, and guidance in modern generative imaging.",
+        "keywords": "diffusion latent diffusion ddpm multimodal image generation"
+    },
+    {
+        "title": "Physiological Signals as Dynamic Systems",
+        "url": "/topics/signals/physiological-signals-as-systems.html",
+        "topic": "Signals",
+        "type": "Article",
+        "excerpt": "A structured introduction to physiological signals as noisy, multiscale measurements of biological regulation.",
+        "keywords": "physiological signals biosignals ecg eeg eda ppg emg respiration regulation measurement"
+    },
+    {
+        "title": "Classical Signal Concepts for Physiological Data",
+        "url": "/topics/signals/classical-signal-concepts-for-physiology.html",
+        "topic": "Signals",
+        "type": "Article",
+        "excerpt": "Sampling, filtering, spectra, stationarity, and artifact handling for biosignal analysis.",
+        "keywords": "signals physiology sampling filtering spectrum stationarity artifacts biomedical signal processing"
+    },
+    {
+        "title": "Self-Supervised ECG Representation Learning",
+        "url": "/topics/signals/self-supervised-ecg.html",
+        "topic": "Signals",
+        "type": "Article",
+        "excerpt": "A research note on self-supervised ECG modelling, contrastive objectives, and masked reconstruction.",
+        "keywords": "ecg self-supervised biosignal contrastive masked reconstruction"
+    },
+    {
+        "title": "Multimodal Biosignal Foundation Models",
+        "url": "/topics/signals/multimodal-biosignal-foundations.html",
+        "topic": "Signals",
+        "type": "Article",
+        "excerpt": "A research note on multimodal foundation models for physiological signals.",
+        "keywords": "biosignal foundation model multimodal physiology ppg ecg sleep"
+    },
+    {
+        "title": "Useful Frameworks and Domains in Robotics",
+        "url": "/topics/robotics/frameworks-and-domains.html",
+        "topic": "Robotics",
+        "type": "Article",
+        "excerpt": "A structured overview of useful frameworks and application domains in robotics.",
+        "keywords": "robotics frameworks domains control planning perception systems"
+    },
+    {
+        "title": "Robotics Learning Pathways",
+        "url": "/topics/robotics/learning-pathways.html",
+        "topic": "Robotics",
+        "type": "Article",
+        "excerpt": "A practical article on useful learning pathways in robotics.",
+        "keywords": "robotics learning pathways education control planning perception"
+    },
+    {
+        "title": "Robotics Tools and Software Ecosystem",
+        "url": "/topics/robotics/tools-and-ecosystem.html",
+        "topic": "Robotics",
+        "type": "Article",
+        "excerpt": "An article on the robotics tools and software ecosystem.",
+        "keywords": "ros2 moveit gazebo mujoco robotics software tools ecosystem"
+    },
+    {
+        "title": "Robotics as a General Control Problem",
+        "url": "/topics/robotics/intralogistics-control-system.html",
+        "topic": "Robotics",
+        "type": "Article",
+        "excerpt": "A systems article framing robotics as coordinated estimation, allocation, planning, execution, and recovery.",
+        "keywords": "robotics control problem intralogistics warehouse fleet coordination recovery planning allocation"
+    },
+    {
+        "title": "Differential Inverse Kinematics",
+        "url": "/topics/robotics/kinematics.html",
+        "topic": "Robotics",
+        "type": "Article",
+        "excerpt": "A technical note on Jacobian-based inverse kinematics and redundancy resolution for manipulators.",
+        "keywords": "inverse kinematics jacobian manipulator control robotics"
+    },
+    {
+        "title": "Robotics Software and Evaluation Stack",
+        "url": "/topics/robotics/validation-stack.html",
+        "topic": "Robotics",
+        "type": "Article",
+        "excerpt": "A systems note on ROS 2, MoveIt, simulation, and evaluation for trustworthy robotics.",
+        "keywords": "robotics software evaluation ros2 moveit simulation validation"
+    },
+    {
+        "title": "About Neuroide",
+        "url": "/about.html",
+        "topic": "About",
+        "type": "Page",
+        "excerpt": "The concept behind Neuroide from perception to intelligence to action.",
+        "keywords": "about neuroide concept perception intelligence action"
+    }
+]
