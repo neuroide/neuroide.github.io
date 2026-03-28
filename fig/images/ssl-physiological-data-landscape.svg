@@ -1,0 +1,53 @@
+<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="980" fill="#F5F2EA"/>
+  <rect x="48" y="40" width="1504" height="900" rx="30" fill="#FFFDF8" stroke="#1C3550" stroke-width="4"/>
+  <defs>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0L14 7L0 14L4.5 7Z" fill="#1C3550"/>
+    </marker>
+  </defs>
+  <text x="88" y="108" fill="#1C3550" font-family="Georgia, serif" font-size="46" font-weight="700">
+    Self-Supervised Representation Learning for Physiological Data
+  </text>
+  <text x="88" y="148" fill="#5F6876" font-family="Arial, sans-serif" font-size="24">
+    Core objective families, physiological structure, and downstream scientific value.
+  </text>
+
+  <rect x="110" y="220" width="300" height="150" rx="22" fill="#DDEAF8" stroke="#1C3550" stroke-width="3"/>
+  <text x="142" y="274" fill="#1C3550" font-family="Arial, sans-serif" font-size="30" font-weight="700">Contrastive</text>
+  <text x="142" y="314" fill="#344054" font-family="Arial, sans-serif" font-size="22">InfoNCE, patient/time/lead positives</text>
+
+  <rect x="468" y="220" width="300" height="150" rx="22" fill="#E6F6E8" stroke="#2B5D42" stroke-width="3"/>
+  <text x="500" y="274" fill="#2B5D42" font-family="Arial, sans-serif" font-size="30" font-weight="700">Predictive</text>
+  <text x="500" y="314" fill="#314339" font-family="Arial, sans-serif" font-size="22">future latent state, CPC</text>
+
+  <rect x="826" y="220" width="300" height="150" rx="22" fill="#F6E5D9" stroke="#7A4B1E" stroke-width="3"/>
+  <text x="858" y="274" fill="#7A4B1E" font-family="Arial, sans-serif" font-size="30" font-weight="700">Masked Modeling</text>
+  <text x="858" y="314" fill="#5A3D24" font-family="Arial, sans-serif" font-size="22">reconstruction, lead/electrode geometry</text>
+
+  <rect x="1184" y="220" width="300" height="150" rx="22" fill="#F0E5F8" stroke="#5C2F73" stroke-width="3"/>
+  <text x="1216" y="274" fill="#5C2F73" font-family="Arial, sans-serif" font-size="30" font-weight="700">Alignment</text>
+  <text x="1216" y="314" fill="#50395B" font-family="Arial, sans-serif" font-size="22">BYOL-style, multimodal agreement</text>
+
+  <rect x="310" y="520" width="980" height="220" rx="26" fill="#EFE9DE" stroke="#6A5A46" stroke-width="3"/>
+  <text x="360" y="580" fill="#6A5A46" font-family="Arial, sans-serif" font-size="34" font-weight="700">
+    Physiological structure the objectives must respect
+  </text>
+  <text x="360" y="626" fill="#4F4A40" font-family="Arial, sans-serif" font-size="24">
+    temporal continuity, morphology, multilead geometry, multimodal coupling, subject variability, artifact structure
+  </text>
+  <text x="360" y="664" fill="#4F4A40" font-family="Arial, sans-serif" font-size="24">
+    the key scientific problem is not only learning invariance, but learning the right invariance
+  </text>
+
+  <rect x="540" y="800" width="520" height="90" rx="22" fill="#E5EEF2" stroke="#46616E" stroke-width="3"/>
+  <text x="586" y="854" fill="#46616E" font-family="Arial, sans-serif" font-size="30" font-weight="700">
+    Transfer to diagnosis, monitoring, and inference
+  </text>
+
+  <path d="M260 370C260 470 420 500 560 520" stroke="#1C3550" stroke-width="5" stroke-linecap="round" fill="none" marker-end="url(#arrow)"/>
+  <path d="M618 370C650 470 730 500 800 520" stroke="#1C3550" stroke-width="5" stroke-linecap="round" fill="none" marker-end="url(#arrow)"/>
+  <path d="M976 370C950 470 900 500 860 520" stroke="#1C3550" stroke-width="5" stroke-linecap="round" fill="none" marker-end="url(#arrow)"/>
+  <path d="M1334 370C1280 470 1180 500 1040 520" stroke="#1C3550" stroke-width="5" stroke-linecap="round" fill="none" marker-end="url(#arrow)"/>
+  <path d="M800 740V800" stroke="#1C3550" stroke-width="6" stroke-linecap="round" marker-end="url(#arrow)"/>
+</svg>

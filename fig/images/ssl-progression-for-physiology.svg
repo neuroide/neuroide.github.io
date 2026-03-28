@@ -1,0 +1,48 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#F6F2EA"/>
+  <rect x="50" y="40" width="1500" height="820" rx="28" fill="#FFFDF8" stroke="#1C3550" stroke-width="4"/>
+  <defs>
+    <marker id="flow" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0L14 7L0 14L4.5 7Z" fill="#1C3550"/>
+    </marker>
+  </defs>
+  <text x="88" y="108" fill="#1C3550" font-family="Georgia, serif" font-size="46" font-weight="700">
+    Progression of Self-Supervised Learning in Physiological Data
+  </text>
+  <text x="88" y="148" fill="#5F6876" font-family="Arial, sans-serif" font-size="24">
+    From generic transfer of SSL recipes to physiology-aware representation learning and multimodal foundation models.
+  </text>
+
+  <rect x="90" y="320" width="240" height="130" rx="22" fill="#DDEAF8" stroke="#1C3550" stroke-width="3"/>
+  <text x="126" y="374" fill="#1C3550" font-family="Arial, sans-serif" font-size="28" font-weight="700">Generic SSL transfer</text>
+  <text x="126" y="410" fill="#344054" font-family="Arial, sans-serif" font-size="20">CPC, SimCLR-style adoption</text>
+
+  <rect x="410" y="320" width="240" height="130" rx="22" fill="#E6F6E8" stroke="#2B5D42" stroke-width="3"/>
+  <text x="446" y="374" fill="#2B5D42" font-family="Arial, sans-serif" font-size="28" font-weight="700">Physiology-aware views</text>
+  <text x="446" y="410" fill="#314339" font-family="Arial, sans-serif" font-size="20">time, leads, patient structure</text>
+
+  <rect x="730" y="320" width="240" height="130" rx="22" fill="#F6E5D9" stroke="#7A4B1E" stroke-width="3"/>
+  <text x="770" y="374" fill="#7A4B1E" font-family="Arial, sans-serif" font-size="28" font-weight="700">Foundation-style EEG</text>
+  <text x="770" y="410" fill="#5A3D24" font-family="Arial, sans-serif" font-size="20">transformers and large pretraining</text>
+
+  <rect x="1050" y="320" width="240" height="130" rx="22" fill="#F0E5F8" stroke="#5C2F73" stroke-width="3"/>
+  <text x="1082" y="374" fill="#5C2F73" font-family="Arial, sans-serif" font-size="28" font-weight="700">Structure-aware masking</text>
+  <text x="1082" y="410" fill="#50395B" font-family="Arial, sans-serif" font-size="20">graph and geometry-aware models</text>
+
+  <rect x="1370" y="320" width="140" height="130" rx="22" fill="#E5EEF2" stroke="#46616E" stroke-width="3"/>
+  <text x="1400" y="374" fill="#46616E" font-family="Arial, sans-serif" font-size="28" font-weight="700">Next</text>
+  <text x="1392" y="410" fill="#45525A" font-family="Arial, sans-serif" font-size="20">multimodal</text>
+
+  <path d="M330 385H410" stroke="#1C3550" stroke-width="6" stroke-linecap="round" marker-end="url(#flow)"/>
+  <path d="M650 385H730" stroke="#1C3550" stroke-width="6" stroke-linecap="round" marker-end="url(#flow)"/>
+  <path d="M970 385H1050" stroke="#1C3550" stroke-width="6" stroke-linecap="round" marker-end="url(#flow)"/>
+  <path d="M1290 385H1370" stroke="#1C3550" stroke-width="6" stroke-linecap="round" marker-end="url(#flow)"/>
+
+  <rect x="260" y="560" width="1080" height="170" rx="24" fill="#EFE9DE" stroke="#6A5A46" stroke-width="3"/>
+  <text x="310" y="620" fill="#6A5A46" font-family="Arial, sans-serif" font-size="34" font-weight="700">
+    Scientific maturation criterion
+  </text>
+  <text x="310" y="666" fill="#4F4A40" font-family="Arial, sans-serif" font-size="24">
+    progress is real when objectives encode physiological structure more faithfully and evaluation becomes stricter
+  </text>
+</svg>

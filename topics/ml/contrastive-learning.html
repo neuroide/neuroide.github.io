@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contrastive Representation Learning | Neuroide</title>
     <meta name="description" content="A technical note on InfoNCE, SimCLR, and the geometry of learned embeddings.">
-    <link rel="icon" type="image/png" href="/images/neuroide.png">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
     <header>
         <nav>
             <a href="/index.html" class="logo" aria-label="Neuroide home">
-                <img src="/images/neuroide.png" alt="Neuroide">
+                <img src="/fig/neuroide.png" alt="Neuroide">
             </a>
             <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="navLinks" class="nav-links">
@@ -30,15 +30,16 @@
         </nav>
     </header>
     <main class="article-layout">
-        <article class="article-shell">
+        <div class="article-layout-grid">
+            <article class="article-shell">
             <div class="article-meta">
-                <span>Machine Learning</span>
+                    <span>Intelligence / Representation and Inference</span>
                 <span>Research Note</span>
-                <span>Intermediate</span>
+                <span>Representation Learning / Contrastive</span>
             </div>
             <h1 class="article-title">Contrastive Representation Learning</h1>
             <div class="article-byline">
-                <span><strong>Author:</strong> Neuroide</span>
+                <span><strong>Author:</strong> P. Tomar</span>
                 <span><strong>Published:</strong> March 2026</span>
             </div>
             <p class="article-lead">Contrastive learning operationalizes a simple principle: augmented views of the same object should land close in representation space, while views from different objects should be well separated.</p>
@@ -72,10 +73,52 @@ loss = F.cross_entropy(logits, labels)
                 </ol>
             </section>
             <div class="article-footer-links">
-                <a class="ghost-button" href="/topics/ml/index.html">Back to Machine Learning</a>
                 <a class="ghost-button" href="/topics/robotics/kinematics.html">Next: Robotics</a>
             </div>
-        </article>
+            </article>
+            <aside class="article-aside">
+                <div class="article-aside-card">
+                    <span class="eyebrow">Article Context</span>
+                    <dl class="article-aside-list">
+                        <div>
+                            <dt>Topic</dt>
+                            <dd>Intelligence / Representation and Inference</dd>
+                        </div>
+                        <div>
+                            <dt>Type</dt>
+                            <dd>Research Note</dd>
+                        </div>
+                        <div>
+                            <dt>Domain</dt>
+                            <dd>Representation Learning / Contrastive</dd>
+                        </div>
+                        <div>
+                            <dt>Author</dt>
+                            <dd>P. Tomar</dd>
+                        </div>
+                        <div>
+                            <dt>Published</dt>
+                            <dd>March 2026</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="article-aside-card">
+                    <span class="eyebrow">Keywords</span>
+                    <div class="article-keywords">
+                        <span>Contrastive</span>
+                        <span>Learning</span>
+                        <span>Infonce</span>
+                        <span>Simclr</span>
+                        <span>Embeddings</span>
+                        <span>Representation</span>
+                    </div>
+                </div>
+                <a class="article-back-link" href="/topics/representation-and-inference/index.html">
+                    <span class="article-back-link-icon" aria-hidden="true">&#8592;</span>
+                    <span>Back to Representation and Inference</span>
+                </a>
+            </aside>
+        </div>
     </main>
     <footer class="site-footer">
         <div class="container footer-grid">

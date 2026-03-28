@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1400"
+   height="880"
+   viewBox="0 0 1400 880"
+   fill="none"
+   version="1.1"
+   id="svg23"
+   sodipodi:docname="robotics_tool_stack_map.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview23"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.74523984"
+     inkscape:cx="792.36236"
+     inkscape:cy="523.99238"
+     inkscape:window-width="2056"
+     inkscape:window-height="1262"
+     inkscape:window-x="0"
+     inkscape:window-y="39"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg23" />
+  <rect
+     width="1400"
+     height="880"
+     fill="#F5F1E8"
+     id="rect1" />
+  <rect
+     x="56"
+     y="46"
+     width="1288"
+     height="788"
+     rx="30"
+     fill="#FFFDF8"
+     stroke="#18324A"
+     stroke-width="4"
+     id="rect2" />
+  <text
+     x="94"
+     y="114"
+     fill="#18324A"
+     font-family="Georgia, serif"
+     font-size="46"
+     font-weight="700"
+     id="text2">
+    Robotics Framework Ecosystem
+  </text>
+  <text
+     x="94"
+     y="154"
+     fill="#5e6775"
+     font-family="Arial, sans-serif"
+     font-size="24px"
+     id="text3"><tspan
+       sodipodi:role="line"
+       id="tspan23"
+       x="94"
+       y="154">Modern robotics emerges from the composition of middleware, perception, planning, simulation, and engineering</tspan><tspan
+       sodipodi:role="line"
+       id="tspan24"
+       x="94"
+       y="184">infrastructure.</tspan></text>
+  <defs
+     id="defs3">
+    <marker
+       id="ecosystemArrow"
+       markerWidth="14"
+       markerHeight="14"
+       refX="10"
+       refY="7"
+       orient="auto"
+       markerUnits="strokeWidth">
+      <path
+         d="M0 0L14 7L0 14L4.5 7Z"
+         fill="#18324A"
+         id="path3" />
+    </marker>
+  </defs>
+  <rect
+     x="120"
+     y="220"
+     width="1160"
+     height="92"
+     rx="18"
+     fill="#18324A"
+     id="rect3" />
+  <text
+     x="152"
+     y="276"
+     fill="#FFFDF8"
+     font-family="Arial, sans-serif"
+     font-size="30"
+     font-weight="700"
+     id="text4">
+    Runtime Integration
+  </text>
+  <text
+     x="515"
+     y="276"
+     fill="#DCE8F2"
+     font-family="Arial, sans-serif"
+     font-size="24"
+     id="text5">
+    ROS 2, colcon, launch, packages, execution graph
+  </text>
+  <rect
+     x="119.89514"
+     y="349.89514"
+     width="447.8017"
+     height="128.0883"
+     rx="18.945457"
+     fill="#dce9f7"
+     stroke="#18324a"
+     stroke-width="3.05968"
+     id="rect5" />
+  <text
+     x="138.16869"
+     y="389.86856"
+     fill="#18324a"
+     font-family="Arial, sans-serif"
+     font-size="29.0946px"
+     font-weight="700"
+     id="text6"
+     transform="scale(0.96982271,1.0311163)"
+     style="stroke-width:0.969825">Visualization and Observability</text>
+  <text
+     x="347.13446"
+     y="436.1792"
+     fill="#344054"
+     font-family="Arial, sans-serif"
+     font-size="23px"
+     id="text7"
+     style="text-align:center;text-anchor:middle"><tspan
+       sodipodi:role="line"
+       id="tspan25"
+       x="347.13446"
+       y="436.1792">RViz, logging, markers, runtime</tspan><tspan
+       sodipodi:role="line"
+       id="tspan26"
+       x="347.13446"
+       y="464.9292">state inspection</tspan></text>
+  <rect
+     x="864.84125"
+     y="349.84125"
+     width="415.31754"
+     height="128.1337"
+     rx="17.571125"
+     fill="#e7f5e8"
+     stroke="#285c42"
+     stroke-width="2.68248"
+     id="rect7" />
+  <text
+     x="892"
+     y="402"
+     fill="#285c42"
+     font-family="Arial, sans-serif"
+     font-size="30px"
+     font-weight="700"
+     id="text8">Planning and Manipulation</text>
+  <text
+     x="1104.6921"
+     y="434.77734"
+     fill="#304036"
+     font-family="Arial, sans-serif"
+     font-size="23px"
+     id="text9"
+     style="text-align:center;text-anchor:middle"><tspan
+       sodipodi:role="line"
+       id="tspan27"
+       x="1104.6921"
+       y="434.77734">MoveIt, kinematics, collision</tspan><tspan
+       sodipodi:role="line"
+       id="tspan28"
+       x="1104.6921"
+       y="463.52734">checking, planning</tspan></text>
+  <rect
+     x="119.89514"
+     y="526.01654"
+     width="447.8017"
+     height="128.0883"
+     rx="18.945457"
+     fill="#f9e8d9"
+     stroke="#7a4d20"
+     stroke-width="3.05968"
+     id="rect9" />
+  <text
+     x="162"
+     y="574"
+     fill="#7a4d20"
+     font-family="Arial, sans-serif"
+     font-size="30px"
+     font-weight="700"
+     id="text10">Perception and Learning</text>
+  <text
+     x="343.10767"
+     y="610"
+     fill="#5a3c24"
+     font-family="Arial, sans-serif"
+     font-size="23px"
+     id="text11"
+     style="text-align:center;text-anchor:middle"><tspan
+       sodipodi:role="line"
+       id="tspan31"
+       x="343.10767"
+       y="610">OpenCV, PyTorch, calibration, inference,</tspan><tspan
+       sodipodi:role="line"
+       id="tspan32"
+       x="343.10767"
+       y="638.75">learned models</tspan></text>
+  <rect
+     x="864.84125"
+     y="526.02509"
+     width="415.31754"
+     height="128.1337"
+     rx="17.571125"
+     fill="#f0e5f8"
+     stroke="#5b2e72"
+     stroke-width="3"
+     id="rect11" />
+  <text
+     x="904"
+     y="578"
+     fill="#5b2e72"
+     font-family="Arial, sans-serif"
+     font-size="30px"
+     font-weight="700"
+     id="text12">Simulation and Validation</text>
+  <text
+     x="1089.6489"
+     y="612"
+     fill="#50385b"
+     font-family="Arial, sans-serif"
+     font-size="23px"
+     id="text13"
+     style="text-align:center;text-anchor:middle"><tspan
+       sodipodi:role="line"
+       id="tspan29"
+       x="1089.6489"
+       y="612">Gazebo, Isaac Sim, SIL/HIL,</tspan><tspan
+       sodipodi:role="line"
+       id="tspan30"
+       x="1089.6489"
+       y="640.75">experimental protocols</tspan></text>
+  <rect
+     x="120"
+     y="702"
+     width="1160"
+     height="92"
+     rx="18"
+     fill="#F3EFE7"
+     stroke="#6A5A46"
+     stroke-width="3"
+     id="rect13" />
+  <text
+     x="485"
+     y="746"
+     fill="#6a5a46"
+     font-family="Arial, sans-serif"
+     font-size="30px"
+     font-weight="700"
+     id="text14">Engineering Infrastructure</text>
+  <text
+     x="363"
+     y="778"
+     fill="#4f4a40"
+     font-family="Arial, sans-serif"
+     font-size="22px"
+     id="text15">Linux, Git, testing, CI, containers, metrics, reproducible workspaces</text>
+  <path
+     d="m 384.66527,310 v 38"
+     stroke="#18324a"
+     stroke-width="6"
+     stroke-linecap="round"
+     id="path15" />
+  <path
+     d="m 1021,310 v 38"
+     stroke="#18324a"
+     stroke-width="6"
+     stroke-linecap="round"
+     id="path15-3" />
+  <path
+     d="M380 478V526"
+     stroke="#18324A"
+     stroke-width="6"
+     stroke-linecap="round"
+     id="path16" />
+  <path
+     d="M1020 478V526"
+     stroke="#18324A"
+     stroke-width="6"
+     stroke-linecap="round"
+     id="path17" />
+  <path
+     d="M380 654V702"
+     stroke="#18324A"
+     stroke-width="6"
+     stroke-linecap="round"
+     id="path18" />
+  <path
+     d="M1020 654V702"
+     stroke="#18324A"
+     stroke-width="6"
+     stroke-linecap="round"
+     id="path19" />
+  <path
+     d="M 567.69684,414 H 848.30116"
+     stroke="#18324a"
+     stroke-width="7.5795"
+     stroke-linecap="round"
+     stroke-dasharray="10, 10"
+     marker-end="url(#ecosystemArrow)"
+     id="path20"
+     sodipodi:nodetypes="cc"
+     style="stroke-width:3.63152;stroke-dasharray:4.79124, 4.79124;stroke-dashoffset:0" />
+  <path
+     d="M 567.69684,590 H 668.43805 848.14242"
+     stroke="#18324a"
+     stroke-width="7.57747"
+     stroke-linecap="round"
+     stroke-dasharray="10, 10"
+     marker-end="url(#ecosystemArrow)"
+     id="path21"
+     sodipodi:nodetypes="ccc"
+     style="stroke-width:3.63147;stroke-dasharray:4.79245, 4.79245;stroke-dashoffset:0" />
+  <text
+     x="702.77515"
+     y="406"
+     fill="#5e6775"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     id="text22"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:21.3333px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#5e6775"><tspan
+       sodipodi:role="line"
+       id="tspan35"
+       x="702.77515"
+       y="406">shared state and</tspan><tspan
+       sodipodi:role="line"
+       id="tspan36"
+       x="702.77515"
+       y="432.66663">interfaces</tspan></text>
+  <text
+     x="689.74182"
+     y="582"
+     fill="#5e6775"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     id="text23"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:21.3333px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#5e6775"><tspan
+       sodipodi:role="line"
+       id="tspan33"
+       x="689.74182"
+       y="582">validation-ready</tspan><tspan
+       sodipodi:role="line"
+       id="tspan34"
+       x="689.74182"
+       y="608.66663">engineering base</tspan></text>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="920" viewBox="0 0 1400 920" role="img" aria-labelledby="title desc">
+  <title id="title">Multimodal Diffusion in Latent Space</title>
+  <desc id="desc">Architecture diagram showing modality-specific encoders, shared latent space diffusion, conditioning, and multimodal decoders.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f8fc; }
+      .title { font: 700 34px Georgia, "Times New Roman", serif; fill: #1a2738; }
+      .subtitle { font: 16px Georgia, "Times New Roman", serif; fill: #3a5674; }
+      .mod { fill: #dce8f6; stroke: #50739a; stroke-width: 2.2; rx: 18; ry: 18; }
+      .lat { fill: #e8f0e2; stroke: #58754b; stroke-width: 2.4; rx: 20; ry: 20; }
+      .diff { fill: #f5ead8; stroke: #8a6f46; stroke-width: 2.4; rx: 20; ry: 20; }
+      .dec { fill: #ece3f4; stroke: #6a4f82; stroke-width: 2.2; rx: 18; ry: 18; }
+      .future { fill: #fffdf5; stroke: #9a8547; stroke-width: 2; rx: 16; ry: 16; }
+      .label { font: 600 20px Georgia, "Times New Roman", serif; fill: #22384f; }
+      .body { font: 15px Georgia, "Times New Roman", serif; fill: #39516a; }
+      .small { font: 14px Georgia, "Times New Roman", serif; fill: #536d87; }
+      .arrow { stroke: #4d6783; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .soft { stroke: #8094a9; stroke-width: 2; fill: none; stroke-dasharray: 8 7; marker-end: url(#arrowSoft); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4d6783"/>
+    </marker>
+    <marker id="arrowSoft" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8094a9"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="920"/>
+  <text class="title" x="700" y="54" text-anchor="middle">Multimodal Diffusion in Latent Space</text>
+  <text class="subtitle" x="700" y="84" text-anchor="middle">A multimodal system must learn latent geometry before it can denoise, condition, and generate coherently.</text>
+
+  <rect class="mod" x="70" y="180" width="210" height="90"/>
+  <text class="label" x="175" y="220" text-anchor="middle">Text Encoder</text>
+  <text class="body" x="175" y="247" text-anchor="middle">tokens to latent semantics</text>
+
+  <rect class="mod" x="70" y="315" width="210" height="90"/>
+  <text class="label" x="175" y="355" text-anchor="middle">Image Encoder</text>
+  <text class="body" x="175" y="382" text-anchor="middle">pixels to latent structure</text>
+
+  <rect class="mod" x="70" y="450" width="210" height="90"/>
+  <text class="label" x="175" y="490" text-anchor="middle">Audio / Video Encoder</text>
+  <text class="body" x="175" y="517" text-anchor="middle">temporal signals to latent tokens</text>
+
+  <rect class="mod" x="70" y="585" width="210" height="90"/>
+  <text class="label" x="175" y="625" text-anchor="middle">Other Modalities</text>
+  <text class="body" x="175" y="652" text-anchor="middle">medical, action, structured data</text>
+
+  <rect class="lat" x="380" y="210" width="290" height="435"/>
+  <text class="label" x="525" y="252" text-anchor="middle">Latent Space</text>
+  <text class="body" x="525" y="282" text-anchor="middle">shared or factorized multimodal manifold</text>
+  <text class="small" x="525" y="320" text-anchor="middle">alignment, compression, missing-modality robustness</text>
+  <text class="small" x="525" y="348" text-anchor="middle">cross-modal projections and conditioning topology</text>
+
+  <rect class="diff" x="750" y="250" width="280" height="360"/>
+  <text class="label" x="890" y="292" text-anchor="middle">Latent Diffusion Process</text>
+  <text class="body" x="890" y="324" text-anchor="middle">forward noising</text>
+  <text class="body" x="890" y="348" text-anchor="middle">q(z_t | z_0)</text>
+  <text class="body" x="890" y="395" text-anchor="middle">conditional denoising</text>
+  <text class="body" x="890" y="419" text-anchor="middle">p_theta(z_{t-1} | z_t, c)</text>
+  <text class="small" x="890" y="472" text-anchor="middle">U-Net or transformer denoiser</text>
+  <text class="small" x="890" y="498" text-anchor="middle">cross-attention or fusion conditioning</text>
+
+  <rect class="dec" x="1110" y="180" width="210" height="90"/>
+  <text class="label" x="1215" y="220" text-anchor="middle">Text Decoder</text>
+  <text class="body" x="1215" y="247" text-anchor="middle">captioning or variation</text>
+
+  <rect class="dec" x="1110" y="315" width="210" height="90"/>
+  <text class="label" x="1215" y="355" text-anchor="middle">Image Decoder</text>
+  <text class="body" x="1215" y="382" text-anchor="middle">generation or translation</text>
+
+  <rect class="dec" x="1110" y="450" width="210" height="90"/>
+  <text class="label" x="1215" y="490" text-anchor="middle">Audio / Video Decoder</text>
+  <text class="body" x="1215" y="517" text-anchor="middle">temporal reconstruction</text>
+
+  <rect class="dec" x="1110" y="585" width="210" height="90"/>
+  <text class="label" x="1215" y="625" text-anchor="middle">Behavior / Medical Outputs</text>
+  <text class="body" x="1215" y="652" text-anchor="middle">action, synthesis, inference</text>
+
+  <path class="arrow" d="M280 225 C330 225, 345 240, 380 245"/>
+  <path class="arrow" d="M280 360 C330 360, 345 350, 380 340"/>
+  <path class="arrow" d="M280 495 C330 495, 345 470, 380 440"/>
+  <path class="arrow" d="M280 630 C330 630, 345 585, 380 540"/>
+
+  <path class="arrow" d="M670 430 C715 430, 730 430, 750 430"/>
+
+  <path class="arrow" d="M1030 300 C1060 300, 1080 245, 1110 225"/>
+  <path class="arrow" d="M1030 380 C1060 380, 1080 360, 1110 360"/>
+  <path class="arrow" d="M1030 470 C1060 470, 1080 495, 1110 495"/>
+  <path class="arrow" d="M1030 560 C1060 560, 1080 620, 1110 630"/>
+
+  <rect class="future" x="270" y="760" width="860" height="80"/>
+  <text class="body" x="700" y="804" text-anchor="middle">Research frontier: latent geometry, shared-private factorization, missing-modality robustness, temporal causality, and scientific faithfulness of generated multimodal outputs.</text>
+</svg>

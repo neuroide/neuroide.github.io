@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search | Neuroide</title>
     <meta name="description" content="Search the Neuroide website across topics and articles.">
-    <link rel="icon" type="image/png" href="/images/neuroide.png">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,15 +15,14 @@
     <header>
         <nav>
             <a href="/index.html" class="logo" aria-label="Neuroide home">
-                <img src="/images/neuroide.png" alt="Neuroide">
+                <img src="/fig/neuroide.png" alt="Neuroide">
             </a>
             <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="navLinks" class="nav-links">
                 <li><a href="/index.html">Home</a></li>
-                <li><a href="/topics/signals/index.html">Signals</a></li>
-                <li><a href="/topics/ml/index.html">Machine Learning</a></li>
-                <li><a href="/topics/genai/index.html">GenAI</a></li>
-                <li><a href="/topics/robotics/index.html">Robotics</a></li>
+                <li><a href="/perception.html">Perception</a></li>
+                <li><a href="/intelligence.html">Intelligence</a></li>
+                <li><a href="/action.html">Action</a></li>
                 <li><a href="/search.html" class="active nav-search-link">Search</a></li>
                 <li><a href="/about.html">About</a></li>
             </ul>
@@ -34,14 +33,22 @@
         <div class="container topic-layout">
             <section class="topic-header">
                 <span class="eyebrow">Search</span>
-                <h1 class="topic-title">Search the site</h1>
-                <p class="page-intro">Search across topics and articles by title, topic, or keyword.</p>
+                <h1 class="topic-title">Search the research architecture</h1>
+                <p class="page-intro">Search across pillars, programs, and articles by title, research area, or keyword.</p>
             </section>
 
             <section class="info-panel">
                 <label class="eyebrow" for="siteSearchInput">Query</label>
-                <input id="siteSearchInput" class="search-input" type="search" placeholder="Search Neuroide..." autocomplete="off">
-                <p class="small-text" style="margin-top: 0.9rem;">Try terms like <code>signals</code>, <code>diffusion</code>, <code>robotics</code>, or <code>intralogistics</code>.</p>
+                <div class="search-input-shell">
+                    <span class="search-page-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M10.5 4a6.5 6.5 0 0 1 5.154 10.463l4.19 4.19-1.414 1.414-4.19-4.19A6.5 6.5 0 1 1 10.5 4Zm0 2a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z"/>
+                        </svg>
+                    </span>
+                    <input id="siteSearchInput" class="search-input" type="search" placeholder="Search pillars, programs, and articles..." autocomplete="off" aria-keyshortcuts="Meta+K Control+K">
+                    <span class="search-page-shortcut" aria-hidden="true">⌘ / Ctrl + K</span>
+                </div>
+                <p class="small-text" style="margin-top: 0.9rem;">Try terms like <code>perception</code>, <code>representation</code>, <code>reasoning</code>, <code>robotics</code>, or <code>validation</code>. Use <code>⌘/Ctrl + K</code> to jump to search.</p>
             </section>
 
             <section class="info-panel">

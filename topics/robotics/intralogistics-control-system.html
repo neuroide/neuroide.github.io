@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robotics as a General Control Problem | Neuroide</title>
-    <meta name="description" content="A robotics article framing autonomous systems as a general control problem across perception, planning, execution, and recovery, with intralogistics as one example.">
-    <link rel="icon" type="image/png" href="/images/neuroide.png">
+    <title>Robotics as a System-Level Control Problem | Neuroide</title>
+    <meta name="description" content="A systems article framing intralogistics as a hierarchical, constrained, stochastic control problem across estimation, task allocation, planning, scheduling, execution, and recovery.">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
     <header>
         <nav>
             <a href="/index.html" class="logo" aria-label="Neuroide home">
-                <img src="/images/neuroide.png" alt="Neuroide">
+                <img src="/fig/neuroide.png" alt="Neuroide">
             </a>
             <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="navLinks" class="nav-links">
@@ -30,69 +30,216 @@
         </nav>
     </header>
     <main class="article-layout">
-        <article class="article-shell">
+        <div class="article-layout-grid">
+            <article class="article-shell">
             <div class="article-meta">
-                <span>Robotics</span>
+                    <span>Action / Control and Planning</span>
                 <span>Systems</span>
-                <span>Intermediate</span>
+                <span>Fleet Systems / Intralogistics</span>
             </div>
-            <h1 class="article-title">Robotics as a General Control Problem</h1>
+            <h1 class="article-title">Robotics as a System-Level Control Problem: Insights from Intralogistics</h1>
             <div class="article-byline">
-                <span><strong>Author:</strong> Neuroide</span>
+                <span><strong>Author:</strong> P. Tomar</span>
                 <span><strong>Published:</strong> March 2026</span>
             </div>
-            <p class="article-lead">Robotics is often introduced through hardware, motion, or autonomy demos, but many real systems are better understood as control problems over information, resources, and time. The difficult question is not only how one robot moves, but how perception, planning, allocation, execution, and recovery remain coordinated under changing conditions.</p>
+            <p class="article-lead">Robotics is frequently introduced through motion, navigation, and autonomy demos, but many deployed systems are better understood as closed-loop regulation over information, resources, timing, and contention. In intralogistics, that systems view becomes operationally visible.</p>
             <div class="article-body">
-                <h2>A control-first view of robotics</h2>
-                <p>A general robotics system can be viewed as a loop that senses state, estimates what matters, selects actions, executes under constraints, and adapts when the world does not cooperate. This applies to manipulators, mobile robots, field systems, warehouse fleets, and multi-agent platforms alike.</p>
-                <p>In that view, robotics is not reducible to navigation or kinematics alone. It is the design of closed-loop behavior across multiple layers of a system, where each layer affects the others through latency, uncertainty, limited resources, and physical constraints.</p>
+                <p>Robotics is frequently introduced through the visible surface of the field: motion, navigation, manipulation, and autonomy demonstrations. That framing is useful pedagogically, but it understates the engineering problem posed by deployed robotic systems. In practical settings, many robotic applications are not merely problems of movement; they are problems of closed-loop regulation over information, resources, timing, and contention.</p>
 
-                <h2>The layered system problem</h2>
-                <p>Most deployed robotic systems contain at least four coupled layers: perception and state estimation, planning and decision logic, low-level execution, and supervisory coordination. The system becomes hard when these layers interact under load. A small sensing delay can degrade planning quality; poor task allocation can create congestion; slow recovery can erase gains from strong local control.</p>
+                <p>This systems view is especially clear in intralogistics, where fleet-scale performance depends less on the local competence of individual robots than on the coordinated behavior of estimation, task allocation, planning, scheduling, execution, and recovery layers. This article reframes robotics as a hierarchical, constrained, stochastic control problem and uses intralogistics as a concrete case in which the systems nature of robotics becomes operationally visible.</p>
+
+                <h2>Introduction</h2>
+                <p>Robotics is often narrated through what is easiest to see: robot motion, manipulation, localization, or autonomous navigation. These are important elements, but they do not fully capture the central challenge of many deployed robotic systems. In operational environments, the main difficulty is often not whether a robot can move, but whether an entire system can sustain safe, efficient, and recoverable behavior under uncertainty, timing pressure, and resource contention.</p>
+
+                <p>This broader framing becomes especially important in intralogistics. Warehouse and fulfillment environments combine mobile robots, task queues, charging processes, shared infrastructure, order priorities, and traffic bottlenecks into one tightly coupled system. In such settings, performance emerges from the interaction of estimation, task allocation, planning, execution, and supervisory recovery rather than from the isolated excellence of any one module.</p>
+
+                <figure class="article-figure">
+                    <img src="/fig/images/robotics-system-level-control-architecture.svg" alt="A hierarchical closed-loop architecture for intralogistics robotics spanning estimation, task allocation, planning, execution, and recovery.">
+                    <figcaption>Operational performance in intralogistics emerges from feedback across layers rather than from isolated motion competence at the level of individual robots.</figcaption>
+                </figure>
+
+                <h2>From Single-Robot Control to System Orchestration</h2>
+                <p>Classical robotics and control theory often focus on stabilizing a plant, tracking trajectories, or rejecting disturbances at the level of a robot or subsystem. These remain essential foundations. However, in multi-robot operational environments, the effective plant is no longer a single machine. It is a networked socio-technical system composed of heterogeneous agents, shared spaces, software services, task demands, and physical constraints.</p>
+
+                <p>This shift matters because local optimality does not guarantee global efficiency. A route planner may minimize travel time for one robot while degrading fleet-wide flow through bottleneck formation. A dispatch rule may maximize immediate utilization while increasing downstream congestion or charging conflicts. A local recovery policy may solve one blockage while destabilizing throughput elsewhere. In other words, many important robotic failures are not failures of locomotion but failures of coordination.</p>
+
+                <h2>Intralogistics as a Canonical Systems Problem</h2>
+                <p>Modern intralogistics systems integrate autonomous mobile robots, fixed infrastructure, order management systems, charging logic, fleet coordination software, and human-operated stations. The system must continuously decide which robot should serve which task, how traffic should be routed through shared aisles, when resources such as chargers or doors should be reserved, and how execution should adapt to disturbances.</p>
+
+                <p>Accordingly, the main system metrics in intralogistics are not elegance of motion alone. They include throughput, task latency, congestion burden, resource utilization, energy efficiency, safety, and recovery quality. These are system-level performance variables. They are shaped by interdependencies across layers and cannot be understood solely through low-level motion competence.</p>
+
+                <h2>Formal Problem Formulation</h2>
+                <p>Consider a fleet of \(N\) robots operating in a shared warehouse graph \(G=(V,E)\), where nodes represent storage locations, workstations, chargers, pickup/drop-off points, and intersections, and edges represent traversable routes. At time \(t\), define the global state as</p>
                 <div class="equation-block">
-                    $$J \approx f(\mathrm{state\ estimation}, \mathrm{allocation}, \mathrm{planning}, \mathrm{execution}, \mathrm{latency}, \mathrm{recovery})$$
+                    $$x_t = \{x_t^{(r)}, x_t^{(q)}, x_t^{(e)}, x_t^{(i)}\},$$
                 </div>
-                <p>This is not a formal law, but it captures a useful engineering truth: system-level performance depends on how well the full control stack remains coordinated, not on any single module in isolation.</p>
+                <p>where:</p>
+                <ul>
+                    <li>\(x_t^{(r)}\) denotes robot states, including pose, velocity, battery level, payload status, and current task</li>
+                    <li>\(x_t^{(q)}\) denotes task-queue states, including pending orders, priorities, and deadlines</li>
+                    <li>\(x_t^{(e)}\) denotes traffic and environmental states, including aisle occupancy, congestion, and temporary blockages</li>
+                    <li>\(x_t^{(i)}\) denotes infrastructure states, including doors, elevators, docking stations, and charger availability</li>
+                </ul>
+                <p>The control input is hierarchical:</p>
+                <div class="equation-block">
+                    $$u_t = \{u_t^{\text{alloc}}, u_t^{\text{plan}}, u_t^{\text{sched}}, u_t^{\text{exec}}\},$$
+                </div>
+                <p>where:</p>
+                <ul>
+                    <li>\(u_t^{\text{alloc}}\): task-to-robot assignment</li>
+                    <li>\(u_t^{\text{plan}}\): path or route planning decisions</li>
+                    <li>\(u_t^{\text{sched}}\): resource and timing schedules</li>
+                    <li>\(u_t^{\text{exec}}\): low-level motion and execution commands</li>
+                </ul>
+                <p>The system evolves under uncertainty as</p>
+                <div class="equation-block">
+                    $$x_{t+1} = f(x_t, u_t, w_t),$$
+                </div>
+                <p>where \(w_t\) captures disturbances such as localization error, communication delay, bursty task arrivals, or blocked paths.</p>
+                <p>A fleet-level policy \(\pi\) seeks to minimize long-horizon operational cost:</p>
+                <div class="equation-block">
+                    $$\pi^* = \arg\min_{\pi} \; \mathbb{E}\left[\sum_{t=0}^{T} \Big(\alpha_1 L_t + \alpha_2 C_t + \alpha_3 E_t + \alpha_4 R_t - \alpha_5 Q_t \Big)\right]$$
+                </div>
+                <p>subject to collision avoidance, safety constraints, battery and charging constraints, task precedence constraints, and resource capacity constraints.</p>
+                <p>Here, \(L_t\) denotes latency or service-delay cost, \(C_t\) congestion cost, \(E_t\) energy cost, \(R_t\) recovery burden or operational risk, and \(Q_t\) throughput or service reward.</p>
 
-                <h2>What the control problem really includes</h2>
-                <p>The perception layer supplies partial and noisy information about the world. The decision layer must choose actions under uncertainty and changing priorities. The execution layer translates those decisions into physical behavior with finite precision, limited actuation, and safety constraints. A supervisory layer must then monitor performance, resolve conflicts, and recover from faults.</p>
-                <p>That broader definition is why robotics overlaps naturally with systems engineering, operations research, and multi-agent coordination. Real success comes from managing interactions, not just optimizing one policy or one controller.</p>
+                <div class="note">The crucial point is that decisions are distributed across multiple coupled layers, so improvements in one layer can be offset by degradation in another if coordination is poor.</div>
 
-                <h2>Why resource conflicts matter</h2>
-                <p>Many robotic failures are not local instabilities but coordination failures. Two agents compete for the same corridor. Charging demand appears at the wrong time. A planner produces individually valid routes that create global congestion. Recovery logic resolves one issue but pushes risk elsewhere in the system.</p>
-                <p>These are control problems because the system must regulate not only motion but also flow, timing, contention, and service quality across interacting components.</p>
+                <h2>System Layers and Their Characteristic Control Problems</h2>
+                <div class="article-table-shell">
+                    <table class="article-table">
+                        <thead>
+                            <tr>
+                                <th>System Layer</th>
+                                <th>Core Decision Variables</th>
+                                <th>Primary Objective</th>
+                                <th>Representative Failure Mode</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Perception and state estimation</td>
+                                <td>Robot pose, obstacle state, queue state, congestion state, infrastructure availability</td>
+                                <td>Maintain accurate, timely system state estimates</td>
+                                <td>Mislocalized robots or stale traffic estimates causing avoidable replanning</td>
+                            </tr>
+                            <tr>
+                                <td>Task allocation</td>
+                                <td>Robot-task assignments, reassignment rules, priority handling</td>
+                                <td>Maximize service efficiency and throughput</td>
+                                <td>Myopic assignment that increases downstream congestion</td>
+                            </tr>
+                            <tr>
+                                <td>Path planning and traffic coordination</td>
+                                <td>Routes, reservations, right-of-way rules, replanning triggers</td>
+                                <td>Avoid collisions while limiting travel and congestion cost</td>
+                                <td>Deadlock or bottleneck formation</td>
+                            </tr>
+                            <tr>
+                                <td>Resource scheduling</td>
+                                <td>Charger access, docking windows, workstation occupancy</td>
+                                <td>Balance utilization of shared resources</td>
+                                <td>Charger contention or blocked stations</td>
+                            </tr>
+                            <tr>
+                                <td>Low-level execution and control</td>
+                                <td>Velocity commands, tracking policies, stop/go decisions</td>
+                                <td>Safe and accurate motion execution</td>
+                                <td>Tracking error that spills into system-wide delay</td>
+                            </tr>
+                            <tr>
+                                <td>Supervisory control and recovery</td>
+                                <td>Exception handling, rerouting, failover, task rollback</td>
+                                <td>Preserve continuity under disturbances</td>
+                                <td>Local recovery that resolves one issue while destabilizing another zone</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>The table highlights an important systems insight: each layer has its own objective, but the warehouse only performs well when those objectives remain mutually compatible. A mathematically elegant local planner can still produce weak system performance if its routes create conflict patterns that the scheduler or allocator cannot absorb.</p>
 
-                <h2>Intralogistics as a concrete example</h2>
-                <p>Intralogistics is a good example because it makes the general problem visible. A warehouse system includes mobile robots, fixed infrastructure, sensing, scheduling, charging, and order-driven priorities. Good local motion is not enough. The system must regulate traffic, allocate work, maintain throughput, and recover from blockages or bursts in demand.</p>
-                <p>In this domain, the main metrics are not elegance of motion alone but throughput, latency, utilization, safety, and resilience. That is why intralogistics is best treated as an instance of robotics control at system scale.</p>
+                <h2>Why Coordination Bottlenecks Dominate Real Performance</h2>
+                <p>One of the most useful corrections to common robotics narratives is that many operational problems are not caused by weak locomotion or poor kinematics. They are caused by shared-resource contention. Robots compete for bottleneck corridors. Charging demand clusters at the wrong time. A valid local plan becomes globally harmful when many robots attempt to execute similar actions simultaneously. Recovery logic that is sensible locally may shift congestion or queue imbalance elsewhere.</p>
+                <p>From this perspective, the core challenge is not only safe motion but regulated flow. That is why congestion-aware planning and reservation-based coordination have become so important in warehouse robotics.</p>
 
-                <h2>Representative control sketch</h2>
-<pre><code class="language-python">for task in pending_tasks:
-    state = estimator.update(sensors, fleet_state)
-    agent = allocator.assign(task, agents, state)
-    plan = planner.solve(agent, task, state, constraints)
-    controller.dispatch(agent, plan)
-    supervisor.monitor(agent, task, state)
-</code></pre>
-                <p>The sketch is intentionally abstract. The point is that robotics usually requires estimation, assignment, planning, actuation, and supervision to stay coupled in one loop. Different domains swap out the details, but the control structure remains recognizable.</p>
+                <h2>Local Optimality Versus Global Optimality</h2>
+                <p>A central systems phenomenon in intralogistics is the divergence between local and global optimality. The shortest path for one robot is not necessarily the best decision for the fleet. If many robots choose the same locally efficient corridor, the result may be bottleneck formation, queue spillback, and reduced throughput. By contrast, a globally coordinated policy may assign some robots slightly longer routes while improving overall flow and service quality.</p>
+                <p>This difference is conceptually important because it explains why single-robot benchmarking often overstates deployment readiness. A local navigation stack may be excellent and yet fail to produce strong warehouse-level performance if it ignores coordination, reservation, and shared-resource timing.</p>
 
-                <h2>Why this framing matters</h2>
-                <p>Treating robotics as a general control problem makes the field easier to reason about. It shifts attention from isolated demos toward system behavior under uncertainty, and from single-robot performance toward coordinated operation over time.</p>
-                <p>That framing is useful whether the application is intralogistics, outdoor autonomy, robotic manipulation, or multi-agent execution. The common challenge is always the same: turn uncertain perception into reliable action while preserving safety, efficiency, and recoverability.</p>
+                <h2>Implications for Robotics Research</h2>
+                <p>Viewing robotics as a system-level control problem changes the scientific agenda. It suggests that four directions deserve particular emphasis.</p>
+                <ul>
+                    <li><strong>Coordination-aware estimation</strong> should infer not only robot pose but also traffic state, bottleneck risk, and resource contention.</li>
+                    <li><strong>Throughput-aware task allocation</strong> should anticipate downstream effects rather than optimize only immediate travel or priority score.</li>
+                    <li><strong>Lifelong planning under operational churn</strong> should handle continual task arrivals, route conflicts, and disturbances without collapsing scalability.</li>
+                    <li><strong>Recovery-by-design</strong> should be treated as a primary architectural objective because robust intralogistics systems derive much of their value from graceful degradation rather than brittle optimality.</li>
+                </ul>
+                <p>This framing also helps unify robotics subfields that are often treated separately. Perception, planning, scheduling, and control are not independent modules connected in a linear pipeline. They form an interacting closed loop whose quality is best judged by system-wide behavior over time.</p>
+
+                <h2>Conclusion</h2>
+                <p>The most useful way to interpret intralogistics robotics is not as a collection of mobile robots moving through a warehouse, but as a hierarchical closed-loop system that regulates flow, timing, contention, and recovery under uncertainty. This is what makes intralogistics a revealing case study for robotics more broadly. It exposes the fact that many of the hardest problems in robotics are not purely geometric or kinematic. They are system-level control problems.</p>
+                <p>A robot fleet succeeds not when each unit moves well in isolation, but when the full architecture of estimation, assignment, planning, execution, and recovery remains sufficiently coordinated to preserve safety, throughput, and resilience over time. In that sense, intralogistics does more than provide an application domain. It offers a clear empirical lens through which the systems nature of robotics becomes visible.</p>
             </div>
             <section class="reference-panel">
                 <span class="eyebrow">References</span>
                 <ol>
-                    <li><a href="https://docs.ros.org/en/rolling/" target="_blank" rel="noreferrer">ROS 2 documentation</a></li>
-                    <li><a href="https://gazebosim.org/docs" target="_blank" rel="noreferrer">Gazebo documentation</a></li>
-                    <li><a href="https://ieeexplore.ieee.org/document/9341162" target="_blank" rel="noreferrer">Representative literature on warehouse and fleet robotics coordination</a></li>
+                    <li><a href="https://www.sciencedirect.com/science/article/pii/S0377221721000217" target="_blank" rel="noreferrer">Fragapane et al., Planning and control of autonomous mobile robots for intralogistics</a></li>
+                    <li><a href="https://www.sciencedirect.com/science/article/pii/S2212827124013441" target="_blank" rel="noreferrer">Lackner et al., Review of autonomous mobile robots in intralogistics</a></li>
+                    <li><a href="https://cdn.aaai.org/AAAI/2007/AAAI07-282.pdf" target="_blank" rel="noreferrer">Wurman, D'Andrea, and Mountz, Coordinating Hundreds of Cooperative, Autonomous Vehicles in Warehouses</a></li>
+                    <li><a href="https://openrmf.readthedocs.io/" target="_blank" rel="noreferrer">OpenRMF overview</a></li>
+                    <li><a href="https://cse-robotics.engr.tamu.edu/dshell/cs689/papers/gerkey04formal.pdf" target="_blank" rel="noreferrer">Gerkey and Mataric, A Formal Analysis and Taxonomy of Task Allocation in Multi-Robot Systems</a></li>
+                    <li><a href="https://cdn.aaai.org/ojs/17344/17344-13-20838-1-2-20210518.pdf" target="_blank" rel="noreferrer">Li et al., Lifelong Multi-Agent Path Finding in Large-Scale Warehouses</a></li>
                 </ol>
             </section>
             <div class="article-footer-links">
-                <a class="ghost-button" href="/topics/robotics/index.html">Back to Robotics</a>
                 <a class="ghost-button" href="/topics/robotics/frameworks-and-domains.html">Next: Frameworks and Domains</a>
             </div>
-        </article>
+            </article>
+            <aside class="article-aside">
+                <div class="article-aside-card">
+                    <span class="eyebrow">Article Context</span>
+                    <dl class="article-aside-list">
+                        <div>
+                            <dt>Topic</dt>
+                            <dd>Action / Control and Planning</dd>
+                        </div>
+                        <div>
+                            <dt>Type</dt>
+                            <dd>Systems</dd>
+                        </div>
+                        <div>
+                            <dt>Domain</dt>
+                            <dd>Fleet Systems / Intralogistics</dd>
+                        </div>
+                        <div>
+                            <dt>Author</dt>
+                            <dd>P. Tomar</dd>
+                        </div>
+                        <div>
+                            <dt>Published</dt>
+                            <dd>March 2026</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="article-aside-card">
+                    <span class="eyebrow">Keywords</span>
+                    <div class="article-keywords">
+                        <span>Robotics</span>
+                        <span>Intralogistics</span>
+                        <span>System Level</span>
+                        <span>Control</span>
+                        <span>Warehouse</span>
+                        <span>Fleet</span>
+                        <span>Coordination</span>
+                        <span>Scheduling</span>
+                    </div>
+                </div>
+                <a class="article-back-link" href="/topics/control-and-planning/index.html">
+                    <span class="article-back-link-icon" aria-hidden="true">&#8592;</span>
+                    <span>Back to Control and Planning</span>
+                </a>
+            </aside>
+        </div>
     </main>
     <footer class="site-footer">
         <div class="container footer-grid">

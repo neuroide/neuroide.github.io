@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="920" viewBox="0 0 1400 920" role="img" aria-labelledby="title desc">
+  <title id="title">Hybrid Control Design Space for Intralogistics</title>
+  <desc id="desc">Triangular design space showing planning, learning, and safety supervision for intralogistics control.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8f8f4; }
+      .tri { fill: #eef2e1; stroke: #425438; stroke-width: 3; }
+      .nodeA { fill: #dfe9c7; stroke: #5d743f; stroke-width: 2.5; }
+      .nodeB { fill: #d8e7ef; stroke: #3f6b7e; stroke-width: 2.5; }
+      .nodeC { fill: #f0e0d0; stroke: #8d6948; stroke-width: 2.5; }
+      .mid { fill: #ffffff; stroke: #203246; stroke-width: 3; }
+      .title { font: 700 34px Georgia, "Times New Roman", serif; fill: #223042; }
+      .label { font: 600 22px Georgia, "Times New Roman", serif; fill: #22394f; }
+      .body { font: 15px Georgia, "Times New Roman", serif; fill: #32495f; }
+      .arrow { stroke: #3e5568; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3e5568"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="920"/>
+  <text class="title" x="700" y="56" text-anchor="middle">Hybrid Learning Control for Safe Multi-Agent Intralogistics</text>
+  <text class="body" x="700" y="86" text-anchor="middle">The strongest controller assigns different kinds of responsibility to different layers.</text>
+
+  <polygon class="tri" points="700,150 230,760 1170,760"/>
+
+  <circle class="nodeA" cx="700" cy="205" r="88"/>
+  <text class="label" x="700" y="198" text-anchor="middle">Safety and</text>
+  <text class="label" x="700" y="226" text-anchor="middle">Feasibility</text>
+  <text class="body" x="700" y="250" text-anchor="middle">deadlock, collision, capacity</text>
+
+  <circle class="nodeB" cx="300" cy="720" r="88"/>
+  <text class="label" x="300" y="713" text-anchor="middle">Classical</text>
+  <text class="label" x="300" y="741" text-anchor="middle">Planning</text>
+  <text class="body" x="300" y="765" text-anchor="middle">routing, reservations, timing</text>
+
+  <circle class="nodeC" cx="1100" cy="720" r="88"/>
+  <text class="label" x="1100" y="713" text-anchor="middle">Learning and</text>
+  <text class="label" x="1100" y="741" text-anchor="middle">Adaptation</text>
+  <text class="body" x="1100" y="765" text-anchor="middle">local ranking, prediction, tuning</text>
+
+  <rect class="mid" x="505" y="430" width="390" height="140" rx="22" ry="22"/>
+  <text class="label" x="700" y="474" text-anchor="middle">Hybrid Controller</text>
+  <text class="body" x="700" y="504" text-anchor="middle">learned proposals are filtered by admissibility</text>
+  <text class="body" x="700" y="528" text-anchor="middle">and executed only inside a safe control envelope</text>
+
+  <path class="arrow" d="M650 286 C625 350, 605 380, 585 430"/>
+  <path class="arrow" d="M370 672 C455 635, 505 605, 560 570"/>
+  <path class="arrow" d="M1025 672 C940 635, 890 605, 840 570"/>
+
+  <text class="body" x="700" y="846" text-anchor="middle">Operational acceptance: throughput improves only if safety, deadlock rate, and control timing remain acceptable.</text>
+</svg>

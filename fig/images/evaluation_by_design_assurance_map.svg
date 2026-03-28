@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Evaluation-by-Design Assurance Map</title>
+  <desc id="desc">A layered map showing how requirements, scenarios, monitoring, metrics, and claims build assurance in learning-enabled robotics.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f5f7fb; }
+      .ring1 { fill: #e9eef6; stroke: #304760; stroke-width: 2.5; }
+      .ring2 { fill: #d9e5f2; stroke: #325b83; stroke-width: 2.5; }
+      .ring3 { fill: #c8dced; stroke: #2d6b88; stroke-width: 2.5; }
+      .ring4 { fill: #b8d4ea; stroke: #226987; stroke-width: 2.5; }
+      .core { fill: #f7fbff; stroke: #17324a; stroke-width: 3; }
+      .title { font: 700 34px Georgia, "Times New Roman", serif; fill: #17283c; }
+      .label { font: 600 20px Georgia, "Times New Roman", serif; fill: #1f3650; }
+      .body { font: 15px Georgia, "Times New Roman", serif; fill: #28435f; }
+      .line { stroke: #496887; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="900"/>
+  <text class="title" x="700" y="54" text-anchor="middle">Evaluation-by-Design for Learning-Enabled Robotics</text>
+  <text class="body" x="700" y="84" text-anchor="middle">Assurance is built as a layered evidence structure, not appended as a final report.</text>
+
+  <ellipse class="ring4" cx="700" cy="500" rx="520" ry="250"/>
+  <ellipse class="ring3" cx="700" cy="500" rx="410" ry="200"/>
+  <ellipse class="ring2" cx="700" cy="500" rx="300" ry="150"/>
+  <ellipse class="ring1" cx="700" cy="500" rx="190" ry="98"/>
+  <ellipse class="core" cx="700" cy="500" rx="95" ry="50"/>
+
+  <text class="label" x="700" y="508" text-anchor="middle">Robot System</text>
+
+  <text class="label" x="700" y="405" text-anchor="middle">Monitoring and Runtime Logging</text>
+  <text class="body" x="700" y="430" text-anchor="middle">timestamps, intervention hooks, synchronized traces</text>
+
+  <text class="label" x="700" y="335" text-anchor="middle">Metrics and Acceptance Rules</text>
+  <text class="body" x="700" y="360" text-anchor="middle">task quality, safety margins, intervention burden, latency budgets</text>
+
+  <text class="label" x="700" y="255" text-anchor="middle">Scenario and Hazard Model</text>
+  <text class="body" x="700" y="280" text-anchor="middle">occlusion, human timing, disturbances, edge-case families</text>
+
+  <text class="label" x="700" y="175" text-anchor="middle">Claim Layer</text>
+  <text class="body" x="700" y="200" text-anchor="middle">what the system is allowed to claim, under which evidence conditions</text>
+
+  <path class="line" d="M330 610 C260 655, 225 710, 225 760"/>
+  <text class="label" x="112" y="790">Design</text>
+  <text class="body" x="112" y="815">requirements shape the</text>
+  <text class="body" x="112" y="836">architecture upstream</text>
+
+  <path class="line" d="M1070 610 C1140 655, 1175 710, 1175 760"/>
+  <text class="label" x="1288" y="790" text-anchor="end">Deployment</text>
+  <text class="body" x="1288" y="815" text-anchor="end">evidence remains linked</text>
+  <text class="body" x="1288" y="836" text-anchor="end">to the operating system</text>
+</svg>

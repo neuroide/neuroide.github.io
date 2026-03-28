@@ -1,0 +1,76 @@
+<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="980" fill="#F5F2EA"/>
+  <rect x="48" y="40" width="1504" height="900" rx="30" fill="#FFFDF8" stroke="#1C3550" stroke-width="4"/>
+
+  <text x="88" y="108" fill="#1C3550" font-family="Georgia, serif" font-size="44" font-weight="700">
+    Objective Families versus Physiological Invariances
+  </text>
+  <text x="88" y="148" fill="#5F6876" font-family="Arial, sans-serif" font-size="24">
+    The central design problem is not only what objective to optimize, but which physiological equivalences it should preserve.
+  </text>
+
+  <rect x="110" y="230" width="300" height="500" rx="22" fill="#F7F3EA" stroke="#6A5A46" stroke-width="3"/>
+  <text x="144" y="282" fill="#6A5A46" font-family="Arial, sans-serif" font-size="30" font-weight="700">
+    Objective Families
+  </text>
+  <text x="144" y="338" fill="#1C3550" font-family="Arial, sans-serif" font-size="24">Predictive coding</text>
+  <text x="144" y="392" fill="#1C3550" font-family="Arial, sans-serif" font-size="24">Contrastive learning</text>
+  <text x="144" y="446" fill="#1C3550" font-family="Arial, sans-serif" font-size="24">Non-contrastive alignment</text>
+  <text x="144" y="500" fill="#1C3550" font-family="Arial, sans-serif" font-size="24">Masked modeling</text>
+  <text x="144" y="554" fill="#1C3550" font-family="Arial, sans-serif" font-size="24">Multimodal alignment</text>
+  <text x="144" y="608" fill="#1C3550" font-family="Arial, sans-serif" font-size="24">Patient-aware objectives</text>
+
+  <rect x="1190" y="230" width="300" height="500" rx="22" fill="#F7F3EA" stroke="#6A5A46" stroke-width="3"/>
+  <text x="1224" y="282" fill="#6A5A46" font-family="Arial, sans-serif" font-size="30" font-weight="700">
+    Target Invariances
+  </text>
+  <text x="1224" y="338" fill="#2B5D42" font-family="Arial, sans-serif" font-size="24">Temporal continuity</text>
+  <text x="1224" y="392" fill="#2B5D42" font-family="Arial, sans-serif" font-size="24">Morphological stability</text>
+  <text x="1224" y="446" fill="#2B5D42" font-family="Arial, sans-serif" font-size="24">Lead / channel redundancy</text>
+  <text x="1224" y="500" fill="#2B5D42" font-family="Arial, sans-serif" font-size="24">Cross-modal agreement</text>
+  <text x="1224" y="554" fill="#2B5D42" font-family="Arial, sans-serif" font-size="24">State consistency</text>
+  <text x="1224" y="608" fill="#2B5D42" font-family="Arial, sans-serif" font-size="24">Patient-specific baseline</text>
+
+  <rect x="520" y="220" width="560" height="530" rx="26" fill="#EFE9DE" stroke="#6A5A46" stroke-width="3"/>
+  <text x="564" y="280" fill="#6A5A46" font-family="Arial, sans-serif" font-size="32" font-weight="700">
+    Design tension
+  </text>
+  <text x="564" y="326" fill="#4F4A40" font-family="Arial, sans-serif" font-size="24">
+    An objective succeeds when its enforced invariances match the physiological structure
+  </text>
+  <text x="564" y="364" fill="#4F4A40" font-family="Arial, sans-serif" font-size="24">
+    that should remain stable across views.
+  </text>
+  <text x="564" y="430" fill="#7A4B1E" font-family="Arial, sans-serif" font-size="26" font-weight="700">
+    Typical failure:
+  </text>
+  <text x="564" y="470" fill="#5A3D24" font-family="Arial, sans-serif" font-size="23">
+    augmentation or pairing rules erase pathology,
+  </text>
+  <text x="564" y="504" fill="#5A3D24" font-family="Arial, sans-serif" font-size="23">
+    preserve artifact, or reward subject identity instead of physiology.
+  </text>
+  <text x="564" y="584" fill="#5C2F73" font-family="Arial, sans-serif" font-size="26" font-weight="700">
+    Core research question:
+  </text>
+  <text x="564" y="624" fill="#50395B" font-family="Arial, sans-serif" font-size="23">
+    what transformations leave the latent physiological state unchanged,
+  </text>
+  <text x="564" y="658" fill="#50395B" font-family="Arial, sans-serif" font-size="23">
+    and which ones destroy clinically meaningful evidence?
+  </text>
+
+  <path d="M410 338H520" stroke="#1C3550" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M410 392H520" stroke="#1C3550" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M410 446H520" stroke="#1C3550" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M410 500H520" stroke="#1C3550" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M410 554H520" stroke="#1C3550" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M410 608H520" stroke="#1C3550" stroke-width="4.5" stroke-dasharray="10 10"/>
+
+  <path d="M1080 338H1190" stroke="#2B5D42" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M1080 392H1190" stroke="#2B5D42" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M1080 446H1190" stroke="#2B5D42" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M1080 500H1190" stroke="#2B5D42" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M1080 554H1190" stroke="#2B5D42" stroke-width="4.5" stroke-dasharray="10 10"/>
+  <path d="M1080 608H1190" stroke="#2B5D42" stroke-width="4.5" stroke-dasharray="10 10"/>
+</svg>

@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1600"
+   height="980"
+   viewBox="0 0 1600 980"
+   fill="none"
+   version="1.1"
+   id="svg39"
+   sodipodi:docname="physiological_signals_dynamic_systems_overview.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview39"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.80249446"
+     inkscape:cx="844.86565"
+     inkscape:cy="481.62326"
+     inkscape:window-width="2056"
+     inkscape:window-height="1262"
+     inkscape:window-x="0"
+     inkscape:window-y="39"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg39" />
+  <rect
+     width="1600"
+     height="980"
+     fill="#F5F2EA"
+     id="rect1" />
+  <rect
+     x="48"
+     y="40"
+     width="1504"
+     height="900"
+     rx="30"
+     fill="#FFFDF8"
+     stroke="#1C3550"
+     stroke-width="4"
+     id="rect2" />
+  <defs
+     id="defs3">
+    <marker
+       id="arrowMain"
+       markerWidth="22"
+       markerHeight="22"
+       refX="10"
+       refY="7"
+       orient="auto"
+       markerUnits="userSpaceOnUse"
+       viewBox="0 0 14 14"
+       preserveAspectRatio="xMidYMid">
+      <path
+         d="M0 0L14 7L0 14L4.5 7Z"
+         fill="#1C3550"
+         id="path2" />
+    </marker>
+    <marker
+       id="arrowSoft"
+       markerWidth="22"
+       markerHeight="22"
+       refX="10"
+       refY="7"
+       orient="auto"
+       markerUnits="userSpaceOnUse"
+       preserveAspectRatio="none"
+       viewBox="0 0 14 14">
+      <path
+         d="M0 0L14 7L0 14L4.5 7Z"
+         fill="#748190"
+         id="path3" />
+    </marker>
+  </defs>
+  <text
+     x="90"
+     y="110"
+     fill="#1C3550"
+     font-family="Georgia, serif"
+     font-size="46"
+     font-weight="700"
+     id="text3">
+    Physiological Signals as Dynamic Systems
+  </text>
+  <text
+     x="90"
+     y="150"
+     fill="#5F6876"
+     font-family="Arial, sans-serif"
+     font-size="24"
+     id="text4">
+    Overview: latent state, multiscale structure, network coupling, observability, and engineering workflow.
+  </text>
+  <rect
+     x="100"
+     y="220"
+     width="320"
+     height="180"
+     rx="22"
+     fill="#DDEAF8"
+     stroke="#1C3550"
+     stroke-width="3"
+     id="rect4" />
+  <text
+     x="130"
+     y="272"
+     fill="#1C3550"
+     font-family="Arial, sans-serif"
+     font-size="30"
+     font-weight="700"
+     id="text5">
+    Measured Signals
+  </text>
+  <text
+     x="130"
+     y="314"
+     fill="#344054"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text6">
+    ECG
+  </text>
+  <text
+     x="130"
+     y="344"
+     fill="#344054"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text7">
+    EEG
+  </text>
+  <text
+     x="130"
+     y="374"
+     fill="#344054"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text8">
+    PPG, BP, respiration, EDA
+  </text>
+  <rect
+     x="500"
+     y="210"
+     width="600"
+     height="200"
+     rx="24"
+     fill="#E6F6E8"
+     stroke="#2B5D42"
+     stroke-width="3"
+     id="rect8" />
+  <text
+     x="540"
+     y="270"
+     fill="#2B5D42"
+     font-family="Arial, sans-serif"
+     font-size="32"
+     font-weight="700"
+     id="text9">
+    Latent Physiological Dynamics
+  </text>
+  <text
+     x="540"
+     y="315"
+     fill="#314339"
+     font-family="Arial, sans-serif"
+     font-size="24"
+     id="text10">
+    State evolution, regulation, adaptation, perturbation
+  </text>
+  <text
+     x="540"
+     y="352"
+     fill="#516056"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text11">
+    x_(t+1) = f(x_t, u_t, w_t),   y_t = h(x_t, v_t)
+  </text>
+  <rect
+     x="1180"
+     y="220"
+     width="320"
+     height="180"
+     rx="22"
+     fill="#F6E5D9"
+     stroke="#7A4B1E"
+     stroke-width="3"
+     id="rect11" />
+  <text
+     x="1212"
+     y="272"
+     fill="#7A4B1E"
+     font-family="Arial, sans-serif"
+     font-size="30"
+     font-weight="700"
+     id="text12">
+    Inference Targets
+  </text>
+  <text
+     x="1212"
+     y="314"
+     fill="#5A3D24"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text13">
+    Hidden state
+  </text>
+  <text
+     x="1212"
+     y="344"
+     fill="#5A3D24"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text14">
+    Coupling regime
+  </text>
+  <text
+     x="1212"
+     y="374"
+     fill="#5A3D24"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text15">
+    Transition and failure risk
+  </text>
+  <rect
+     x="140"
+     y="510"
+     width="360"
+     height="180"
+     rx="22"
+     fill="#F0E5F8"
+     stroke="#5C2F73"
+     stroke-width="3"
+     id="rect15" />
+  <text
+     x="175"
+     y="562"
+     fill="#5C2F73"
+     font-family="Arial, sans-serif"
+     font-size="30"
+     font-weight="700"
+     id="text16">
+    Multiscale Structure
+  </text>
+  <text
+     x="175"
+     y="594"
+     fill="#50395b"
+     font-family="Arial, sans-serif"
+     font-size="22px"
+     id="text17">beat-to-beat variation</text>
+  <text
+     x="175"
+     y="624"
+     fill="#50395b"
+     font-family="Arial, sans-serif"
+     font-size="22px"
+     id="text18">slower modulation</text>
+  <text
+     x="175"
+     y="654"
+     fill="#50395b"
+     font-family="Arial, sans-serif"
+     font-size="22px"
+     id="text19"><tspan
+       sodipodi:role="line"
+       id="tspan57"
+       x="175"
+       y="654">long-range correlation / fractal</tspan><tspan
+       sodipodi:role="line"
+       id="tspan58"
+       x="175"
+       y="681.5">behavior</tspan></text>
+  <rect
+     x="620"
+     y="510"
+     width="360"
+     height="180"
+     rx="22"
+     fill="#F7EEDB"
+     stroke="#8A6B2E"
+     stroke-width="3"
+     id="rect19" />
+  <text
+     x="660"
+     y="562"
+     fill="#8A6B2E"
+     font-family="Arial, sans-serif"
+     font-size="30"
+     font-weight="700"
+     id="text20">
+    Network Coupling
+  </text>
+  <text
+     x="660"
+     y="604"
+     fill="#5A4C30"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text21">
+    cardio-respiratory interaction
+  </text>
+  <text
+     x="660"
+     y="634"
+     fill="#5A4C30"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text22">
+    neurovascular coordination
+  </text>
+  <text
+     x="660"
+     y="664"
+     fill="#5A4C30"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text23">
+    organ-system state transitions
+  </text>
+  <rect
+     x="1100"
+     y="510"
+     width="360"
+     height="180"
+     rx="22"
+     fill="#E5EEF2"
+     stroke="#46616E"
+     stroke-width="3"
+     id="rect23" />
+  <text
+     x="1142"
+     y="562"
+     fill="#46616E"
+     font-family="Arial, sans-serif"
+     font-size="30"
+     font-weight="700"
+     id="text24">
+    Observability
+  </text>
+  <text
+     x="1142"
+     y="604"
+     fill="#45525A"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text25">
+    noisy outputs
+  </text>
+  <text
+     x="1142"
+     y="634"
+     fill="#45525A"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text26">
+    partial state access
+  </text>
+  <text
+     x="1142"
+     y="664"
+     fill="#45525A"
+     font-family="Arial, sans-serif"
+     font-size="22"
+     id="text27">
+    state reconstruction and filtering
+  </text>
+  <rect
+     x="300"
+     y="770"
+     width="1000"
+     height="110"
+     rx="22"
+     fill="#EFE9DE"
+     stroke="#6A5A46"
+     stroke-width="3"
+     id="rect27" />
+  <text
+     x="637.96124"
+     y="807.66992"
+     fill="#6a5a46"
+     font-family="Arial, sans-serif"
+     font-size="30px"
+     font-weight="700"
+     id="text28">Engineering Workflow</text>
+  <text
+     x="808.87549"
+     y="842"
+     fill="#4f4a40"
+     font-family="Arial, sans-serif"
+     font-size="22px"
+     id="text29"
+     style="text-align:center;text-anchor:middle"><tspan
+       sodipodi:role="line"
+       id="tspan40"
+       x="808.87549"
+       y="842">define latent question → choose model → test across regimes → evaluate coupling →</tspan><tspan
+       sodipodi:role="line"
+       x="808.87549"
+       y="869.5"
+       id="tspan42">validate on shared datasets</tspan></text>
+  <path
+     d="M420 310H500"
+     stroke="#1C3550"
+     stroke-width="6"
+     stroke-linecap="round"
+     marker-end="url(#arrowMain)"
+     id="path29" />
+  <path
+     d="M1100 310H1180"
+     stroke="#1C3550"
+     stroke-width="6"
+     stroke-linecap="round"
+     marker-end="url(#arrowMain)"
+     id="path30" />
+  <path
+     d="M800 410V510"
+     stroke="#1C3550"
+     stroke-width="6"
+     stroke-linecap="round"
+     marker-end="url(#arrowMain)"
+     id="path31" />
+  <path
+     d="M800 690V770"
+     stroke="#1C3550"
+     stroke-width="6"
+     stroke-linecap="round"
+     marker-end="url(#arrowMain)"
+     id="path32" />
+  <path
+     d="M620 600H500"
+     stroke="#748190"
+     stroke-width="4.5"
+     stroke-linecap="round"
+     stroke-dasharray="10 10"
+     marker-end="url(#arrowSoft)"
+     id="path33" />
+  <path
+     d="M980 600H1100"
+     stroke="#748190"
+     stroke-width="4.5"
+     stroke-linecap="round"
+     stroke-dasharray="10 10"
+     marker-end="url(#arrowSoft)"
+     id="path34" />
+  <path
+     d="M320 400C320 455 320 470 320 510"
+     stroke="#748190"
+     stroke-width="4.5"
+     stroke-linecap="round"
+     stroke-dasharray="10 10"
+     fill="none"
+     marker-end="url(#arrowSoft)"
+     id="path35" />
+  <path
+     d="M1280 400C1280 455 1280 470 1280 510"
+     stroke="#748190"
+     stroke-width="4.5"
+     stroke-linecap="round"
+     stroke-dasharray="10 10"
+     fill="none"
+     marker-end="url(#arrowSoft)"
+     id="path36"
+     style="stroke-dasharray:9.9;stroke-dashoffset:0" />
+  <text
+     x="-679.19238"
+     y="578.5"
+     fill="#748190"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     id="text36"
+     transform="rotate(-90)">timescale dependence</text>
+  <text
+     x="-640.49268"
+     y="1047.3862"
+     fill="#748190"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     id="text37"
+     transform="rotate(-90)">state inference</text>
+  <text
+     fill="#748190"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     id="text38"
+     y="460"
+     x="196">signal diversity</text>
+  <text
+     x="1291"
+     y="463.01553"
+     fill="#748190"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     id="text39">analysis objective</text>
+</svg>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Neuroide Startup Research Lab</title>
-    <meta name="description" content="About Neuroide, a startup research lab focused on perception, machine intelligence, and robotics.">
-    <link rel="icon" type="image/png" href="/images/neuroide.png">
+    <title>About | Neuroide Research Architecture</title>
+    <meta name="description" content="About Neuroide, a research lab organized around Perception, Intelligence, and Action.">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,15 +15,14 @@
     <header>
         <nav>
             <a href="/index.html" class="logo" aria-label="Neuroide home">
-                <img src="/images/neuroide.png" alt="Neuroide">
+                <img src="/fig/neuroide.png" alt="Neuroide">
             </a>
             <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="navLinks" class="nav-links">
                 <li><a href="/index.html">Home</a></li>
-                <li><a href="/topics/signals/index.html">Signals</a></li>
-                <li><a href="/topics/ml/index.html">Machine Learning</a></li>
-                <li><a href="/topics/genai/index.html">GenAI</a></li>
-                <li><a href="/topics/robotics/index.html">Robotics</a></li>
+                <li><a href="/perception.html">Perception</a></li>
+                <li><a href="/intelligence.html">Intelligence</a></li>
+                <li><a href="/action.html">Action</a></li>
                 <li><a href="/search.html" class="nav-search-link">Search</a></li>
                 <li><a href="/about.html" class="active">About</a></li>
             </ul>
@@ -34,8 +33,8 @@
         <div class="container topic-layout">
             <section class="info-panel">
                 <span class="eyebrow">About Neuroide</span>
-                <h1 class="page-title">Neuroide is a startup research lab focused on perception, machine intelligence, and robotics.</h1>
-                <p class="page-intro">The lab studies how intelligent systems sense the world, form useful internal models, and act under real constraints. The public site is where that work is published as technical notes, research essays, and systems-oriented writing.</p>
+                <h1 class="page-title">Neuroide is a research lab organized around Perception, Intelligence, and Action.</h1>
+                <p class="page-intro">The lab studies how intelligent systems sense the world, form useful internal models, and act under real constraints. The public site is structured as a research architecture, with pillar pages, topic programs, technical notes, and systems-oriented articles.</p>
             </section>
 
             <section class="grid">
@@ -52,19 +51,19 @@
             </section>
 
             <section class="info-panel">
-                <span class="eyebrow">What The Lab Publishes</span>
+                <span class="eyebrow">Research Programs</span>
                 <div class="topic-table">
                     <div class="topic-row">
-                        <div class="eyebrow">Research Notes</div>
-                        <p class="small-text">Short technical pieces on specific concepts, model classes, and system design questions.</p>
+                        <div class="eyebrow">Perception</div>
+                        <p class="small-text">Signals, multimodal sensing, and physiological systems as the measurement layer of Neuroide.</p>
                     </div>
                     <div class="topic-row">
-                        <div class="eyebrow">Systems Articles</div>
-                        <p class="small-text">Longer writing on architecture, deployment constraints, validation, and integration across the stack.</p>
+                        <div class="eyebrow">Intelligence</div>
+                        <p class="small-text">Machine learning, generative and reasoning systems, and representation and inference as the modeling layer.</p>
                     </div>
                     <div class="topic-row">
-                        <div class="eyebrow">Topic Maps</div>
-                        <p class="small-text">Structured overviews of the major domains inside signals, machine learning, generative AI, and robotics.</p>
+                        <div class="eyebrow">Action</div>
+                        <p class="small-text">Robotics, control and planning, and validation and simulation as the execution and evidence layer.</p>
                     </div>
                 </div>
             </section>
@@ -74,15 +73,15 @@
                 <div class="topic-table">
                     <div class="topic-row">
                         <div class="eyebrow">Perception</div>
-                        <p class="small-text">Perception is the boundary between a system and the world: signals, physiological sensing, raw measurements, sensor fusion, and the work of extracting reliable information from noisy reality.</p>
+                        <p class="small-text">Perception is the boundary between a system and the world: signals, multimodal sensing, physiological systems, raw measurements, sensor fusion, and the work of extracting reliable information from noisy reality.</p>
                     </div>
                     <div class="topic-row">
                         <div class="eyebrow">Intelligence</div>
-                        <p class="small-text">Intelligence is the internal layer where structure is learned, uncertainty is managed, and decisions become possible. This includes machine learning, generative models, representation learning, reasoning workflows, and model-guided inference.</p>
+                        <p class="small-text">Intelligence is the internal layer where structure is learned, uncertainty is managed, and decisions become possible. This includes machine learning, generative and reasoning systems, representation learning, and inference workflows.</p>
                     </div>
                     <div class="topic-row">
                         <div class="eyebrow">Action</div>
-                        <p class="small-text">Action is where computation becomes behavior. This includes control, robotics, multi-agent coordination, planning, middleware, validation, and the engineering needed to survive outside controlled demonstrations.</p>
+                        <p class="small-text">Action is where computation becomes behavior. This includes robotics, control and planning, validation and simulation, multi-agent coordination, deployment, and the engineering needed to survive outside controlled demonstrations.</p>
                     </div>
                 </div>
             </section>
@@ -103,14 +102,14 @@
             <section class="info-panel profile-panel">
                 <div class="profile-shell">
                     <div class="profile-image">
-                        <img src="/images/profile.png" alt="Puneet Tomar, Founder and Research Lead of Neuroide">
+                        <img src="/fig/profile.png" alt="Puneet Tomar, Founder and Research Lead of Neuroide">
                     </div>
 
                     <div class="profile-identity">
                         <span class="eyebrow">Founder / Authorship / Contact</span>
                         <h2>Puneet Tomar</h2>
                         <p class="profile-role">Founder and Research Lead</p>
-                        <p class="small-text">Puneet Tomar is building Neuroide as a startup research lab focused on perception, machine intelligence, and robotics. The work emphasizes technical depth, system design, and the gap between impressive models and deployable systems.</p>
+                        <p class="small-text">Puneet Tomar is building Neuroide as a startup research lab organized around Perception, Intelligence, and Action. The work emphasizes technical depth, system design, and the gap between impressive models and deployable systems.</p>
                         <h3>For research, technical collaboration, and venture conversations.</h3>
                         <p class="small-text">Direct contact: <a href="mailto:neuroide@proton.me">neuroide@proton.me</a></p>
                     </div>

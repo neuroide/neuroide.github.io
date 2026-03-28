@@ -1,0 +1,45 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="32" fill="#0F141B"/>
+  <rect x="42" y="42" width="1516" height="816" rx="30" fill="url(#bg)" stroke="#EEF2F7" stroke-opacity="0.12" stroke-width="4"/>
+  <rect x="96" y="96" width="1408" height="108" rx="24" fill="#131A23" stroke="#EEF2F7" stroke-opacity="0.12" stroke-width="2"/>
+  <text x="136" y="154" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="40" font-weight="700">Signal-Processing Workflow for Physiological Data</text>
+  <text x="136" y="188" fill="#C9D3DE" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Engineering path from sensing to validated inference.</text>
+
+  <rect x="100" y="284" width="236" height="136" rx="22" fill="#122030" stroke="#6DD3FF" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="138" y="342" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Acquire</text>
+  <text x="138" y="378" fill="#D9E8F3" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">Sensor, front-end, ADC</text>
+
+  <rect x="392" y="284" width="236" height="136" rx="22" fill="#162118" stroke="#C2D46B" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="428" y="342" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Preprocess</text>
+  <text x="428" y="378" fill="#E4EAD0" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">Filter, detrend, normalize</text>
+
+  <rect x="684" y="284" width="236" height="136" rx="22" fill="#2B1B18" stroke="#FF8C69" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="742" y="342" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Analyze</text>
+  <text x="720" y="378" fill="#F5DCD4" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">Time, frequency, time-frequency</text>
+
+  <rect x="976" y="284" width="236" height="136" rx="22" fill="#22182D" stroke="#C28EFF" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="1036" y="342" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Detect</text>
+  <text x="1010" y="378" fill="#E7D8F8" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">Events, rhythms, transitions</text>
+
+  <rect x="1268" y="284" width="236" height="136" rx="22" fill="#17222B" stroke="#88CDE6" stroke-opacity="0.36" stroke-width="3"/>
+  <text x="1312" y="342" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Validate</text>
+  <text x="1300" y="378" fill="#DCEFF5" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">Public data, metrics, repeatability</text>
+
+  <path d="M336 352H392" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M628 352H684" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M920 352H976" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1212 352H1268" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+
+  <rect x="242" y="548" width="1116" height="206" rx="28" fill="#161C23" stroke="#EEF2F7" stroke-opacity="0.14" stroke-width="3"/>
+  <text x="292" y="616" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="36" font-weight="700">Core engineering questions</text>
+  <text x="292" y="668" fill="#CDD7E1" font-family="IBM Plex Sans, Arial, sans-serif" font-size="25">What bandwidth is physiological? What distortion is acceptable? What stationarity assumption is being made?</text>
+  <text x="292" y="706" fill="#CDD7E1" font-family="IBM Plex Sans, Arial, sans-serif" font-size="25">Is the detector coupled properly to preprocessing? Does the evaluation reflect real signal conditions?</text>
+
+  <defs>
+    <linearGradient id="bg" x1="84" y1="54" x2="1492" y2="844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142131"/>
+      <stop offset="0.52" stop-color="#10161E"/>
+      <stop offset="1" stop-color="#0E1319"/>
+    </linearGradient>
+  </defs>
+</svg>

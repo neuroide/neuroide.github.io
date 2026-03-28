@@ -1,0 +1,44 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="32" fill="#0F141B"/>
+  <rect x="42" y="42" width="1516" height="816" rx="30" fill="url(#bg)" stroke="#EEF2F7" stroke-opacity="0.12" stroke-width="4"/>
+  <rect x="96" y="96" width="1408" height="110" rx="24" fill="#131A23" stroke="#EEF2F7" stroke-opacity="0.12" stroke-width="2"/>
+  <text x="136" y="154" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="40" font-weight="700">Progression from Classical to Advanced Signal Processing</text>
+  <text x="136" y="188" fill="#C9D3DE" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Methodological progression should follow failure of assumptions, not algorithmic fashion.</text>
+
+  <rect x="90" y="320" width="220" height="130" rx="22" fill="#122030" stroke="#6DD3FF" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="132" y="374" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Classical</text>
+  <text x="132" y="410" fill="#D9E8F3" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">Filtering, spectra, detection</text>
+
+  <rect x="390" y="320" width="220" height="130" rx="22" fill="#162118" stroke="#C2D46B" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="428" y="374" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Localized</text>
+  <text x="428" y="410" fill="#E4EAD0" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">STFT, wavelets</text>
+
+  <rect x="690" y="320" width="220" height="130" rx="22" fill="#2B1B18" stroke="#FF8C69" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="736" y="374" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Adaptive</text>
+  <text x="736" y="410" fill="#F5DCD4" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">Time-varying disturbance</text>
+
+  <rect x="990" y="320" width="220" height="130" rx="22" fill="#22182D" stroke="#C28EFF" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="1042" y="374" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Latent</text>
+  <text x="1042" y="410" fill="#E7D8F8" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">ICA, state-space models</text>
+
+  <rect x="1290" y="320" width="220" height="130" rx="22" fill="#17222B" stroke="#88CDE6" stroke-opacity="0.36" stroke-width="3"/>
+  <text x="1330" y="374" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="30" font-weight="700">Advanced</text>
+  <text x="1330" y="410" fill="#DCEFF5" font-family="IBM Plex Sans, Arial, sans-serif" font-size="22">Nonlinear, sparse, Bayesian</text>
+
+  <path d="M310 385H390" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M610 385H690" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M910 385H990" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1210 385H1290" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+
+  <rect x="236" y="572" width="1128" height="172" rx="24" fill="#161C23" stroke="#EEF2F7" stroke-opacity="0.14" stroke-width="3"/>
+  <text x="286" y="632" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="34" font-weight="700">Progression criterion</text>
+  <text x="286" y="678" fill="#CDD7E1" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Move to a richer method only when the simpler model fails because of nonstationarity, source mixing, latent-state structure, multimodal coupling, or uncertainty.</text>
+
+  <defs>
+    <linearGradient id="bg" x1="84" y1="54" x2="1492" y2="844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142131"/>
+      <stop offset="0.52" stop-color="#10161E"/>
+      <stop offset="1" stop-color="#0E1319"/>
+    </linearGradient>
+  </defs>
+</svg>

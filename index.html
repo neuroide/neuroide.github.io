@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neuroide | Startup Research Lab for Signals, AI, and Robotics</title>
-    <meta name="description" content="Neuroide is a startup research lab publishing technical work on perception, machine intelligence, and robotics.">
-    <link rel="icon" type="image/png" href="/images/neuroide.png">
+    <title>Neuroide | Research Architecture for Perception, Intelligence, and Action</title>
+    <meta name="description" content="Neuroide is a research lab organized around Perception, Intelligence, and Action, publishing technical work across signals, multimodal sensing, physiological systems, machine learning, reasoning systems, robotics, control, and validation.">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,15 +15,14 @@
     <header>
         <nav>
             <a href="/index.html" class="logo" aria-label="Neuroide home">
-                <img src="/images/neuroide.png" alt="Neuroide">
+                <img src="/fig/neuroide.png" alt="Neuroide">
             </a>
             <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="navLinks" class="nav-links">
                 <li><a href="/index.html" class="active">Home</a></li>
-                <li><a href="/topics/signals/index.html">Signals</a></li>
-                <li><a href="/topics/ml/index.html">Machine Learning</a></li>
-                <li><a href="/topics/genai/index.html">GenAI</a></li>
-                <li><a href="/topics/robotics/index.html">Robotics</a></li>
+                <li><a href="/perception.html">Perception</a></li>
+                <li><a href="/intelligence.html">Intelligence</a></li>
+                <li><a href="/action.html">Action</a></li>
                 <li><a href="/search.html" class="nav-search-link">Search</a></li>
                 <li><a href="/about.html">About</a></li>
             </ul>
@@ -35,14 +34,164 @@
             <div class="container">
                 <div class="home-hero-copy">
                     <div class="hero-brand">
-                        <img src="/images/neuroide.png" alt="Neuroide" class="hero-logo">
+                        <img src="/fig/neuroide.png" alt="Neuroide" class="hero-logo">
                         <p class="hero-tagline">Perception.Intelligence.Action.</p>
                     </div>
                     <h1>Technical research on how intelligent systems perceive, reason, and act.</h1>
-                    <p class="hero-summary">Neuroide is a startup research lab focused on the full stack of autonomy. The work spans physiological signals, machine learning, generative AI, and robotics, with an emphasis on systems that hold up outside controlled demos.</p>
+                    <p class="hero-summary">Neuroide is organized as a research architecture rather than a loose collection of categories. The site is structured around three pillars, Perception, Intelligence, and Action, with topic programs that cover signals, multimodal sensing, physiological systems, machine learning, generative and reasoning systems, representation and inference, robotics, control and planning, and validation and simulation.</p>
                     <div class="hero-actions">
-                        <a href="#featured-notes" class="button">Read Featured Notes</a>
-                        <a href="/about.html" class="ghost-button">About the Lab</a>
+                        <a href="#featured-articles" class="button">Featured Articles</a>
+                        <a href="/about.html" class="ghost-button">About Lab</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="core-areas-section featured-articles-section" id="featured-articles">
+            <div class="container">
+                <div class="section-head featured-articles-head">
+                    <div class="featured-articles-title">
+                        <span class="eyebrow">Featured Articles</span>
+                        <h2>Featured Articles</h2>
+                        <p>The strongest current reads from the lab, staged as an editorial shelf across the three research pillars and their topic programs.</p>
+                    </div>
+                    <div class="featured-articles-summary">
+                        <span>5 featured reads</span>
+                        <span>Perception to Action</span>
+                        <span>Updated 2026</span>
+                    </div>
+                </div>
+
+                <div class="featured-carousel" data-featured-slider>
+                    <div class="featured-carousel-shell">
+                        <div class="featured-carousel-track" data-featured-track>
+                            <article class="featured-slide" data-featured-slide>
+                                <div class="featured-slide-card">
+                                    <div class="featured-slide-media">
+                                        <img src="/fig/featured/photos/ecg-and-cvp-curves.jpg" alt="Medical monitor with ECG and central venous pressure traces">
+                                    </div>
+                                    <a href="/topics/signals/physiological-signals-as-systems.html" class="featured-slide-link">
+                                        <div class="featured-slide-copy">
+                                            <div class="content-meta">
+                                                <span>Perception / Physiological Systems</span>
+                                                <span>Article</span>
+                                            </div>
+                                            <h3>Physiological Signals as Dynamic Systems</h3>
+                                            <p>A systems view of physiological data as noisy, multiscale observations of biological regulation.</p>
+                                            <div class="featured-slide-tags">
+                                                <span>Biosignals</span>
+                                                <span>Dynamics</span>
+                                                <span>Measurement</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="featured-slide-credit" href="https://commons.wikimedia.org/wiki/File:ECG_and_CVP_Curves.jpg" target="_blank" rel="noreferrer">Image: Stefan Bellini / Wikimedia Commons · CC0</a>
+                                </div>
+                            </article>
+                            <article class="featured-slide" data-featured-slide>
+                                <div class="featured-slide-card">
+                                    <div class="featured-slide-media">
+                                        <img src="/fig/featured/photos/social-network-visualization.png" alt="Network visualization showing clustered graph structure and relational connectivity">
+                                    </div>
+                                    <a href="/topics/ml/contrastive-learning.html" class="featured-slide-link">
+                                        <div class="featured-slide-copy">
+                                            <div class="content-meta">
+                                                <span>Intelligence / Representation and Inference</span>
+                                                <span>Article</span>
+                                            </div>
+                                            <h3>Contrastive Representation Learning</h3>
+                                            <p>A technical note on InfoNCE, SimCLR, and how embedding objectives shape useful representations.</p>
+                                            <div class="featured-slide-tags">
+                                                <span>Embeddings</span>
+                                                <span>InfoNCE</span>
+                                                <span>Geometry</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="featured-slide-credit" href="https://commons.wikimedia.org/wiki/File:Social_Network_Analysis_Visualization.png" target="_blank" rel="noreferrer">Image: Martin Grandjean / Wikimedia Commons · CC BY-SA 3.0</a>
+                                </div>
+                            </article>
+                            <article class="featured-slide" data-featured-slide>
+                                <div class="featured-slide-card">
+                                    <div class="featured-slide-media">
+                                        <img src="/fig/featured/photos/brain-visualization.jpg" alt="Scientific brain visualization based on MRI data">
+                                    </div>
+                                    <a href="/topics/genai/test-time-scaling.html" class="featured-slide-link">
+                                        <div class="featured-slide-copy">
+                                            <div class="content-meta">
+                                                <span>Intelligence / Generative and Reasoning Systems</span>
+                                                <span>Article</span>
+                                            </div>
+                                            <h3>Test-Time Compute for Reasoning Models</h3>
+                                            <p>An analysis of inference-time scaling strategies such as self-consistency and verifier-guided decoding.</p>
+                                            <div class="featured-slide-tags">
+                                                <span>Reasoning</span>
+                                                <span>Inference</span>
+                                                <span>Verification</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="featured-slide-credit" href="https://commons.wikimedia.org/wiki/File:Brain_visualization.jpg" target="_blank" rel="noreferrer">Image: UCRL / Wikimedia Commons · Public domain</a>
+                                </div>
+                            </article>
+                            <article class="featured-slide" data-featured-slide>
+                                <div class="featured-slide-card">
+                                    <div class="featured-slide-media">
+                                        <img src="/fig/featured/photos/ocado-warehouse-bots.jpg" alt="Ocado warehouse robots operating in a logistics environment">
+                                    </div>
+                                    <a href="/topics/robotics/intralogistics-control-system.html" class="featured-slide-link">
+                                        <div class="featured-slide-copy">
+                                            <div class="content-meta">
+                                                <span>Action / Control and Planning</span>
+                                                <span>Systems</span>
+                                            </div>
+                                            <h3>Robotics as a System-Level Control Problem</h3>
+                                            <p>A systems article on estimation, planning, execution, recovery, and why deployment breaks simplistic narratives.</p>
+                                            <div class="featured-slide-tags">
+                                                <span>Planning</span>
+                                                <span>Control</span>
+                                                <span>Coordination</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="featured-slide-credit" href="https://commons.wikimedia.org/wiki/File:Ocado_warehouse_bots.jpg" target="_blank" rel="noreferrer">Image: Techwords / Wikimedia Commons · CC BY-SA 4.0</a>
+                                </div>
+                            </article>
+                            <article class="featured-slide" data-featured-slide>
+                                <div class="featured-slide-card">
+                                    <div class="featured-slide-media">
+                                        <img src="/fig/featured/photos/industry-robot.jpg" alt="Industrial robot operating inside an automated warehouse">
+                                    </div>
+                                    <a href="/topics/robotics/runtime-calibrated-digital-twins-for-sim-to-real-robotics.html" class="featured-slide-link">
+                                        <div class="featured-slide-copy">
+                                            <div class="content-meta">
+                                                <span>Action / Validation and Simulation</span>
+                                                <span>Research Note</span>
+                                            </div>
+                                            <h3>Runtime-Calibrated Digital Twins for Sim-to-Real Robotics</h3>
+                                            <p>Simulation as a runtime-calibrated experimental instrument for design, calibration, failure analysis, and sim-to-real evidence.</p>
+                                            <div class="featured-slide-tags">
+                                                <span>Simulation</span>
+                                                <span>Digital Twin</span>
+                                                <span>Calibration</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="featured-slide-credit" href="https://commons.wikimedia.org/wiki/File:Industry_Robot.jpg" target="_blank" rel="noreferrer">Image: Junbao1234 / Wikimedia Commons · CC BY-SA 4.0</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="featured-carousel-controls">
+                        <button class="featured-carousel-button" type="button" data-featured-prev aria-label="Previous featured article">Prev</button>
+                        <div class="featured-carousel-dots" aria-label="Featured article slides">
+                            <button class="featured-carousel-dot active" type="button" data-featured-dot aria-label="Show slide 1" aria-current="true"></button>
+                            <button class="featured-carousel-dot" type="button" data-featured-dot aria-label="Show slide 2" aria-current="false"></button>
+                            <button class="featured-carousel-dot" type="button" data-featured-dot aria-label="Show slide 3" aria-current="false"></button>
+                            <button class="featured-carousel-dot" type="button" data-featured-dot aria-label="Show slide 4" aria-current="false"></button>
+                            <button class="featured-carousel-dot" type="button" data-featured-dot aria-label="Show slide 5" aria-current="false"></button>
+                        </div>
+                        <button class="featured-carousel-button" type="button" data-featured-next aria-label="Next featured article">Next</button>
                     </div>
                 </div>
             </div>
@@ -52,154 +201,147 @@
             <div class="container">
                 <div class="section-head">
                     <div>
-                        <span class="eyebrow">Core Areas</span>
-                        <h2>Core Areas</h2>
+                        <span class="eyebrow">Research Architecture</span>
+                        <h2>Perception, Intelligence, and Action</h2>
                     </div>
-                    <p>Neuroide is organized around the three layers that make autonomous systems work: perception, intelligence, and action.</p>
+                    <p>Neuroide is organized around three research pillars. Each pillar contains topic programs that define how the lab studies measurement, modeling, reasoning, control, validation, and deployment.</p>
                 </div>
 
                 <div class="core-areas-layout">
                     <section class="core-areas-lead">
-                        <p class="page-intro">The lab treats autonomy as a systems problem rather than a model category. Reliable behavior starts with perception, improves through learning and reasoning, and only matters when it survives contact with real environments, constraints, and failure modes.</p>
+                        <p class="page-intro">The lab treats autonomy as a systems problem rather than a stack of disconnected specialties. Reliable behavior begins in perception, matures through intelligence, and only counts when it survives action under real constraints, uncertainty, and failure modes.</p>
                         <div class="core-areas-flow">
                             <div class="flow-step">
                                 <strong>Perception</strong>
-                                <p class="small-text">Signals, sensing, calibration, and turning noisy measurements into usable information.</p>
+                                <p class="small-text">Signals, multimodal sensing, physiological systems, and the conversion of noisy measurement into structured observations.</p>
                             </div>
                             <div class="flow-step">
                                 <strong>Intelligence</strong>
-                                <p class="small-text">Representation learning, reasoning, uncertainty, and decision-supporting models.</p>
+                                <p class="small-text">Machine learning, generative and reasoning systems, representation, inference, and uncertainty-aware model building.</p>
                             </div>
                             <div class="flow-step">
                                 <strong>Action</strong>
-                                <p class="small-text">Control, robotics, deployment, and systems that execute under real constraints.</p>
+                                <p class="small-text">Robotics, control and planning, validation and simulation, and systems that execute under real operational pressure.</p>
                             </div>
                         </div>
                     </section>
 
                     <div class="area-grid">
-                    <a href="/topics/signals/index.html" class="area-card">
-                        <div class="card-kicker">Perception / Signals</div>
-                        <h3>Signals</h3>
-                        <p>Research on physiological sensing, time-series structure, filtering, multimodal fusion, and the realities of noisy measurement.</p>
-                        <div class="area-keywords">
-                            <span>Biosignals</span>
-                            <span>EEG</span>
-                            <span>EDA</span>
-                            <span>ECG</span>
-                            <span>PPG</span>
-                            <span>DSP</span>
-                        </div>
-                    </a>
-                    <a href="/topics/ml/index.html" class="area-card">
-                        <div class="card-kicker">Intelligence / ML</div>
-                        <h3>ML</h3>
-                        <p>Work on inference, optimization, representation learning, and robust models that support real decisions.</p>
-                        <div class="area-keywords">
-                            <span>Inference</span>
-                            <span>Optimization</span>
-                            <span>Representations</span>
-                            <span>Robustness</span>
-                            <span>Evaluation</span>
-                        </div>
-                    </a>
-                    <a href="/topics/genai/index.html" class="area-card">
-                        <div class="card-kicker">Intelligence / GenAI</div>
-                        <h3>GenAI</h3>
-                        <p>Structured notes on reasoning systems, generative models, multimodal interfaces, and practical model behavior.</p>
-                        <div class="area-keywords">
-                            <span>Generative Models</span>
-                            <span>Reasoning</span>
-                            <span>Multimodality</span>
-                            <span>Language Systems</span>
-                            <span>Serving</span>
-                        </div>
-                    </a>
-                    <a href="/topics/robotics/index.html" class="area-card">
-                        <div class="card-kicker">Action / Systems / Robotics</div>
-                        <h3>Robotics</h3>
-                        <p>Systems thinking on control, planning, middleware, simulation, and embodied execution outside the lab.</p>
-                        <div class="area-keywords">
-                            <span>Control</span>
-                            <span>Planning</span>
-                            <span>Simulation</span>
-                            <span>Middleware</span>
-                            <span>Validation</span>
-                        </div>
-                    </a>
+                        <a href="/topics/signals/index.html" class="area-card">
+                            <div class="card-kicker">Perception / Topic Program</div>
+                            <h3>Signals</h3>
+                            <p>Signal theory, biosignals, waveform analysis, and the technical realities of noisy sensing and physiological measurement.</p>
+                            <div class="area-keywords">
+                                <span>DSP</span>
+                                <span>Waveforms</span>
+                                <span>Biosignals</span>
+                                <span>Filtering</span>
+                            </div>
+                        </a>
+                        <a href="/topics/multimodal-sensing/index.html" class="area-card">
+                            <div class="card-kicker">Perception / Topic Program</div>
+                            <h3>Multimodal Sensing</h3>
+                            <p>Cross-sensor observation, fused representations, missing-modality robustness, and measurement systems that work across channels.</p>
+                            <div class="area-keywords">
+                                <span>Fusion</span>
+                                <span>Cross-Modal</span>
+                                <span>Sensors</span>
+                                <span>Missingness</span>
+                            </div>
+                        </a>
+                        <a href="/topics/physiological-systems/index.html" class="area-card">
+                            <div class="card-kicker">Perception / Topic Program</div>
+                            <h3>Physiological Systems</h3>
+                            <p>Physiological dynamics, coupled biological systems, and measurement frameworks for serious human-centered sensing.</p>
+                            <div class="area-keywords">
+                                <span>Dynamics</span>
+                                <span>Regulation</span>
+                                <span>ECG</span>
+                                <span>EEG</span>
+                            </div>
+                        </a>
+                        <a href="/topics/ml/index.html" class="area-card">
+                            <div class="card-kicker">Intelligence / Topic Program</div>
+                            <h3>Machine Learning</h3>
+                            <p>Inference, optimization, robust learning, calibration, and the technical logic of predictive systems.</p>
+                            <div class="area-keywords">
+                                <span>Inference</span>
+                                <span>Optimization</span>
+                                <span>Robustness</span>
+                                <span>Evaluation</span>
+                            </div>
+                        </a>
+                        <a href="/topics/genai/index.html" class="area-card">
+                            <div class="card-kicker">Intelligence / Topic Program</div>
+                            <h3>Generative and Reasoning Systems</h3>
+                            <p>Generative models, reasoning workflows, tool use, multimodal generation, and system-level model behavior.</p>
+                            <div class="area-keywords">
+                                <span>Reasoning</span>
+                                <span>Generation</span>
+                                <span>Multimodal</span>
+                                <span>Serving</span>
+                            </div>
+                        </a>
+                        <a href="/topics/representation-and-inference/index.html" class="area-card">
+                            <div class="card-kicker">Intelligence / Topic Program</div>
+                            <h3>Representation and Inference</h3>
+                            <p>Latent-variable modeling, self-supervision, multimodal representations, and how internal structure supports useful decisions.</p>
+                            <div class="area-keywords">
+                                <span>Latents</span>
+                                <span>Self-Supervision</span>
+                                <span>Embeddings</span>
+                                <span>Uncertainty</span>
+                            </div>
+                        </a>
+                        <a href="/topics/robotics/index.html" class="area-card">
+                            <div class="card-kicker">Action / Topic Program</div>
+                            <h3>Robotics</h3>
+                            <p>Embodied systems, middleware, deployment, and the integration work required to turn models into behavior.</p>
+                            <div class="area-keywords">
+                                <span>Embodiment</span>
+                                <span>Systems</span>
+                                <span>Deployment</span>
+                                <span>Middleware</span>
+                            </div>
+                        </a>
+                        <a href="/topics/control-and-planning/index.html" class="area-card">
+                            <div class="card-kicker">Action / Topic Program</div>
+                            <h3>Control and Planning</h3>
+                            <p>Feedback, coordination, motion planning, multi-agent execution, and the architecture of decision making in physical systems.</p>
+                            <div class="area-keywords">
+                                <span>Control</span>
+                                <span>Planning</span>
+                                <span>Coordination</span>
+                                <span>Execution</span>
+                            </div>
+                        </a>
+                        <a href="/topics/validation-and-simulation/index.html" class="area-card">
+                            <div class="card-kicker">Action / Topic Program</div>
+                            <h3>Validation and Simulation</h3>
+                            <p>Benchmarking, safety evidence, digital twins, propagation risk, and simulation as an instrument for trustworthy robotics.</p>
+                            <div class="area-keywords">
+                                <span>Benchmarking</span>
+                                <span>Safety</span>
+                                <span>Digital Twins</span>
+                                <span>Evaluation</span>
+                            </div>
+                        </a>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="core-areas-section" id="featured-notes">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <span class="eyebrow">Featured Notes</span>
-                        <h2>What The Lab Publishes</h2>
-                    </div>
-                    <p>Neuroide publishes technical notes, research essays, and systems articles across the perception-to-action stack.</p>
-                </div>
-
-                <div class="note-list">
-                    <a href="/topics/signals/physiological-signals-as-systems.html" class="note-item">
-                        <div class="content-meta">
-                            <span>Signals</span>
-                            <span>Research Note</span>
-                        </div>
-                        <h3>Physiological Signals as Dynamic Systems</h3>
-                        <p>A systems view of physiological data as noisy, multiscale observations of biological regulation.</p>
-                    </a>
-                    <a href="/topics/ml/contrastive-learning.html" class="note-item">
-                        <div class="content-meta">
-                            <span>Machine Learning</span>
-                            <span>Theory</span>
-                        </div>
-                        <h3>Contrastive Representation Learning</h3>
-                        <p>A technical note on InfoNCE, SimCLR, and how embedding objectives shape useful representations.</p>
-                    </a>
-                    <a href="/topics/genai/test-time-scaling.html" class="note-item">
-                        <div class="content-meta">
-                            <span>GenAI</span>
-                            <span>Research Note</span>
-                        </div>
-                        <h3>Test-Time Compute for Reasoning Models</h3>
-                        <p>An analysis of inference-time scaling strategies such as self-consistency and verifier-guided decoding.</p>
-                    </a>
-                    <a href="/topics/robotics/intralogistics-control-system.html" class="note-item">
-                        <div class="content-meta">
-                            <span>Robotics</span>
-                            <span>Systems</span>
-                        </div>
-                        <h3>Robotics as a General Control Problem</h3>
-                        <p>A systems article on estimation, planning, execution, recovery, and why deployment breaks simplistic narratives.</p>
-                    </a>
                 </div>
             </div>
         </section>
     </main>
-
     <footer class="site-footer">
         <div class="container footer-grid">
             <div>&copy; 2026 Neuroide. All rights reserved.</div>
             <div class="footer-social" aria-label="Social media links">
-                <a class="social-link" href="https://github.com/neuroide" aria-label="GitHub">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .08 1.53 1.05 1.53 1.05.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.64-1.38-2.22-.26-4.55-1.14-4.55-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.95-2.34 4.82-4.57 5.07.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/></svg>
-                </a>
-                <a class="social-link" href="https://youtube.com/neuroide" aria-label="YouTube">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.39.58A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.87.58 9.39.58 9.39.58s7.52 0 9.39-.58a3 3 0 0 0 2.11-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.7V8.3l6.3 3.7-6.3 3.7Z"/></svg>
-                </a>
-                <a class="social-link" href="https://www.linkedin.com/in/neuroide/" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A1.98 1.98 0 1 0 5 7.46a1.98 1.98 0 0 0-.02-3.96ZM3.5 8.75h3V20.5h-3V8.75Zm5.5 0h2.88v1.6h.04c.4-.76 1.38-1.56 2.84-1.56 3.03 0 3.59 2 3.59 4.59v7.12h-3v-6.31c0-1.5-.03-3.43-2.09-3.43-2.1 0-2.42 1.64-2.42 3.32v6.42H9V8.75Z"/></svg>
-                </a>
-                <a class="social-link" href="https://x.com/neuroide_" aria-label="Twitter or X">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.88-6.97L5.98 22H2.87l7.24-8.27L.5 2h6.4l4.4 6.3L18.9 2Zm-1.1 18h1.72L5.97 3.9H4.12L17.8 20Z"/></svg>
-                </a>
+                <a class="social-link" href="https://github.com/neuroide" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .08 1.53 1.05 1.53 1.05.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.64-1.38-2.22-.26-4.55-1.14-4.55-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.95-2.34 4.82-4.57 5.07.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/></svg></a>
+                <a class="social-link" href="https://youtube.com/neuroide" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.39.58A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.87.58 9.39.58 9.39.58s7.52 0 9.39-.58a3 3 0 0 0 2.11-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.7V8.3l6.3 3.7-6.3 3.7Z"/></svg></a>
+                <a class="social-link" href="https://www.linkedin.com/in/neuroide/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A1.98 1.98 0 1 0 5 7.46a1.98 1.98 0 0 0-.02-3.96ZM3.5 8.75h3V20.5h-3V8.75Zm5.5 0h2.88v1.6h.04c.4-.76 1.38-1.56 2.84-1.56 3.03 0 3.59 2 3.59 4.59v7.12h-3v-6.31c0-1.5-.03-3.43-2.09-3.43-2.1 0-2.42 1.64-2.42 3.32v6.42H9V8.75Z"/></svg></a>
+                <a class="social-link" href="https://x.com/neuroide_" aria-label="Twitter or X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.88-6.97L5.98 22H2.87l7.24-8.27L.5 2h6.4l4.4 6.3L18.9 2Zm-1.1 18h1.72L5.97 3.9H4.12L17.8 20Z"/></svg></a>
             </div>
         </div>
     </footer>
-
     <script src="/script.js"></script>
 </body>
 </html>

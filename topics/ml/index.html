@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Machine Learning | Neuroide</title>
     <meta name="description" content="Machine learning at Neuroide: inference, optimization, representation learning, robustness, and evaluation.">
-    <link rel="icon" type="image/png" href="/images/neuroide.png">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,15 +15,14 @@
     <header>
         <nav>
             <a href="/index.html" class="logo" aria-label="Neuroide home">
-                <img src="/images/neuroide.png" alt="Neuroide">
+                <img src="/fig/neuroide.png" alt="Neuroide">
             </a>
             <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="navLinks" class="nav-links">
                 <li><a href="/index.html">Home</a></li>
-                <li><a href="/topics/signals/index.html">Signals</a></li>
-                <li><a href="/topics/ml/index.html" class="active">Machine Learning</a></li>
-                <li><a href="/topics/genai/index.html">GenAI</a></li>
-                <li><a href="/topics/robotics/index.html">Robotics</a></li>
+                <li><a href="/perception.html">Perception</a></li>
+                <li><a href="/intelligence.html" class="active">Intelligence</a></li>
+                <li><a href="/action.html">Action</a></li>
                 <li><a href="/search.html" class="nav-search-link">Search</a></li>
                 <li><a href="/about.html">About</a></li>
             </ul>
@@ -35,7 +34,7 @@
             <section class="topic-header">
                 <span class="eyebrow">Intelligence / Machine Learning</span>
                 <h1 class="topic-title">Learning, inference, and decision-making from perceived data.</h1>
-                <p class="page-intro">Machine learning is one half of the intelligence layer of Neuroide. This topic covers probabilistic inference, optimization, representation learning, uncertainty, robustness, and evaluation as the methods that turn perceived data into internal models and decisions.</p>
+                <p class="page-intro">Machine Learning is one of the core topic programs in the intelligence pillar of Neuroide. This topic covers probabilistic inference, optimization, representation learning, uncertainty, robustness, and evaluation as the methods that turn perceived data into internal models and decisions.</p>
             </section>
 
             <section class="info-panel">
@@ -65,16 +64,16 @@
                 <div class="note-list">
                     <a href="/topics/ml/variational-inference.html" class="note-item">
                         <div class="content-meta">
+                            <span>Intelligence / Representation and Inference</span>
                             <span>Theory</span>
-                            <span>Advanced</span>
                         </div>
                         <h3>Variational Inference and the ELBO</h3>
                         <p>A compact note on the evidence lower bound, amortized inference, and latent-variable modeling.</p>
                     </a>
                     <a href="/topics/ml/contrastive-learning.html" class="note-item">
                         <div class="content-meta">
+                            <span>Intelligence / Representation and Inference</span>
                             <span>Research Note</span>
-                            <span>Intermediate</span>
                         </div>
                         <h3>Contrastive Representation Learning</h3>
                         <p>Augmentations, InfoNCE, and geometric intuition for representation quality.</p>

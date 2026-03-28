@@ -1,0 +1,53 @@
+<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="980" rx="32" fill="#0F141B"/>
+  <rect x="42" y="42" width="1516" height="896" rx="30" fill="url(#bg)" stroke="#EEF2F7" stroke-opacity="0.12" stroke-width="4"/>
+  <rect x="96" y="96" width="1408" height="116" rx="26" fill="#131A23" stroke="#EEF2F7" stroke-opacity="0.12" stroke-width="2"/>
+  <text x="138" y="154" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="42" font-weight="700">Classical Signal Concepts for Physiological Data</text>
+  <text x="138" y="190" fill="#C9D3DE" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Acquisition, filtering, spectral analysis, time-frequency methods, interpretation, and validation.</text>
+
+  <rect x="114" y="280" width="286" height="162" rx="24" fill="#122030" stroke="#6DD3FF" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="150" y="340" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="32" font-weight="700">Acquisition</text>
+  <text x="150" y="390" fill="#D9E8F3" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Sampling</text>
+  <text x="150" y="424" fill="#D9E8F3" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Anti-aliasing</text>
+
+  <rect x="442" y="280" width="286" height="162" rx="24" fill="#162118" stroke="#C2D46B" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="478" y="340" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="32" font-weight="700">Filtering</text>
+  <text x="478" y="390" fill="#E4EAD0" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Convolution</text>
+  <text x="478" y="424" fill="#E4EAD0" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Phase and morphology</text>
+
+  <rect x="770" y="280" width="286" height="162" rx="24" fill="#2B1B18" stroke="#FF8C69" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="806" y="340" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="32" font-weight="700">Spectral Analysis</text>
+  <text x="806" y="390" fill="#F5DCD4" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">DFT and PSD</text>
+  <text x="806" y="424" fill="#F5DCD4" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Resolution vs variance</text>
+
+  <rect x="1098" y="280" width="386" height="162" rx="24" fill="#22182D" stroke="#C28EFF" stroke-opacity="0.42" stroke-width="3"/>
+  <text x="1134" y="340" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="32" font-weight="700">Time-Frequency</text>
+  <text x="1134" y="390" fill="#E7D8F8" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">STFT and wavelets</text>
+  <text x="1134" y="424" fill="#E7D8F8" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Nonstationary physiological signals</text>
+
+  <rect x="238" y="536" width="1124" height="208" rx="28" fill="#161C23" stroke="#EEF2F7" stroke-opacity="0.14" stroke-width="3"/>
+  <text x="286" y="604" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="36" font-weight="700">Physiological Interpretation Layer</text>
+  <text x="286" y="656" fill="#CDD7E1" font-family="IBM Plex Sans, Arial, sans-serif" font-size="25">ECG, EEG, EMG, PPG, respiration, and blood pressure are not generic time series.</text>
+  <text x="286" y="694" fill="#CDD7E1" font-family="IBM Plex Sans, Arial, sans-serif" font-size="25">Every classical concept must be interpreted through instrumentation, physiology, artifact, and use case.</text>
+
+  <rect x="496" y="786" width="608" height="110" rx="24" fill="#131A23" stroke="#88CDE6" stroke-opacity="0.3" stroke-width="3"/>
+  <text x="546" y="848" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="32" font-weight="700">Detection and Validation</text>
+  <text x="546" y="882" fill="#DCEFF5" font-family="IBM Plex Sans, Arial, sans-serif" font-size="23">Morphology-aware detection, public datasets, reproducible evaluation</text>
+
+  <path d="M400 361H442" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M728 361H770" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1056 361H1098" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+  <path d="M252 442C252 502 348 522 486 536" stroke="#AAB8C4" stroke-opacity="0.52" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+  <path d="M584 442C584 500 644 520 716 536" stroke="#AAB8C4" stroke-opacity="0.52" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+  <path d="M912 442C912 500 948 520 886 536" stroke="#AAB8C4" stroke-opacity="0.52" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+  <path d="M1290 442C1290 506 1204 522 1118 536" stroke="#AAB8C4" stroke-opacity="0.52" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+  <path d="M800 744V786" stroke="#EEF2F7" stroke-opacity="0.26" stroke-width="6" stroke-linecap="round"/>
+
+  <defs>
+    <linearGradient id="bg" x1="84" y1="54" x2="1492" y2="928" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142131"/>
+      <stop offset="0.52" stop-color="#10161E"/>
+      <stop offset="1" stop-color="#0E1319"/>
+    </linearGradient>
+  </defs>
+</svg>

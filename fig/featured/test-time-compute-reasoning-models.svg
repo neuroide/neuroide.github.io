@@ -1,0 +1,39 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" rx="40" fill="#0F131A"/>
+  <rect x="26" y="26" width="1148" height="668" rx="30" fill="url(#bg)"/>
+  <circle cx="972" cy="140" r="180" fill="#FF8C69" fill-opacity="0.12"/>
+  <circle cx="202" cy="592" r="170" fill="#6DD3FF" fill-opacity="0.1"/>
+  <rect x="96" y="84" width="1008" height="552" rx="30" fill="#0E141C" fill-opacity="0.74" stroke="#F2EDE3" stroke-opacity="0.12"/>
+  <path d="M248 216H434" stroke="#F2EDE3" stroke-opacity="0.26" stroke-width="4"/>
+  <path d="M434 216L560 148" stroke="#F2EDE3" stroke-opacity="0.26" stroke-width="4"/>
+  <path d="M434 216L560 256" stroke="#F2EDE3" stroke-opacity="0.26" stroke-width="4"/>
+  <path d="M434 216L560 370" stroke="#F2EDE3" stroke-opacity="0.26" stroke-width="4"/>
+  <path d="M560 148L722 118" stroke="#F2EDE3" stroke-opacity="0.26" stroke-width="4"/>
+  <path d="M560 148L722 202" stroke="#F2EDE3" stroke-opacity="0.26" stroke-width="4"/>
+  <path d="M560 256L722 274" stroke="#F2EDE3" stroke-opacity="0.26" stroke-width="4"/>
+  <path d="M560 370L722 382" stroke="#F2EDE3" stroke-opacity="0.26" stroke-width="4"/>
+  <path d="M722 118L920 178" stroke="#F7B267" stroke-width="5"/>
+  <path d="M722 202L920 178" stroke="#F7B267" stroke-width="5"/>
+  <path d="M722 274L920 178" stroke="#F7B267" stroke-width="5"/>
+  <path d="M722 382L920 178" stroke="#F7B267" stroke-width="5"/>
+  <circle cx="220" cy="216" r="34" fill="#6DD3FF"/>
+  <circle cx="434" cy="216" r="34" fill="#9CE6FF"/>
+  <circle cx="560" cy="148" r="30" fill="#D3F7FF"/>
+  <circle cx="560" cy="256" r="30" fill="#D3F7FF"/>
+  <circle cx="560" cy="370" r="30" fill="#D3F7FF"/>
+  <circle cx="722" cy="118" r="28" fill="#FFB596"/>
+  <circle cx="722" cy="202" r="28" fill="#FFB596"/>
+  <circle cx="722" cy="274" r="28" fill="#FFB596"/>
+  <circle cx="722" cy="382" r="28" fill="#FFB596"/>
+  <circle cx="920" cy="178" r="42" fill="#FF8C69"/>
+  <rect x="146" y="476" width="908" height="102" rx="22" fill="#0C1118" stroke="#F2EDE3" stroke-opacity="0.12"/>
+  <text x="184" y="535" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="28" font-weight="600">Reasoning branches, self-consistency, verifier selection, and inference-time compute</text>
+  <rect x="134" y="104" width="252" height="70" rx="18" fill="#0C1218" stroke="#F2EDE3" stroke-opacity="0.14"/>
+  <text x="164" y="148" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="26" font-weight="600">Reasoning Search Tree</text>
+  <defs>
+    <linearGradient id="bg" x1="84" y1="42" x2="1122" y2="678" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#131C2A"/>
+      <stop offset="1" stop-color="#111319"/>
+    </linearGradient>
+  </defs>
+</svg>

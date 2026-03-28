@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="920" viewBox="0 0 1400 920" role="img" aria-labelledby="title desc">
+  <title id="title">Open-Ended Benchmark Coverage Canvas</title>
+  <desc id="desc">Matrix-style figure showing scenario axes, metrics, and safety constraints for benchmarking collaborative robots.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f6faf7; }
+      .panel { fill: #ffffff; stroke: #315242; stroke-width: 2.5; rx: 18; ry: 18; }
+      .head { fill: #dcece2; stroke: #4f6c5b; stroke-width: 2; }
+      .cellA { fill: #eff6f1; stroke: #7b9488; stroke-width: 1.5; }
+      .cellB { fill: #f4efe7; stroke: #9b8c76; stroke-width: 1.5; }
+      .cellC { fill: #e9f0f7; stroke: #7a8fa3; stroke-width: 1.5; }
+      .title { font: 700 34px Georgia, "Times New Roman", serif; fill: #21372c; }
+      .label { font: 600 19px Georgia, "Times New Roman", serif; fill: #294339; }
+      .body { font: 15px Georgia, "Times New Roman", serif; fill: #3c584d; }
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="920"/>
+  <text class="title" x="700" y="56" text-anchor="middle">Benchmarking Open-Ended Collaborative Robot Systems</text>
+  <text class="body" x="700" y="86" text-anchor="middle">A useful benchmark varies structured conditions while keeping safety constraints explicit.</text>
+
+  <rect class="panel" x="110" y="150" width="1180" height="650" rx="24" ry="24"/>
+
+  <rect class="head" x="200" y="220" width="210" height="90"/>
+  <text class="label" x="305" y="275" text-anchor="middle">Scenario Axis</text>
+
+  <rect class="head" x="410" y="220" width="210" height="90"/>
+  <text class="label" x="515" y="275" text-anchor="middle">Variation</text>
+
+  <rect class="head" x="620" y="220" width="220" height="90"/>
+  <text class="label" x="730" y="275" text-anchor="middle">Primary Metric</text>
+
+  <rect class="head" x="840" y="220" width="220" height="90"/>
+  <text class="label" x="950" y="275" text-anchor="middle">Stress Signal</text>
+
+  <rect class="head" x="1060" y="220" width="140" height="90"/>
+  <text class="label" x="1130" y="275" text-anchor="middle">Constraint</text>
+
+  <rect class="cellA" x="200" y="310" width="210" height="85"/>
+  <text class="body" x="305" y="360" text-anchor="middle">human timing</text>
+  <rect class="cellB" x="410" y="310" width="210" height="85"/>
+  <text class="body" x="515" y="350" text-anchor="middle">early, late, interrupted</text>
+  <rect class="cellC" x="620" y="310" width="220" height="85"/>
+  <text class="body" x="730" y="350" text-anchor="middle">handover success</text>
+  <rect class="cellA" x="840" y="310" width="220" height="85"/>
+  <text class="body" x="950" y="350" text-anchor="middle">minimum separation</text>
+  <rect class="cellB" x="1060" y="310" width="140" height="85"/>
+  <text class="body" x="1130" y="350" text-anchor="middle">no collision</text>
+
+  <rect class="cellA" x="200" y="395" width="210" height="85"/>
+  <text class="body" x="305" y="445" text-anchor="middle">visibility</text>
+  <rect class="cellB" x="410" y="395" width="210" height="85"/>
+  <text class="body" x="515" y="435" text-anchor="middle">occlusion, glare, dropout</text>
+  <rect class="cellC" x="620" y="395" width="220" height="85"/>
+  <text class="body" x="730" y="435" text-anchor="middle">task completion time</text>
+  <rect class="cellA" x="840" y="395" width="220" height="85"/>
+  <text class="body" x="950" y="435" text-anchor="middle">missed detections</text>
+  <rect class="cellB" x="1060" y="395" width="140" height="85"/>
+  <text class="body" x="1130" y="435" text-anchor="middle">safe stop</text>
+
+  <rect class="cellA" x="200" y="480" width="210" height="85"/>
+  <text class="body" x="305" y="530" text-anchor="middle">task order</text>
+  <rect class="cellB" x="410" y="480" width="210" height="85"/>
+  <text class="body" x="515" y="520" text-anchor="middle">reorder, interrupt, resume</text>
+  <rect class="cellC" x="620" y="480" width="220" height="85"/>
+  <text class="body" x="730" y="520" text-anchor="middle">recovery success</text>
+  <rect class="cellA" x="840" y="480" width="220" height="85"/>
+  <text class="body" x="950" y="520" text-anchor="middle">intervention count</text>
+  <rect class="cellB" x="1060" y="480" width="140" height="85"/>
+  <text class="body" x="1130" y="520" text-anchor="middle">workspace rule</text>
+
+  <rect class="cellA" x="200" y="565" width="210" height="85"/>
+  <text class="body" x="305" y="615" text-anchor="middle">system timing</text>
+  <rect class="cellB" x="410" y="565" width="210" height="85"/>
+  <text class="body" x="515" y="605" text-anchor="middle">latency, async updates</text>
+  <rect class="cellC" x="620" y="565" width="220" height="85"/>
+  <text class="body" x="730" y="605" text-anchor="middle">control deadline margin</text>
+  <rect class="cellA" x="840" y="565" width="220" height="85"/>
+  <text class="body" x="950" y="605" text-anchor="middle">delayed intervention onset</text>
+  <rect class="cellB" x="1060" y="565" width="140" height="85"/>
+  <text class="body" x="1130" y="605" text-anchor="middle">timing budget</text>
+
+  <rect class="head" x="255" y="700" width="900" height="60"/>
+  <text class="body" x="705" y="737" text-anchor="middle">Benchmark quality depends on coverage across structured variability, not on nominal repeatability alone.</text>
+</svg>

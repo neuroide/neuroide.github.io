@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signals | Neuroide</title>
     <meta name="description" content="Signals at Neuroide: digital signal theory, biosignals, physiological signals, EEG, EDA, ECG, PPG, and multimodal sensing.">
-    <link rel="icon" type="image/png" href="/images/neuroide.png">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,15 +15,14 @@
     <header>
         <nav>
             <a href="/index.html" class="logo" aria-label="Neuroide home">
-                <img src="/images/neuroide.png" alt="Neuroide">
+                <img src="/fig/neuroide.png" alt="Neuroide">
             </a>
             <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="navLinks" class="nav-links">
                 <li><a href="/index.html">Home</a></li>
-                <li><a href="/topics/signals/index.html" class="active">Signals</a></li>
-                <li><a href="/topics/ml/index.html">Machine Learning</a></li>
-                <li><a href="/topics/genai/index.html">GenAI</a></li>
-                <li><a href="/topics/robotics/index.html">Robotics</a></li>
+                <li><a href="/perception.html" class="active">Perception</a></li>
+                <li><a href="/intelligence.html">Intelligence</a></li>
+                <li><a href="/action.html">Action</a></li>
                 <li><a href="/search.html" class="nav-search-link">Search</a></li>
                 <li><a href="/about.html">About</a></li>
             </ul>
@@ -65,35 +64,43 @@
                 <div class="note-list">
                     <a href="/topics/signals/physiological-signals-as-systems.html" class="note-item">
                         <div class="content-meta">
-                            <span>Research Note</span>
-                            <span>Intermediate</span>
+                            <span>Perception / Physiological Systems</span>
+                            <span>Introduction</span>
                         </div>
                         <h3>Physiological Signals as Dynamic Systems</h3>
-                        <p>A structured introduction to physiological signals as noisy, multiscale measurements of biological regulation.</p>
+                        <p>An introduction to physiological data as partial observations of adaptive, multiscale, and coupled biological systems.</p>
                     </a>
                     <a href="/topics/signals/classical-signal-concepts-for-physiology.html" class="note-item">
                         <div class="content-meta">
+                            <span>Perception / Signals</span>
                             <span>Theory</span>
-                            <span>Intermediate</span>
                         </div>
                         <h3>Classical Signal Concepts for Physiological Data</h3>
-                        <p>Sampling, filtering, spectra, stationarity, and artifacts for serious biosignal analysis.</p>
+                        <p>Sampling, filtering, spectra, time-frequency methods, detection, and validation for serious physiological signal processing.</p>
                     </a>
-                    <a href="/topics/signals/self-supervised-ecg.html" class="note-item">
+                    <a href="/topics/signals/self-supervised-representation-learning-for-human-physiological-data.html" class="note-item">
                         <div class="content-meta">
+                            <span>Intelligence / Representation and Inference</span>
                             <span>Research Note</span>
-                            <span>Advanced</span>
                         </div>
-                        <h3>Self-Supervised ECG Representation Learning</h3>
-                        <p>Contrastive and masked objectives for waveform data under label scarcity and domain shift.</p>
+                        <h3>Self-Supervised Representation Learning for Human Physiological Data</h3>
+                        <p>Predictive, contrastive, masked, and multimodal objectives for scalable biosignal pretraining across ECG, EEG, and human physiological sensing.</p>
                     </a>
                     <a href="/topics/signals/multimodal-biosignal-foundations.html" class="note-item">
                         <div class="content-meta">
+                            <span>Perception / Multimodal Sensing</span>
                             <span>Research Note</span>
-                            <span>Advanced</span>
                         </div>
                         <h3>Multimodal Biosignal Foundation Models</h3>
-                        <p>Cross-modal fusion and representation learning for physiological data collected across sensors and settings.</p>
+                        <p>Cross-modal pretraining, modality-robust interfaces, and generalizable health inference across heterogeneous physiological sensing.</p>
+                    </a>
+                    <a href="/topics/signals/advanced-signal-processing-for-physiological-data.html" class="note-item">
+                        <div class="content-meta">
+                            <span>Perception / Signals</span>
+                            <span>Research Note</span>
+                        </div>
+                        <h3>Advanced Signal Processing for Physiological Data</h3>
+                        <p>Adaptive filtering, source separation, state-space models, nonlinear methods, and sparse inference for physiological signals.</p>
                     </a>
                 </div>
             </section>

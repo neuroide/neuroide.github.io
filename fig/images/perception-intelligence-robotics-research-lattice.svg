@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="940" viewBox="0 0 1400 940" role="img" aria-labelledby="title desc">
+  <title id="title">Perception, Intelligence, Machine Learning, and Robotics Research Lattice</title>
+  <desc id="desc">A research lattice connecting sensory grounding, learned representation, predictive intelligence, action, and future research directions.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fc; }
+      .title { font: 700 34px Georgia, "Times New Roman", serif; fill: #18283b; }
+      .subtitle { font: 16px Georgia, "Times New Roman", serif; fill: #36506d; }
+      .sens { fill: #dce8f5; stroke: #4d6f96; stroke-width: 2.2; rx: 18; ry: 18; }
+      .lat { fill: #e6f0e8; stroke: #5a7b5a; stroke-width: 2.2; rx: 18; ry: 18; }
+      .int { fill: #f5ead9; stroke: #8a6b41; stroke-width: 2.2; rx: 18; ry: 18; }
+      .act { fill: #ece2f3; stroke: #6b4f82; stroke-width: 2.2; rx: 18; ry: 18; }
+      .future { fill: #fffdf6; stroke: #8a7c47; stroke-width: 2; rx: 16; ry: 16; }
+      .label { font: 600 21px Georgia, "Times New Roman", serif; fill: #21374f; }
+      .body { font: 15px Georgia, "Times New Roman", serif; fill: #35506a; }
+      .small { font: 14px Georgia, "Times New Roman", serif; fill: #4f6882; }
+      .arrow { stroke: #47627e; stroke-width: 2.6; fill: none; marker-end: url(#arrow); }
+      .soft { stroke: #7c91a8; stroke-width: 2; fill: none; stroke-dasharray: 8 7; marker-end: url(#arrowSoft); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#47627e"/>
+    </marker>
+    <marker id="arrowSoft" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c91a8"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="940"/>
+  <text class="title" x="700" y="54" text-anchor="middle">Perception, Intelligence, Machine Learning, and Robotics</text>
+  <text class="subtitle" x="700" y="84" text-anchor="middle">Current embodied-AI research is converging on a unified loop of sensing, representation, prediction, and action.</text>
+
+  <rect class="sens" x="90" y="230" width="250" height="140"/>
+  <text class="label" x="215" y="275" text-anchor="middle">Perception</text>
+  <text class="body" x="215" y="304" text-anchor="middle">vision, touch, audio, language,</text>
+  <text class="body" x="215" y="328" text-anchor="middle">proprioception, uncertainty cues</text>
+
+  <rect class="lat" x="415" y="180" width="300" height="180"/>
+  <text class="label" x="565" y="230" text-anchor="middle">Machine Learning</text>
+  <text class="body" x="565" y="262" text-anchor="middle">representation learning, multimodal fusion,</text>
+  <text class="body" x="565" y="286" text-anchor="middle">self-supervision, transfer, scaling</text>
+  <text class="small" x="565" y="324" text-anchor="middle">RT-1, PaLM-E, RT-2, Open X, diffusion policies</text>
+
+  <rect class="int" x="790" y="180" width="300" height="180"/>
+  <text class="label" x="940" y="230" text-anchor="middle">Intelligence</text>
+  <text class="body" x="940" y="262" text-anchor="middle">belief update, world models, planning,</text>
+  <text class="body" x="940" y="286" text-anchor="middle">reasoning, active information gathering</text>
+  <text class="small" x="940" y="324" text-anchor="middle">prediction under action and partial observability</text>
+
+  <rect class="act" x="1160" y="230" width="170" height="140"/>
+  <text class="label" x="1245" y="275" text-anchor="middle">Robotics</text>
+  <text class="body" x="1245" y="304" text-anchor="middle">control, contact,</text>
+  <text class="body" x="1245" y="328" text-anchor="middle">timing, execution</text>
+
+  <rect class="future" x="185" y="560" width="220" height="110"/>
+  <text class="label" x="295" y="604" text-anchor="middle">Physics-Grounded</text>
+  <text class="body" x="295" y="632" text-anchor="middle">multimodal intelligence</text>
+
+  <rect class="future" x="470" y="560" width="220" height="110"/>
+  <text class="label" x="580" y="604" text-anchor="middle">Persistent World</text>
+  <text class="body" x="580" y="632" text-anchor="middle">memory and state abstraction</text>
+
+  <rect class="future" x="755" y="560" width="220" height="110"/>
+  <text class="label" x="865" y="604" text-anchor="middle">Causal Prediction</text>
+  <text class="body" x="865" y="632" text-anchor="middle">intervention-aware world models</text>
+
+  <rect class="future" x="1040" y="560" width="220" height="110"/>
+  <text class="label" x="1150" y="604" text-anchor="middle">Scientific Robots</text>
+  <text class="body" x="1150" y="632" text-anchor="middle">robots as information-seeking agents</text>
+
+  <path class="arrow" d="M340 300 L415 270"/>
+  <path class="arrow" d="M715 270 L790 270"/>
+  <path class="arrow" d="M1090 270 L1160 300"/>
+  <path class="arrow" d="M1245 370 C1245 450, 1080 470, 940 360"/>
+  <path class="soft" d="M940 360 C820 470, 660 470, 565 360"/>
+  <path class="soft" d="M565 360 C430 470, 280 470, 215 370"/>
+
+  <path class="arrow" d="M565 360 C565 450, 580 510, 580 560"/>
+  <path class="arrow" d="M940 360 C940 450, 865 510, 865 560"/>
+  <path class="arrow" d="M215 370 C215 455, 295 510, 295 560"/>
+  <path class="arrow" d="M1245 370 C1245 455, 1150 510, 1150 560"/>
+
+  <text class="small" x="700" y="770" text-anchor="middle">The frontier is not a pipeline but a lattice: perception shapes state, state shapes action, action shapes future perception.</text>
+</svg>

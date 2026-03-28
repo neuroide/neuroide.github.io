@@ -1,0 +1,41 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" rx="40" fill="#111319"/>
+  <rect x="26" y="26" width="1148" height="668" rx="30" fill="url(#bg)"/>
+  <circle cx="210" cy="170" r="160" fill="#F7B267" fill-opacity="0.14"/>
+  <circle cx="1000" cy="560" r="220" fill="#5FD4D0" fill-opacity="0.12"/>
+  <rect x="96" y="84" width="1008" height="552" rx="30" fill="#121922" fill-opacity="0.78" stroke="#F2EDE3" stroke-opacity="0.12"/>
+  <path d="M266 220L454 316" stroke="#FF8C69" stroke-width="4" stroke-dasharray="10 10"/>
+  <path d="M308 256L474 376" stroke="#F7B267" stroke-width="4" stroke-dasharray="10 10"/>
+  <path d="M792 270L962 216" stroke="#6DD3FF" stroke-width="4" stroke-dasharray="10 10"/>
+  <path d="M760 372L972 322" stroke="#5FD4D0" stroke-width="4" stroke-dasharray="10 10"/>
+  <g>
+    <circle cx="250" cy="214" r="48" fill="#FF8C69"/>
+    <circle cx="314" cy="262" r="30" fill="#FFB596"/>
+    <circle cx="224" cy="292" r="24" fill="#FFC8A1"/>
+    <circle cx="460" cy="318" r="62" fill="#FF8C69" fill-opacity="0.76"/>
+    <circle cx="520" cy="388" r="28" fill="#FFB596"/>
+    <circle cx="430" cy="420" r="22" fill="#FFD6C1"/>
+  </g>
+  <g>
+    <circle cx="968" cy="214" r="48" fill="#6DD3FF"/>
+    <circle cx="908" cy="262" r="30" fill="#B8F1FF"/>
+    <circle cx="992" cy="316" r="24" fill="#D4FAFF"/>
+    <circle cx="760" cy="380" r="62" fill="#6DD3FF" fill-opacity="0.76"/>
+    <circle cx="832" cy="450" r="28" fill="#A4E8FF"/>
+    <circle cx="724" cy="484" r="22" fill="#DBF7FF"/>
+  </g>
+  <path d="M590 150V568" stroke="#F2EDE3" stroke-opacity="0.18" stroke-width="3"/>
+  <path d="M160 538C238 492 312 462 380 454C446 446 514 464 582 500" stroke="#F2EDE3" stroke-opacity="0.22" stroke-width="3"/>
+  <path d="M628 506C696 468 766 448 840 454C918 460 996 494 1048 538" stroke="#F2EDE3" stroke-opacity="0.22" stroke-width="3"/>
+  <rect x="136" y="104" width="254" height="70" rx="18" fill="#0C1218" stroke="#F2EDE3" stroke-opacity="0.14"/>
+  <text x="166" y="148" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="26" font-weight="600">Representation Space</text>
+  <rect x="774" y="104" width="246" height="70" rx="18" fill="#0C1218" stroke="#F2EDE3" stroke-opacity="0.14"/>
+  <text x="804" y="148" fill="#F7F3ED" font-family="IBM Plex Sans, Arial, sans-serif" font-size="26" font-weight="600">Similarity Structure</text>
+  <defs>
+    <linearGradient id="bg" x1="58" y1="40" x2="1138" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E1724"/>
+      <stop offset="0.52" stop-color="#101924"/>
+      <stop offset="1" stop-color="#10151C"/>
+    </linearGradient>
+  </defs>
+</svg>
