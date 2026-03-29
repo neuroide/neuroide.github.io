@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classical Signal Concepts for Physiological Data | Neuroide</title>
+    <meta name="description" content="A Signals theory article on sampling, filtering, spectral analysis, time-frequency methods, and validation for physiological data.">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo" aria-label="Neuroide home">
+                <img src="/fig/neuroide.png" alt="Neuroide">
+            </a>
+            <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <ul id="navLinks" class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/topics/signals/" class="active">Signals</a></li>
+                <li><a href="/topics/ml/">Machine Learning</a></li>
+                <li><a href="/topics/genai/">GenAI</a></li>
+                <li><a href="/topics/robotics/">Robotics</a></li>
+                <li><a href="/search/" class="nav-search-link">Search</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="article-layout">
+        <div class="article-layout-grid">
+            <article class="article-shell">
+            <div class="article-meta">
+                    <span>Perception / Signals</span>
+                <span>Theory</span>
+                <span>Signal Processing / Physiology</span>
+            </div>
+            <h1 class="article-title">Classical Signal Concepts for Physiological Data</h1>
+            <div class="article-byline">
+                <span><strong>Author:</strong> P. Tomar</span>
+                <span><strong>Published:</strong> October 2025</span>
+            </div>
+            <p class="article-lead">Before physiological data are clinical, cognitive, or behavioral, they are signals. They are sampled, filtered, transformed, detected, and interpreted under the constraints of measurement systems and the assumptions of signal processing.</p>
+            <div class="article-body">
+                <p>Physiological data analysis is often introduced through applications: ECG interpretation, EEG analysis, pulse detection, respiratory monitoring, electromyographic burst analysis, or multimodal patient monitoring. That application-driven framing is necessary, but it can obscure a deeper point. Before physiological data are clinical, cognitive, or behavioral, they are signals.</p>
+
+                <p>They are acquired, sampled, filtered, transformed, represented, and interpreted under the constraints of instrumentation and the assumptions of signal processing. For that reason, the classical language of signal and system theory remains foundational in physiological data science. Contemporary machine learning does not remove that need. It depends on it.</p>
+
+                <figure class="article-figure">
+                    <img src="/fig/images/classical-signal-concepts-overview.svg" alt="Overview diagram of acquisition, filtering, spectral analysis, time-frequency methods, interpretation, and validation for physiological signals.">
+                    <figcaption>Physiological signal analysis is still governed by classical questions of acquisition, filtering, representation, and interpretation.</figcaption>
+                </figure>
+
+                <h2>Classical signal processing is the foundation of physiological inference</h2>
+                <p>At the most general level, signal processing is concerned with representation and transformation of information-bearing physical quantities. In the discrete-time setting, the central objects are signals \(x[n]\), systems \(H\), transforms \(X(\omega)\), and estimators or detectors defined over finite observations.</p>
+
+                <p>Those questions transfer directly to physiological data, but with sharper stakes. A physiological signal is not simply a numerical sequence. It is a recorded manifestation of a biological process observed through a sensor, filtered by hardware, corrupted by disturbances, and interpreted through task-specific assumptions. A useful abstraction is</p>
+                <div class="equation-block">
+                    $$x(t) \rightarrow s(t) \rightarrow y(t) \rightarrow y[n],$$
+                </div>
+                <p>where \(x(t)\) denotes the latent physiological process, \(s(t)\) its measurable physical manifestation, \(y(t)\) the analog signal after sensor and front-end effects, and \(y[n]\) the sampled discrete-time sequence used for computation.</p>
+
+                <div class="note">These are not implementation details added after the fact. They determine what can be defended scientifically.</div>
+
+                <h2>Why physiological data are an especially demanding signal-processing domain</h2>
+                <p>Physiological signals make classical concepts operationally difficult because they combine several challenging properties. They are often nonstationary. They are multiscale. They are measured indirectly. And their interpretation depends heavily on the coupling between instrumentation, morphology, and downstream use.</p>
+
+                <p>An ECG is not the heart itself. It is an electrical projection of cardiac activity filtered through the body and the instrument. A PPG is not blood flow itself. It is an optical surrogate coupled to perfusion, compliance, motion, and sensor placement. EEG is not cognition. It is a superposition of neural population activity, volume conduction, reference choice, and noise.</p>
+
+                <p>That is why physiological signals are not merely a biomedical application of signal processing. They are a demanding testbed for the field itself.</p>
+
+                <h2>Sampling and discretization</h2>
+                <p>Sampling is among the most fundamental classical concepts. In its idealized form, a band-limited continuous-time signal can be reconstructed from samples if the sampling rate satisfies</p>
+                <div class="equation-block">
+                    $$f_s &gt; 2 f_{\max},$$
+                </div>
+                <p>where \(f_{\max}\) is the highest retained frequency component after anti-alias filtering. In practice, however, physiological acquisition rarely conforms to the textbook case.</p>
+
+                <p>This matters because physiological signals are often interpreted morphologically as well as spectrally. A rate that is theoretically sufficient for reconstruction may still be inadequate for reliable measurement of peak timing, interval duration, onset slope, or waveform curvature. In biomedical work, one should distinguish minimum sampling for avoiding catastrophic aliasing, sufficient sampling for preserving diagnostic morphology, and practical sampling chosen for robust downstream processing.</p>
+
+                <div class="article-table-shell">
+                    <table class="article-table">
+                        <thead>
+                            <tr>
+                                <th>Modality</th>
+                                <th>Typical Target</th>
+                                <th>Signal-Processing Concern</th>
+                                <th>Why It Matters</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ECG</td>
+                                <td>QRS timing, intervals, morphology, HRV</td>
+                                <td>Baseline drift, mains noise, phase distortion</td>
+                                <td>Timing and morphology can change under poor filtering</td>
+                            </tr>
+                            <tr>
+                                <td>EEG</td>
+                                <td>Rhythms, transients, spectral content</td>
+                                <td>Line noise, nonstationarity, reference dependence</td>
+                                <td>Narrow-band and transient interpretations are sensitive to preprocessing</td>
+                            </tr>
+                            <tr>
+                                <td>EMG</td>
+                                <td>Bursts, fatigue, envelope structure</td>
+                                <td>Motion artifact, rectification, bandwidth choice</td>
+                                <td>Preprocessing changes both envelope and spectral conclusions</td>
+                            </tr>
+                            <tr>
+                                <td>PPG and respiration</td>
+                                <td>Pulse timing, morphology, modulation, trend</td>
+                                <td>Motion, clipping, drift, delayed sensing</td>
+                                <td>Apparent variation may be sensor-induced rather than physiological</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Convolution, systems, and filtering</h2>
+                <p>In classical signal processing, a linear time-invariant system is described in discrete time by</p>
+                <div class="equation-block">
+                    $$y[n] = \sum_{k=-\infty}^{\infty} h[k]\,x[n-k],$$
+                </div>
+                <p>or equivalently in the transform domain by</p>
+                <div class="equation-block">
+                    $$Y(e^{j\omega}) = H(e^{j\omega}) X(e^{j\omega}).$$
+                </div>
+                <p>These equations are elementary, but their physiological consequences are substantial. Every filtering operation is a design decision that modifies amplitude, phase, timing, and potentially morphology. In settings such as ECG analysis, filtering is not simply a denoising stage. It becomes part of the measurement model.</p>
+
+                <p>A band-pass filter useful for QRS enhancement may be inappropriate for ST-segment analysis. A notch filter that suppresses mains interference may also distort nearby spectral content if bandwidth and phase are handled carelessly. Physiological filtering is never only about noise attenuation. It is about preserving the structure that downstream inference depends on.</p>
+
+                <h2>Frequency-domain representation and spectral estimation</h2>
+                <p>The Fourier transform and its discrete approximations remain indispensable because many physiological signals exhibit rhythm, periodic modulation, or oscillatory structure. For a finite record \(x[n]\), the discrete Fourier transform is</p>
+                <div class="equation-block">
+                    $$X[k] = \sum_{n=0}^{N-1} x[n] e^{-j 2 \pi kn / N}.$$
+                </div>
+                <p>In principle this is straightforward. In practice, the DFT of a finite physiological record is never the spectrum of an infinite stationary process. It is the transform of a finite, windowed, often nonstationary observation.</p>
+
+                <p>Welch's method remains widely used for power spectral density estimation because it reduces estimator variance by averaging modified periodograms over overlapping segments. The price paid is reduced spectral resolution. That tradeoff is often appropriate for physiological data, but it must be understood rather than applied mechanically.</p>
+
+<pre><code class="language-python">import numpy as np
+from scipy import signal
+import matplotlib.pyplot as plt
+
+fs = 250.0
+t = np.arange(0, 60, 1 / fs)
+
+x = (
+    0.7 * np.sin(2 * np.pi * 1.2 * t) +
+    0.2 * np.sin(2 * np.pi * 0.25 * t) +
+    0.05 * np.random.randn(len(t))
+)
+
+f, pxx = signal.welch(
+    x,
+    fs=fs,
+    window="hann",
+    nperseg=2048,
+    noverlap=1024,
+    detrend="constant"
+)
+
+plt.semilogy(f, pxx)
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("PSD")
+plt.title("Welch Power Spectral Density")
+plt.xlim(0, 10)
+plt.show()
+</code></pre>
+                <p>The code is simple. The engineering questions are not: whether the segment length supports the needed resolution, whether the signal is stationary enough over each segment, whether detrending removes drift or erases physiology, and whether the window balances leakage against resolution in a way the task can tolerate.</p>
+
+                <h2>Time-frequency analysis for nonstationary biosignals</h2>
+                <p>Many physiological signals are not adequately represented by one global spectrum. EEG rhythms change over time, EMG bursts are transient, cardiorespiratory coupling varies across state, and pulse signals can be intermittently corrupted by motion. In such cases, classical time-frequency methods become essential.</p>
+
+                <p>The short-time Fourier transform is defined as</p>
+                <div class="equation-block">
+                    $$X(\tau,\omega)=\sum_{n=-\infty}^{\infty} x[n]\,w[n-\tau]\,e^{-j\omega n},$$
+                </div>
+                <p>where \(w[n]\) is a local analysis window. The STFT makes the classical time-frequency tradeoff explicit: shorter windows improve time localization and degrade frequency resolution, whereas longer windows do the opposite.</p>
+
+                <p>Wavelet methods address similar problems from a multiresolution perspective and are especially useful when abrupt transients and scale-varying structure matter more than one fixed-resolution spectrum.</p>
+
+                <figure class="article-figure">
+                    <img src="/fig/images/classical-signal-processing-workflow.svg" alt="Workflow diagram showing acquisition, preprocessing, analysis, detection, and validation for physiological signal processing.">
+                    <figcaption>A serious pipeline couples acquisition, preprocessing, analysis, detection, and validation rather than treating them as isolated steps.</figcaption>
+                </figure>
+
+                <h2>Detection and morphology-aware processing</h2>
+                <p>Detection is the point at which classical concepts become operational. The Pan-Tompkins algorithm remains canonical because it translates signal-processing ideas into a concrete detection pipeline: band-pass filtering, slope enhancement, nonlinear transformation, moving integration, and adaptive thresholding.</p>
+
+                <p>Its importance lies not only in historical influence, but in the structure of the design. The method works because it encodes assumptions about morphology and slope characteristics of the QRS complex. In that sense it is not simply a detector. It is an explicit signal model operationalized through classical processing stages.</p>
+
+<pre><code class="language-python">import numpy as np
+from scipy import signal
+
+fs = 250
+t = np.arange(0, 20, 1 / fs)
+ecg_like = 0.03 * np.random.randn(len(t))
+ecg_like += 0.3 * np.sin(2 * np.pi * 0.25 * t)
+
+for beat in np.arange(1, 20, 1.0):
+    idx = np.argmin(np.abs(t - beat))
+    ecg_like[idx:idx + 3] += [0.5, 1.0, 0.4]
+
+b, a = signal.butter(2, [5 / (fs / 2), 20 / (fs / 2)], btype="bandpass")
+filtered = signal.filtfilt(b, a, ecg_like)
+peaks, _ = signal.find_peaks(filtered, distance=int(0.4 * fs), height=0.2)
+</code></pre>
+                <p>The detector and the preprocessing are not independent. Evaluating one without the other means evaluating the wrong abstraction.</p>
+
+                <h2>A research-grade workflow for physiological signal processing</h2>
+                <p>The most useful workflow is not to apply every transform in sequence. It is to pose the right signal-processing questions in the right order.</p>
+                <ul>
+                    <li><strong>Measurement:</strong> what physiological quantity is actually being sensed, and what part of the waveform comes from instrumentation rather than biology?</li>
+                    <li><strong>Acquisition:</strong> is the sampling rate sufficient for analysis as well as display and timing, and is anti-alias protection explicit?</li>
+                    <li><strong>Processing:</strong> does filtering preserve the morphology and timing relevant to the claim, and does the chosen representation match the signal assumptions?</li>
+                    <li><strong>Validation:</strong> is the method tested on public data with trusted protocols, and does preprocessing inflate apparent performance?</li>
+                </ul>
+
+                <h2>Broader relevance of classical signal processing</h2>
+                <p>It is tempting to regard classical signal processing as preparatory material superseded by data-driven models. That view is mistaken. Classical methods remain relevant not because they are old, but because they answer unavoidable questions: what has been measured, what has been distorted, what survives discretization, what assumptions support the transform being used, and what exactly is being detected or estimated.</p>
+
+                <h2>Closing perspective</h2>
+                <p>The deepest lesson of classical signal processing in physiology is that mathematics and the measurement chain cannot be separated. Sampling theory is not abstract when aliasing changes clinical interpretation. Filtering is not neutral when phase distortion deforms a diagnostic interval. Spectral estimation is not generic when the signal is nonstationary and the biological conclusion depends on band structure.</p>
+
+                <p>For engineers and researchers, that is exactly why classical concepts still matter. They remain the most reliable vocabulary for stating what was measured, what was preserved, what was distorted, and what can be defended analytically. In physiological data analysis, that is not peripheral knowledge. It is foundational knowledge.</p>
+            </div>
+            <section class="reference-panel">
+                <span class="eyebrow">References</span>
+                <ol>
+                    <li><a href="https://doi.org/10.1073/pnas.012579499" target="_blank" rel="noreferrer">Goldberger et al., Fractal dynamics in physiology: alterations with disease and aging</a></li>
+                    <li><a href="https://doi.org/10.1016/S0378-4371(97)00508-6" target="_blank" rel="noreferrer">Peng et al., Multiple-time scales analysis of physiological time series under neural control</a></li>
+                    <li><a href="https://doi.org/10.1038/383323a0" target="_blank" rel="noreferrer">Ivanov et al., Scaling behaviour of heartbeat intervals obtained by wavelet-based time-series analysis</a></li>
+                    <li><a href="https://doi.org/10.1016/0168-5597(93)90075-Z" target="_blank" rel="noreferrer">Nilsson, Panizza, and Hallett, Principles of digital sampling of a physiologic signal</a></li>
+                    <li><a href="https://doi.org/10.1016/0022-0736(91)90014-D" target="_blank" rel="noreferrer">Frankel et al., A filter to suppress ECG baseline wander and preserve ST-segment accuracy</a></li>
+                    <li><a href="https://doi.org/10.1007/BF02441986" target="_blank" rel="noreferrer">Sornmo, Time-varying digital filtering of ECG baseline wander</a></li>
+                    <li><a href="https://research.ibm.com/publications/the-use-of-fast-fourier-transform-for-the-estimation-of-power-spectra-a-method-based-on-time-averaging-over-short-modified-periodograms" target="_blank" rel="noreferrer">Welch, The use of fast Fourier transform for the estimation of power spectra</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/8598068/" target="_blank" rel="noreferrer">Task Force, Heart rate variability: standards of measurement, physiological interpretation and clinical use</a></li>
+                    <li><a href="https://doi.org/10.1088/0967-3334/21/2/303" target="_blank" rel="noreferrer">Elsenbruch et al., Time-frequency analysis of heart rate variability using short-time Fourier analysis</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/30440895/" target="_blank" rel="noreferrer">Shafer et al., Short-Time Fourier Transform Based Spike Detection of Spontaneous Peripheral Nerve Activity</a></li>
+                    <li><a href="https://doi.org/10.1088/0967-3334/26/5/R01" target="_blank" rel="noreferrer">Addison, Wavelet transforms and the ECG: a review</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/3997178/" target="_blank" rel="noreferrer">Pan and Tompkins, A real-time QRS detection algorithm</a></li>
+                    <li><a href="https://doi.org/10.1161/01.CIR.101.23.e215" target="_blank" rel="noreferrer">Goldberger et al., PhysioBank, PhysioToolkit, and PhysioNet</a></li>
+                    <li><a href="https://doi.org/10.1109/IEMBS.2011.6092053" target="_blank" rel="noreferrer">Moody and Mark, PhysioNet: physiologic signals, time series and related open source software</a></li>
+                    <li><a href="https://www.pearson.com/en-us/subject-catalog/p/discrete-time-signal-processing/P200000003226/9780137549771" target="_blank" rel="noreferrer">Oppenheim and Schafer, Discrete-Time Signal Processing</a></li>
+                </ol>
+            </section>
+            <div class="article-footer-links">
+                <a class="ghost-button" href="/topics/signals/self-supervised-representation-learning-for-human-physiological-data/">Next: Self-Supervised Representation Learning</a>
+            </div>
+            </article>
+            <aside class="article-aside">
+                <div class="article-aside-card">
+                    <span class="eyebrow">Article Context</span>
+                    <dl class="article-aside-list">
+                        <div>
+                            <dt>Topic</dt>
+                            <dd>Perception / Signals</dd>
+                        </div>
+                        <div>
+                            <dt>Type</dt>
+                            <dd>Theory</dd>
+                        </div>
+                        <div>
+                            <dt>Domain</dt>
+                            <dd>Signal Processing / Physiology</dd>
+                        </div>
+                        <div>
+                            <dt>Author</dt>
+                            <dd>P. Tomar</dd>
+                        </div>
+                        <div>
+                            <dt>Published</dt>
+                            <dd>October 2025</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="article-aside-card">
+                    <span class="eyebrow">Keywords</span>
+                    <div class="article-keywords">
+                        <span>Sampling</span>
+                        <span>Filtering</span>
+                        <span>PSD</span>
+                        <span>STFT</span>
+                        <span>Wavelets</span>
+                        <span>Detection</span>
+                        <span>Artifacts</span>
+                        <span>Validation</span>
+                    </div>
+                </div>
+                <a class="article-back-link" href="/topics/signals/">
+                    <span class="article-back-link-icon" aria-hidden="true">&#8592;</span>
+                    <span>Back to Signals</span>
+                </a>
+            </aside>
+        </div>
+    </main>
+    <footer class="site-footer"></footer>
+    <script src="/script.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] } };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="neuroide-nav" content="intelligence">
+    <title>Self-Supervised Representation Learning for Human Physiological Data | Neuroide</title>
+    <meta name="description" content="A Signals article on self-supervised representation learning for physiological data, including predictive, contrastive, masked, and multimodal objectives across ECG, EEG, and biosignals.">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo" aria-label="Neuroide home">
+                <img src="/fig/neuroide.png" alt="Neuroide">
+            </a>
+            <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <ul id="navLinks" class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/topics/signals/" class="active">Signals</a></li>
+                <li><a href="/topics/ml/">Machine Learning</a></li>
+                <li><a href="/topics/genai/">GenAI</a></li>
+                <li><a href="/topics/robotics/">Robotics</a></li>
+                <li><a href="/search/" class="nav-search-link">Search</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="article-layout">
+        <div class="article-layout-grid">
+            <article class="article-shell">
+                <div class="article-meta">
+                    <span>Intelligence / Representation and Inference</span>
+                    <span>Research Note</span>
+                    <span>Self-Supervision / Physiological Data</span>
+                </div>
+                <h1 class="article-title">Self-Supervised Representation Learning for Human Physiological Data</h1>
+                <div class="article-byline">
+                    <span><strong>Author:</strong> P. Tomar</span>
+                    <span><strong>Published:</strong> November 2025</span>
+                </div>
+                <p class="article-lead">Self-supervised representation learning has become one of the most consequential developments in modern machine learning because it offers a route to scalable pretraining without dependence on dense annotation. In the domain of human physiological data, this promise is particularly compelling.</p>
+                <div class="article-body">
+                    <h2>Abstract</h2>
+                    <p>Self-supervised representation learning has become one of the most consequential developments in modern machine learning because it offers a route to scalable pretraining without dependence on dense annotation. In the domain of human physiological data, this promise is particularly compelling. Biosignal datasets are often large in raw duration but poor in labels, expensive to annotate, heterogeneous across devices and institutions, and structured by latent physiological dynamics that cannot be reduced to simple class labels. Under these conditions, self-supervised learning is not merely a workaround for annotation scarcity. It is a research program for learning signal representations that preserve temporal structure, cross-channel dependencies, and subject-specific or state-specific regularities while remaining useful for downstream diagnosis, monitoring, and scientific inference. This article develops that perspective from first principles to current advances, with emphasis on objective design, modality-specific inductive bias, evaluation discipline, and open research challenges in electrocardiography, electroencephalography, and multimodal human physiological sensing.</p>
+
+                    <h2>Introduction</h2>
+                    <p>Human physiological data occupy a difficult position in machine learning. They are abundant in raw form yet scarce in curated labels; richly structured yet heavily contaminated by artifact; informative at multiple time scales yet often nonstationary across state, subject, device, and context. Traditional supervised pipelines are therefore constrained not only by label availability but by the mismatch between a narrow task label and the broader structure present in the signal.</p>
+
+                    <p>Self-supervised representation learning changes the problem formulation. Instead of asking only how to map a signal directly to a target label, it asks how to learn a representation that captures what is stable, predictive, and transferable in the signal before a specific label is imposed. In domains such as vision and language, this shift has already transformed the scale and quality of learned representations. In physiology, the stakes are arguably even higher because labels are expensive, biomedical datasets are fragmented, and much of the relevant structure is latent, longitudinal, and multimodal.</p>
+
+                    <p>The central claim of this article is that self-supervised learning is especially well aligned with physiological data because physiology itself is structured. Rhythms recur. Signals co-vary across channels. Dynamics unfold over time. Artifacts have their own structure. Clinical outcomes often reflect latent state rather than single local patterns. The right self-supervised objective can therefore act as a compressed scientific hypothesis about what aspects of the signal should remain invariant, predictable, or reconstructible.</p>
+
+                    <figure class="article-figure">
+                        <img src="/fig/images/ssl-physiological-data-landscape.svg" alt="Landscape of self-supervised representation learning for physiological data.">
+                        <figcaption>Core objective families, physiological structure, and downstream scientific value.</figcaption>
+                    </figure>
+
+                    <h2>Why self-supervision is a natural fit for physiological data</h2>
+                    <p>At a high level, self-supervised learning seeks representations \(z = f_\theta(x)\) from unlabeled input \(x\) by defining supervision from the data itself. The learned encoder \(f_\theta\) is then transferred to downstream tasks via linear evaluation, finetuning, or other protocols.</p>
+
+                    <p>For physiological data, this strategy is compelling for several structural reasons.</p>
+
+                    <p>First, annotation is intrinsically expensive. ECG rhythm labels, sleep-stage labels, seizure annotations, artifact masks, and clinically validated outcome labels all require expert time and often disagreement resolution. Second, raw data volume is usually much larger than annotated volume: hours or days of ECG, EEG, respiration, or wearable data may be available long before reliable labels are. Third, labels are often task-local while the data contain broader physiological structure. A label such as arrhythmia presence or sleep stage may not exhaust the information encoded in morphology, temporal coupling, patient-specific dynamics, or state transitions.</p>
+
+                    <p>From a signal-processing perspective, this means that the classical supervised pipeline throws away too much structure too early. Self-supervised learning offers a way to retain that structure in a learned representation before downstream compression into a task-specific decision rule.</p>
+
+                    <h2>Representation learning as objective design</h2>
+                    <p>The critical question in self-supervised learning is not whether labels are absent. It is what surrogate objective replaces them. In practice, modern self-supervised representation learning can be organized into several broad families:</p>
+
+                    <ul>
+                        <li>predictive objectives, which learn by forecasting or inferring future latent structure;</li>
+                        <li>contrastive objectives, which bring positive pairs together and push negatives apart;</li>
+                        <li>non-contrastive or self-distillation objectives, which align multiple views without explicit negatives;</li>
+                        <li>reconstruction and masked modeling objectives, which infer missing content from context;</li>
+                        <li>multimodal alignment objectives, which learn shared structure across different physiological or contextual streams.</li>
+                    </ul>
+
+                    <p>These are not merely algorithmic variants. They encode different assumptions about the signal class.</p>
+
+                    <h2>Predictive coding</h2>
+                    <p>Contrastive Predictive Coding (CPC) is one of the most influential early formulations in modern self-supervised learning [1]. It combines latent encoding with autoregressive prediction and uses a contrastive objective to favor representations that are informative about future latent states. In compact form, if \(c_t\) is a context representation summarizing the past and \(z_{t+k}\) is a future latent representation, CPC optimizes a contrastive objective that rewards correct future prediction among distractors.</p>
+
+                    <p>This formulation is particularly natural for physiology because many signals are driven by temporally coherent latent processes: cardiac cycles, respiratory modulation, neural rhythms, autonomic fluctuations, and behavioral state transitions. A representation that is useful for predicting near-future latent structure may be more physiologically faithful than one trained only on local classification labels.</p>
+
+                    <h2>Contrastive learning</h2>
+                    <p>The most familiar modern contrastive objective takes the form of the InfoNCE loss:</p>
+                    <div class="equation-block">
+                        \[
+                        \mathcal{L}_{\mathrm{InfoNCE}} =
+                        - \log \frac{\exp(\mathrm{sim}(z_i, z_j)/\tau)}
+                        {\sum_{k=1}^{N}\exp(\mathrm{sim}(z_i, z_k)/\tau)},
+                        \]
+                    </div>
+                    <p>where \(z_i\) and \(z_j\) form a positive pair, \(z_k\) are candidate negatives, \(\mathrm{sim}\) is typically cosine similarity, and \(\tau\) is a temperature parameter. SimCLR made this formulation widely influential by showing how augmentations and representation heads interact to produce strong transfer representations [2].</p>
+
+                    <p>In physiological data, however, the meaning of a positive pair is more subtle than in vision. Two augmentations of the same signal window are not necessarily the most meaningful positive pair. Positives may instead be defined across:</p>
+
+                    <ul>
+                        <li>time: nearby windows from the same recording,</li>
+                        <li>space: different leads or sensors observing related physiology,</li>
+                        <li>subject: windows from the same patient,</li>
+                        <li>modality: cross-signal views such as ECG and PPG,</li>
+                        <li>state: matched views under the same physiological regime.</li>
+                    </ul>
+
+                    <p>CLOCS is a particularly important example because it explicitly defined contrastive objectives across space, time, and patients for cardiac signals, showing that cardiac representation learning benefits from physiological rather than purely generic view design [3].</p>
+
+                    <h2>Non-contrastive self-distillation</h2>
+                    <p>BYOL demonstrated that useful representations can be learned by aligning multiple views even without explicit negative examples [4]. This matters for physiology because negative sampling can be problematic: two recordings from different patients may be more physiologically similar than two states from the same patient, and aggressive negative construction may inadvertently penalize clinically relevant invariances.</p>
+
+                    <p>For biosignals, non-contrastive methods raise a productive question: which invariances should be enforced, and at what granularity? The answer cannot be borrowed mechanically from computer vision.</p>
+
+                    <h2>Masked modeling and reconstruction</h2>
+                    <p>Masked autoencoders and related masked modeling approaches treat the signal as partially observed and train the model to infer missing portions from context [5]. This family is attractive for physiological data because it aligns naturally with structured temporal continuity, lead redundancy, and multimodal coupling.</p>
+
+                    <p>If a sequence \(x\) is corrupted by a masking operator \(M\), one may train an encoder-decoder pair to minimize a reconstruction objective</p>
+                    <div class="equation-block">
+                        \[
+                        \mathcal{L}_{\mathrm{rec}} = \|x - \hat{x}(M(x))\|^2
+                        \]
+                    </div>
+                    <p>or a task-specific variant. In physiology, masked modeling can be interpreted not only as signal completion but as a test of whether the representation captures local morphology, long-range temporal context, or cross-channel dependency.</p>
+
+                    <p>Recent work in EEG representation learning, such as graph-masked autoencoder approaches, extends this idea by respecting non-Euclidean spatial relations between electrodes rather than treating the signal as a flat array [6].</p>
+
+                    <h2>Table 1. Taxonomy of objective families, assumptions, and physiological failure modes</h2>
+                    <div class="article-table-shell">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Objective family</th>
+                                    <th>Core assumption</th>
+                                    <th>Useful invariance or structure</th>
+                                    <th>Typical physiological strength</th>
+                                    <th>Typical physiological failure mode</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Predictive coding</td>
+                                    <td>future latent structure is informative and locally predictable</td>
+                                    <td>temporal continuity, short-horizon dynamics</td>
+                                    <td>strong for rhythm, morphology progression, state continuity</td>
+                                    <td>fails when abrupt interventions, arrhythmias, or artifact bursts break predictability</td>
+                                </tr>
+                                <tr>
+                                    <td>Contrastive learning</td>
+                                    <td>positive pairs encode semantic similarity better than negatives</td>
+                                    <td>augmentation-defined invariance, lead/time/subject consistency</td>
+                                    <td>strong when positive-pair design reflects physiology</td>
+                                    <td>fails when augmentations erase pathology or negatives penalize clinically meaningful similarity</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-contrastive self-distillation</td>
+                                    <td>two views should align without explicit negatives</td>
+                                    <td>stability across benign transformations</td>
+                                    <td>avoids some false-negative problems in biosignals</td>
+                                    <td>can collapse toward nuisance invariances if view design is weak</td>
+                                </tr>
+                                <tr>
+                                    <td>Masked modeling</td>
+                                    <td>missing signal content is inferable from context</td>
+                                    <td>local morphology, long-range context, channel redundancy</td>
+                                    <td>strong for structured multilead or multichannel signals</td>
+                                    <td>reconstructs easy low-level statistics while missing clinically important latent structure</td>
+                                </tr>
+                                <tr>
+                                    <td>Multimodal alignment</td>
+                                    <td>synchronized modalities share latent physiological state</td>
+                                    <td>cross-system agreement, network physiology</td>
+                                    <td>promising for ECG-PPG-respiration or neurophysiological fusion</td>
+                                    <td>fails when modalities are only weakly aligned or one modality is artifact-dominated</td>
+                                </tr>
+                                <tr>
+                                    <td>Patient-aware objectives</td>
+                                    <td>subject identity stabilizes some signal structure</td>
+                                    <td>intra-subject consistency</td>
+                                    <td>useful for personalized baselines and longitudinal monitoring</td>
+                                    <td>risks overfitting to identity rather than transferable physiology</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>What makes physiological self-supervision difficult</h2>
+                    <p>The transfer of self-supervised learning from vision or speech into physiology is not trivial. Several domain-specific issues matter.</p>
+
+                    <h2>Positive-pair construction is a scientific decision</h2>
+                    <p>In images, common augmentations such as cropping or color jitter often preserve semantic identity. In physiological data, an augmentation may destroy the very phenomenon one wishes to preserve. Time warping can alter interval structure. Aggressive filtering can erase pathology. Channel dropout may remove clinically decisive evidence. Window shuffling may break physiological causality.</p>
+
+                    <p>Thus, view construction is not a technical nuisance. It is a scientific statement about what should remain invariant. Poorly chosen invariances create shortcut learning rather than robust representation learning.</p>
+
+                    <h2>Artifact is structured, not random</h2>
+                    <p>Motion contamination, electrode displacement, line interference, myogenic activity, and sensor saturation often have regular structure. A self-supervised objective can accidentally learn artifact persistence instead of physiology if training data are not curated or if augmentations preserve nuisance structure too effectively. This is especially relevant in wearable sensing and ambulatory monitoring.</p>
+
+                    <h2>Subject leakage can inflate apparent success</h2>
+                    <p>Representation learning is particularly vulnerable to evaluation mistakes when windows from the same subject appear across pretraining, validation, and downstream splits. A representation may appear highly transferable while mainly encoding subject identity or acquisition context. In physiology, evaluation design therefore matters as much as objective design.</p>
+
+                    <figure class="article-figure">
+                        <img src="/fig/images/ssl-objectives-vs-physiological-invariances.svg" alt="Objective families versus physiological invariances.">
+                        <figcaption>The central design problem is not only what objective to optimize, but which physiological equivalences it should preserve.</figcaption>
+                    </figure>
+
+                    <h2>ECG as a leading case study</h2>
+                    <p>ECG is one of the most fertile domains for physiological self-supervision because it combines high data availability, meaningful multi-lead structure, strong morphology, and clear downstream tasks. Mehari and Strodthoff provided one of the first comprehensive assessments of self-supervised learning on 12-lead clinical ECG, showing that self-supervised pretraining can improve label efficiency and robustness while making contrastive predictive coding especially effective in that setting [7].</p>
+
+                    <p>CLOCS then pushed the field further by showing that physiology-specific contrastive structure matters. Rather than treating ECG as a generic one-dimensional sequence, it used space (lead relationships), time (temporal neighborhoods), and patient structure as positive-pair design cues [3]. This was an important conceptual advance because it demonstrated that self-supervised learning for biosignals benefits from domain-aware view semantics rather than direct transplantation of image recipes.</p>
+
+                    <h2>ECG-specific design opportunities</h2>
+                    <div class="article-table-shell">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Signal property</th>
+                                    <th>Self-supervised opportunity</th>
+                                    <th>Failure mode if ignored</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>multi-lead spatial redundancy</td>
+                                    <td>cross-lead alignment or prediction</td>
+                                    <td>representation collapses to lead-specific nuisance structure</td>
+                                </tr>
+                                <tr>
+                                    <td>recurring morphology</td>
+                                    <td>beat-level or segment-level temporal consistency</td>
+                                    <td>model learns only coarse rhythm, not morphology</td>
+                                </tr>
+                                <tr>
+                                    <td>patient-specific baselines</td>
+                                    <td>patient-aware positive definitions</td>
+                                    <td>model overfits identity rather than physiology</td>
+                                </tr>
+                                <tr>
+                                    <td>sparse labeled pathology</td>
+                                    <td>pretraining for finetuning and rare-disease transfer</td>
+                                    <td>supervised model remains label-starved</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>EEG and the problem of mixtures</h2>
+                    <p>EEG presents a different challenge. Channels are mixtures of neural and non-neural sources, electrode geometry matters, and the signal is highly nonstationary across task, subject, recording hardware, and artifact conditions. This makes EEG a strong test case for whether self-supervised learning can move from channel-level memorization toward transferable latent representation.</p>
+
+                    <p>BENDR was influential because it brought transformer-based contrastive pretraining to large-scale EEG and argued for a foundation-model-like approach to encephalographic data [8]. Its significance was not only performance, but the proposal that EEG pretraining can be organized analogously to large-scale sequence modeling in other domains while still respecting biosignal structure.</p>
+
+                    <p>More recent work such as GMAEEG highlights another important direction: masked modeling that explicitly incorporates graph structure over electrodes rather than flattening spatial relationships [6]. This is a critical step for physiology because EEG is not simply a 1D sequence; it is a spatiotemporal measurement of coupled field activity.</p>
+
+                    <h2>Multimodal physiological self-supervision</h2>
+                    <p>The next major advance lies beyond single-modality pretraining. Human physiology is intrinsically multimodal. Cardiac, respiratory, vascular, electrodermal, and neural signals interact, and these interactions are often more informative than isolated channels.</p>
+
+                    <p>This suggests several multimodal self-supervised objectives:</p>
+                    <ul>
+                        <li>cross-modal agreement: align ECG and PPG representations over matched time windows;</li>
+                        <li>cross-modal prediction: use one signal stream to predict latent structure in another;</li>
+                        <li>multimodal masked modeling: reconstruct masked segments using complementary channels;</li>
+                        <li>state-consistency objectives: learn representations stable across multiple synchronized physiological measurements.</li>
+                    </ul>
+
+                    <p>The conceptual bridge here is strong: multimodal self-supervision is not only a data-fusion technique. It is a way to encode network physiology into the representation objective.</p>
+
+                    <h2>From pretext tasks to physiological foundation models</h2>
+                    <p>The field is now moving from isolated pretext-task studies toward the idea of reusable biosignal foundation models. This does not simply mean scaling model size. It means pretraining on large heterogeneous physiological corpora so that downstream tasks inherit richer priors about dynamics, morphology, coupling, and subject variation.</p>
+
+                    <p>TS2Vec, though not physiology-specific, is relevant because it framed self-supervised representation learning for time series at arbitrary semantic levels and showed that hierarchical contrastive structure can produce broadly useful temporal embeddings [9]. Physiological research can be interpreted as the specialization of this broader time-series agenda under stronger domain constraints.</p>
+
+                    <p>The frontier question is therefore not only whether self-supervised learning works on biosignals. It is what class of physiological foundation model is possible:</p>
+                    <ul>
+                        <li>modality-specific or multimodal,</li>
+                        <li>sequence-based or graph-aware,</li>
+                        <li>contrastive or masked-reconstructive,</li>
+                        <li>patient-agnostic or patient-adaptive,</li>
+                        <li>and general-purpose or clinically specialized.</li>
+                    </ul>
+
+                    <h2>A compact implementation sketch</h2>
+<pre><code class="language-python">import torch
+import torch.nn.functional as F
+
+
+def info_nce(z1, z2, temperature=0.1):
+    z1 = F.normalize(z1, dim=-1)
+    z2 = F.normalize(z2, dim=-1)
+    logits = z1 @ z2.T / temperature
+    labels = torch.arange(z1.size(0), device=z1.device)
+    return F.cross_entropy(logits, labels)
+
+
+def augment_ecg(x):
+    noise = 0.01 * torch.randn_like(x)
+    scale = 0.9 + 0.2 * torch.rand(x.size(0), 1, 1, device=x.device)
+    return scale * x + noise
+
+
+def ssl_step(encoder, batch):
+    view1 = augment_ecg(batch)
+    view2 = augment_ecg(batch)
+    z1 = encoder(view1)
+    z2 = encoder(view2)
+    loss = info_nce(z1, z2)
+    return loss
+</code></pre>
+                    <p>What matters here is not the simplicity of the loss, but the difficulty of the augmentation. In physiology, <code>augment_ecg</code> is the scientific bottleneck. If the augmentation destroys clinically meaningful morphology, the learned invariance is wrong. If it leaves nuisance variation untouched, the representation may become brittle or shortcut-driven.</p>
+
+                    <h2>Evaluation: the part that determines whether the field matures</h2>
+                    <p>A major portion of the scientific value of self-supervised learning for physiological data now depends on evaluation rigor. Several issues should be regarded as non-negotiable:</p>
+                    <ul>
+                        <li>patient-level splits rather than random window-level leakage,</li>
+                        <li>cross-device and cross-cohort testing where possible,</li>
+                        <li>linear evaluation plus finetuning rather than one protocol only,</li>
+                        <li>robustness analysis under artifact and domain shift,</li>
+                        <li>careful distinction between representation quality and downstream classifier strength.</li>
+                    </ul>
+
+                    <p>This is where many apparently strong results can become fragile. In physiology, the representation is useful only if it transfers across the shifts that matter clinically or scientifically.</p>
+
+                    <h2>Progression of the field</h2>
+                    <h2>Table 1. Progression of self-supervised representation learning for physiological data</h2>
+                    <div class="article-table-shell">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Stage</th>
+                                    <th>Main idea</th>
+                                    <th>Representative advance</th>
+                                    <th>Research implication</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>generic transfer of SSL</td>
+                                    <td>adapt vision/speech SSL objectives to biosignals</td>
+                                    <td>CPC- and contrastive-based ECG pretraining [1,7]</td>
+                                    <td>tests whether unlabeled physiological structure is exploitable at all</td>
+                                </tr>
+                                <tr>
+                                    <td>physiology-aware objective design</td>
+                                    <td>define positives using time, leads, patient structure</td>
+                                    <td>CLOCS [3]</td>
+                                    <td>objective design becomes domain science, not only ML engineering</td>
+                                </tr>
+                                <tr>
+                                    <td>sequence foundation modeling</td>
+                                    <td>large-scale sequence pretraining for EEG and related data</td>
+                                    <td>BENDR [8]</td>
+                                    <td>supports transfer across tasks and recording conditions</td>
+                                </tr>
+                                <tr>
+                                    <td>structure-aware masked modeling</td>
+                                    <td>incorporate electrode or lead geometry into reconstruction</td>
+                                    <td>GMAEEG [6]</td>
+                                    <td>graph and spatial priors become central</td>
+                                </tr>
+                                <tr>
+                                    <td>multimodal physiological SSL</td>
+                                    <td>align or predict across synchronized biosignals</td>
+                                    <td>emerging 2024 direction [10,11]</td>
+                                    <td>representation learning begins to encode organ-system interaction</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <figure class="article-figure">
+                        <img src="/fig/images/ssl-progression-for-physiology.svg" alt="Progression of self-supervised learning in physiological data.">
+                        <figcaption>From generic transfer of SSL recipes to physiology-aware representation learning and multimodal foundation models.</figcaption>
+                    </figure>
+
+                    <h2>Open research problems</h2>
+
+                    <h2>What should representations be invariant to?</h2>
+                    <p>The central design question is not only how to learn a representation, but which equivalence classes matter physiologically. Invariance to sensor gain may be desirable; invariance to ST-segment morphology may be disastrous. The theory of augmentations in biosignals remains underdeveloped.</p>
+
+                    <h2>How should multimodal coupling be represented?</h2>
+                    <p>Current methods are still largely modality-specific. Yet physiology is relational. Future progress likely depends on objectives that capture cross-system dependencies rather than only within-channel continuity.</p>
+
+                    <h2>Can self-supervised learning support clinically trustworthy transfer?</h2>
+                    <p>The field has shown label-efficiency gains, but clinically meaningful robustness under device shift, demographic heterogeneity, comorbidity, and artifact remains a harder benchmark. Representation quality must ultimately be evaluated under these shifts.</p>
+
+                    <h2>What is the right scale?</h2>
+                    <p>Foundation-model thinking is attractive, but physiological datasets are fragmented by institution, protocol, device, and privacy constraints. This makes scale a sociotechnical problem as much as a modeling problem.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>Self-supervised representation learning is one of the most promising research directions in human physiological data because it addresses a real structural bottleneck: biosignals are information-rich but label-poor. The field now has enough evidence to say that self-supervision is not merely portable to physiology. It is well matched to physiology, provided its objectives are designed with respect to temporal continuity, morphology, spatial structure, multimodal coupling, and the realities of biomedical evaluation.</p>
+
+                    <p>The deeper lesson is that representation learning in physiology should not be treated as a generic transfer of machine-learning fashion. It is a signal-science problem. The success of the next generation of methods will depend less on adopting new acronyms than on designing self-supervised objectives that are faithful to how human physiological signals are generated, measured, and interpreted.</p>
+                </div>
+                <section class="reference-panel">
+                    <span class="eyebrow">References</span>
+                    <ol>
+                        <li><a href="https://arxiv.org/abs/1807.03748" target="_blank" rel="noreferrer">van den Oord, Li, and Vinyals, Representation Learning with Contrastive Predictive Coding</a></li>
+                        <li><a href="https://simclr.github.io/" target="_blank" rel="noreferrer">Chen et al., A Simple Framework for Contrastive Learning of Visual Representations</a></li>
+                        <li><a href="https://proceedings.mlr.press/v139/kiyasseh21a.html" target="_blank" rel="noreferrer">Kiyasseh, Zhu, and Clifton, CLOCS: Contrastive Learning of Cardiac Signals Across Space, Time, and Patients</a></li>
+                        <li><a href="https://proceedings.neurips.cc/paper/2020/hash/f3ada80d5c4ee70142b17b8192b2958e-Abstract.html" target="_blank" rel="noreferrer">Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning</a></li>
+                        <li><a href="https://openaccess.thecvf.com/content/CVPR2022/html/He_Masked_Autoencoders_Are_Scalable_Vision_Learners_CVPR_2022_paper.html" target="_blank" rel="noreferrer">He et al., Masked Autoencoders Are Scalable Vision Learners</a></li>
+                        <li><a href="https://pubmed.ncbi.nlm.nih.gov/39146173/" target="_blank" rel="noreferrer">Fu et al., GMAEEG: A Self-Supervised Graph Masked Autoencoder for EEG Representation Learning</a></li>
+                        <li><a href="https://pubmed.ncbi.nlm.nih.gov/34973584/" target="_blank" rel="noreferrer">Mehari and Strodthoff, Self-supervised representation learning from 12-lead ECG data</a></li>
+                        <li><a href="https://pubmed.ncbi.nlm.nih.gov/34248521/" target="_blank" rel="noreferrer">Kostas, Aroca-Ouellette, and Rudzicz, BENDR</a></li>
+                        <li><a href="https://www.microsoft.com/en-us/research/publication/ts2vec-towards-universal-representation-of-time-series/" target="_blank" rel="noreferrer">Yue et al., TS2Vec: Towards Universal Representation of Time Series</a></li>
+                        <li><a href="https://pubmed.ncbi.nlm.nih.gov/38655374/" target="_blank" rel="noreferrer">Zhang and Cui, Self supervised learning based emotion recognition using physiological signals</a></li>
+                        <li><a href="https://pubmed.ncbi.nlm.nih.gov/36501803/" target="_blank" rel="noreferrer">Quispe et al., Applying Self-Supervised Representation Learning for Emotion Recognition Using Physiological Signals</a></li>
+                    </ol>
+                </section>
+                <div class="article-footer-links">
+                    <a class="ghost-button" href="/topics/signals/multimodal-biosignal-foundations/">Next: Multimodal Biosignal Foundation Models</a>
+                </div>
+            </article>
+            <aside class="article-aside">
+                <div class="article-aside-card">
+                    <span class="eyebrow">Article Context</span>
+                    <dl class="article-aside-list">
+                        <div>
+                            <dt>Topic</dt>
+                            <dd>Intelligence / Representation and Inference</dd>
+                        </div>
+                        <div>
+                            <dt>Type</dt>
+                            <dd>Research Note</dd>
+                        </div>
+                        <div>
+                            <dt>Domain</dt>
+                            <dd>Self-Supervision / Physiological Data</dd>
+                        </div>
+                        <div>
+                            <dt>Author</dt>
+                            <dd>P. Tomar</dd>
+                        </div>
+                        <div>
+                            <dt>Published</dt>
+                            <dd>November 2025</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="article-aside-card">
+                    <span class="eyebrow">Keywords</span>
+                    <div class="article-keywords">
+                        <span>Self-Supervision</span>
+                        <span>Representation Learning</span>
+                        <span>Physiological Data</span>
+                        <span>ECG</span>
+                        <span>EEG</span>
+                        <span>Biosignals</span>
+                        <span>Contrastive</span>
+                        <span>Masked Modeling</span>
+                        <span>Latent State</span>
+                    </div>
+                </div>
+                <a class="article-back-link" href="/topics/representation-and-inference/">
+                    <span class="article-back-link-icon" aria-hidden="true">&#8592;</span>
+                    <span>Back to Representation and Inference</span>
+                </a>
+            </aside>
+        </div>
+    </main>
+    <footer class="site-footer"></footer>
+    <script src="/script.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] } };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation-by-Design for Learning-Enabled Robotics | Neuroide</title>
+    <meta name="description" content="A Robotics article on evaluation as architecture in learning-enabled systems, with scenario coverage, evidence design, intervention logic, and trustworthy robotics practice.">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo" aria-label="Neuroide home">
+                <img src="/fig/neuroide.png" alt="Neuroide">
+            </a>
+            <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <ul id="navLinks" class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/topics/signals/">Signals</a></li>
+                <li><a href="/topics/ml/">Machine Learning</a></li>
+                <li><a href="/topics/genai/">GenAI</a></li>
+                <li><a href="/topics/robotics/" class="active">Robotics</a></li>
+                <li><a href="/search/" class="nav-search-link">Search</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
+    </header>
+        <main class="article-layout">
+        <div class="article-layout-grid">
+            <article class="article-shell">
+<div class="article-meta">
+                    <span>Action / Validation and Simulation</span>
+    <span>Research Note</span>
+    <span>Evaluation / Learning-Enabled Robotics</span>
+</div>
+<h1 class="article-title">Evaluation-by-Design for Learning-Enabled Robotics</h1>
+<div class="article-byline">
+    <span><strong>Author:</strong> P. Tomar</span>
+    <span><strong>Published:</strong> February 2026</span>
+</div>
+<p class="article-lead">Learning-enabled robotics has reached a point where system performance is no longer the only question. The harder question is whether a robot can be shown, in a structured and reproducible way, to remain acceptable under changing tasks, sensing conditions, and interaction contexts. This article argues that evaluation must move upstream from a final reporting activity to a design principle. In that framing, metrics, evidence, scenario coverage, safety margins, and intervention logic are not paperwork around the controller; they are part of the controller's engineering envelope. The article develops this idea from systems formulation to implementation practice, with emphasis on collaborative and industrial robotics. The goal is to retain research rigor while keeping the argument accessible to engineers, researchers, and technically literate readers who need to understand why trustworthy robotics depends on evaluation architecture rather than leaderboard performance alone.</p>
+                <div class="article-body">
+<h2>Abstract</h2>
+<p>Learning-enabled robotics has reached a point where system performance is no longer the only question. The harder question is whether a robot can be shown, in a structured and reproducible way, to remain acceptable under changing tasks, sensing conditions, and interaction contexts. This article argues that evaluation must move upstream from a final reporting activity to a design principle. In that framing, metrics, evidence, scenario coverage, safety margins, and intervention logic are not paperwork around the controller; they are part of the controller's engineering envelope. The article develops this idea from systems formulation to implementation practice, with emphasis on collaborative and industrial robotics. The goal is to retain research rigor while keeping the argument accessible to engineers, researchers, and technically literate readers who need to understand why trustworthy robotics depends on evaluation architecture rather than leaderboard performance alone.</p>
+<h2>Introduction</h2>
+<p>Robotics is increasingly built from components that learn: learned perception, learned policies, learned world models, learned anomaly detectors, learned calibration, and learned adaptation layers. This has changed the burden of proof. A conventional robot could often be argued from mechanism, specification, and deterministic test cases. A learning-enabled robot has to be argued from evidence under uncertainty.</p>
+<p>That is the practical meaning of evaluation-by-design. The phrase does not mean "test more." It means that evaluation requirements shape architecture from the beginning:</p>
+<ul>
+<li>what must be logged;</li>
+<li>what counts as a successful run;</li>
+<li>what counts as an unacceptable event;</li>
+<li>which scenario families must be sampled before a claim is made;</li>
+<li>and how runtime intervention is measured rather than ignored.</li>
+</ul>
+<p>This shift matters for both research and deployment. It is increasingly aligned with public standardization and regulatory pressure. The EU AI Act, for example, formalizes obligations around risk management, data governance, technical documentation, logging, and post-market monitoring for high-risk systems [1]. Industrial robotics continues to be anchored by the ISO 10218 family and ISO/TS 15066 for collaborative operation [2, 3]. NIST has likewise pushed robotics toward structured performance measurement rather than anecdotal demonstrations [4, 5].</p>
+<p>The central claim of this article is simple: in learning-enabled robotics, evaluation is part of system design because the object being engineered is not only a policy <span class="math inline">\(\pi\)</span>, but an evidence-backed closed-loop system.</p>
+<figure class="article-figure"><img src="/fig/images/evaluation_by_design_assurance_map.svg" alt="Evaluation-by-design assurance map"><figcaption>Evaluation-by-design assurance map</figcaption></figure>
+<h2>From first principles</h2>
+<p>At the most basic level, evaluating a robot means asking two different questions.</p>
+<p>The first is functional: did the robot achieve the intended task? The second is admissibility: did it achieve the task without entering states or behaviors that the application cannot tolerate? Classical robotics often emphasized the first question because the system logic was relatively fixed. Learning-enabled robotics makes the second question equally important because adaptive components can behave well in familiar conditions while becoming brittle under shift, ambiguity, or rare interaction patterns.</p>
+<p>That is why evaluation-by-design begins before experiments. It starts when the engineer decides which events are unacceptable, which variables must be measured, which scenarios must be covered, and what level of evidence is required before a claim is made.</p>
+<h2>The systems formulation</h2>
+<p>Consider a robot operating in environment state <span class="math inline">\(x_t\)</span>, with observation <span class="math inline">\(o_t\)</span>, control action <span class="math inline">\(u_t\)</span>, and latent uncertainty <span class="math inline">\(w_t\)</span>. A compact closed-loop description is</p>
+<div class="equation-block">\[
+x_{t+1} = f(x_t, u_t, w_t), \qquad
+o_t = h(x_t, v_t), \qquad
+u_t = \pi_\theta(o_{0:t}, m_t),
+\]</div>
+<p>where <span class="math inline">\(\pi_\theta\)</span> may contain learned components and <span class="math inline">\(m_t\)</span> denotes monitoring or supervisory state.</p>
+<p>The usual performance question asks whether the task objective</p>
+<div class="equation-block">\[
+J(\pi) = \mathbb{E}\!\left[\sum_{t=0}^{T} r(x_t, u_t)\right]
+\]</div>
+<p>is high. Evaluation-by-design adds a second question: under what conditions is the system admissible? That requires explicit safety and evidence constraints. A useful abstraction is</p>
+<div class="equation-block">\[
+\max_{\pi} \; J(\pi)
+\quad \text{subject to} \quad
+\mathbb{P}\!\left(g_j(\tau) > 0\right) \le \varepsilon_j,
+\]</div>
+<p>where <span class="math inline">\(g_j(\tau)\)</span> encodes a violation condition over trajectory <span class="math inline">\(\tau\)</span>, such as collision, unsafe separation, control timing overrun, or stop failure.</p>
+<p>The variables in this formulation matter. The state <span class="math inline">\(x_t\)</span> represents the evolving robot-environment configuration, <span class="math inline">\(o_t\)</span> is the information actually available to the controller, <span class="math inline">\(u_t\)</span> is the executed action, and <span class="math inline">\(w_t\)</span> collects unmodeled disturbances or uncertainty. The trajectory <span class="math inline">\(\tau\)</span> denotes an entire run rather than a single time step, which is important because many safety failures are trajectory-level events.</p>
+<p>This formulation does two important things.</p>
+<p>First, it separates objectives from non-negotiable constraints. A robot that is faster but violates safety envelopes is not better. Second, it forces evaluation to include distributions over scenarios, not only nominal runs. Let scenario parameters be sampled as <span class="math inline">\(\xi \sim p(\xi)\)</span>. Then any claim about performance is really a claim about performance over <span class="math inline">\(p(\xi)\)</span>, not over a single demonstration.</p>
+<h2>Evidence as an engineered artifact</h2>
+<p>In practice, evaluation-by-design means building an evidence graph rather than a test report. The graph links claims to artifacts:</p>
+<ul>
+<li>requirement definitions;</li>
+<li>scenario generators;</li>
+<li>runtime logs;</li>
+<li>metric computation;</li>
+<li>failure labels;</li>
+<li>safety interventions;</li>
+<li>uncertainty estimates;</li>
+<li>and traceable software versions.</li>
+</ul>
+<p>This is not bureaucracy. It is the only way to make a learning-enabled robot scientifically inspectable.</p>
+<h2>Table 1. Minimal evidence layers for a learning-enabled robotic system</h2>
+<div class="article-table-shell"><table class="article-table">
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Question answered</th>
+<th>Typical artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>task definition</td>
+<td>what is the robot supposed to achieve</td>
+<td>protocol and acceptance criteria</td>
+</tr>
+<tr class="even">
+<td>hazard definition</td>
+<td>what must never happen</td>
+<td>safety envelope, separation rules, stop conditions</td>
+</tr>
+<tr class="odd">
+<td>scenario model</td>
+<td>under what operational variability is the claim made</td>
+<td>scenario distribution, perturbation ranges, seeds</td>
+</tr>
+<tr class="even">
+<td>runtime observability</td>
+<td>what was actually measured</td>
+<td>synchronized logs, traces, system timestamps</td>
+</tr>
+<tr class="odd">
+<td>metric layer</td>
+<td>how is success quantified</td>
+<td>success rate, latency, distance margins, intervention counts</td>
+</tr>
+<tr class="even">
+<td>evidence synthesis</td>
+<td>how are claims supported</td>
+<td>confidence intervals, failure analysis, traceability matrix</td>
+</tr>
+</tbody>
+</table></div>
+<p>The strongest robotics groups already work this way, even when they do not use the term. In collaborative robotics, for example, a good study does not only report task completion. It reports separation distances, stop responses, intervention frequency, and robustness under delayed human entry, occlusion, or sensing degradation [3, 4, 6].</p>
+<h2>A design pattern for evaluation-aware robotics</h2>
+<p>The architecture consequence is that the robot should expose an evaluation interface. A practical stack often includes:</p>
+<ul>
+<li>a scenario definition layer;</li>
+<li>a control layer;</li>
+<li>a monitoring layer;</li>
+<li>a logging and synchronization layer;</li>
+<li>a metric computation layer;</li>
+<li>and a claim layer that maps aggregated evidence to acceptance rules.</li>
+</ul>
+<p>One can formalize an acceptance rule as</p>
+<div class="equation-block">\[
+\mathcal{A}(\pi) =
+\mathbf{1}\!\left[
+\mu_{\text{task}} \ge \alpha
+\;\land\;
+\mu_{\text{unsafe}} = 0
+\;\land\;
+\mu_{\text{intervention}} \le \beta
+\;\land\;
+\ell_{\max} \le L_{\max}
+\right],
+\]</div>
+<p>where <span class="math inline">\(\mu_{\text{task}}\)</span> is mean task performance, <span class="math inline">\(\mu_{\text{unsafe}}\)</span> is the observed rate of safety-critical failures, <span class="math inline">\(\mu_{\text{intervention}}\)</span> is the intervention rate, and <span class="math inline">\(\ell_{\max}\)</span> is the worst-case control latency.</p>
+<p>This rule is intentionally modest. It does not pretend to certify everything. It simply prevents the common mistake of reporting only task reward or throughput while hiding the rest of the system behavior.</p>
+<p>Conceptually, the equation says that acceptance is conjunctive rather than compensatory. In other words, high task performance cannot compensate for unsafe behavior, excessive intervention, or unacceptable control timing.</p>
+<h2>Implementation sketch</h2>
+<p>The implementation challenge is rarely the metric formula itself. The challenge is forcing all required evidence to exist in a consistent schema. A lightweight example is below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statistics <span class="im">import</span> mean</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RunRecord:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    scenario: <span class="bu">str</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    success: <span class="bu">int</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    completion_time: <span class="bu">float</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    min_separation: <span class="bu">float</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    interventions: <span class="bu">int</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    unsafe_event: <span class="bu">int</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    max_control_ms: <span class="bu">float</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize(records):</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;success_rate&quot;</span>: mean(r.success <span class="cf">for</span> r <span class="kw">in</span> records),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;mean_completion_time&quot;</span>: mean(r.completion_time <span class="cf">for</span> r <span class="kw">in</span> records),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;mean_min_separation&quot;</span>: mean(r.min_separation <span class="cf">for</span> r <span class="kw">in</span> records),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;mean_interventions&quot;</span>: mean(r.interventions <span class="cf">for</span> r <span class="kw">in</span> records),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;unsafe_rate&quot;</span>: mean(r.unsafe_event <span class="cf">for</span> r <span class="kw">in</span> records),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;max_control_ms&quot;</span>: <span class="bu">max</span>(r.max_control_ms <span class="cf">for</span> r <span class="kw">in</span> records),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> accepts(summary, success_floor<span class="op">=</span><span class="fl">0.95</span>, max_interventions<span class="op">=</span><span class="fl">1.0</span>, budget_ms<span class="op">=</span><span class="fl">20.0</span>):</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        summary[<span class="st">&quot;success_rate&quot;</span>] <span class="op">&gt;=</span> success_floor</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> summary[<span class="st">&quot;unsafe_rate&quot;</span>] <span class="op">==</span> <span class="fl">0.0</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> summary[<span class="st">&quot;mean_interventions&quot;</span>] <span class="op">&lt;=</span> max_interventions</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> summary[<span class="st">&quot;max_control_ms&quot;</span>] <span class="op">&lt;=</span> budget_ms</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<p>This is deliberately simple, but it captures the right engineering instinct: define the schema first, then define the claim. In many robotics projects the inverse happens, and evidence collection is retrofitted after the algorithm is already fixed.</p>
+<h2>Interpretation</h2>
+<p>The payoff is larger than better testing.</p>
+<p>For researchers, it sharpens problem formulation. The question becomes not "did the method improve?" but "under which scenario distribution, under which constraints, and by what evidence standard did it improve?" For engineers, it changes integration. The robot must expose observability, timestamps, intervention hooks, and scenario metadata. For managers and reviewers, it makes claims easier to trust because the evidence path is explicit.</p>
+<p>It also changes what counts as maturity. A flashy demo with a strong nominal success rate but no scenario coverage, no intervention accounting, and no confidence intervals is weak evidence. A quieter system with narrower claims but rigorous traceability is usually stronger science and better engineering.</p>
+<h2>Failure modes in evaluation practice</h2>
+<p>Several recurring mistakes undermine learning-enabled robotics:</p>
+<ul>
+<li>treating simulation performance as if it were deployment evidence;</li>
+<li>mixing nominal metrics and safety constraints into one opaque score;</li>
+<li>using random split accuracy as a substitute for operational robustness;</li>
+<li>failing to log the activation of supervisory overrides;</li>
+<li>and making deployment claims without a scenario model.</li>
+</ul>
+<p>These are not stylistic issues. They directly weaken the truth value of the reported result.</p>
+<h2>Conclusion</h2>
+<p>Evaluation-by-design is the natural methodological response to learning-enabled robotics. Once the robot includes adaptive or learned components, performance can no longer be separated cleanly from evidence architecture. The engineered object becomes a monitored, traceable, distribution-aware closed-loop system. That is the right level of abstraction for collaborative, industrial, and safety-relevant robotics.</p>
+<p>If the field takes that abstraction seriously, evaluation stops being a final chapter in a paper and becomes part of the robot's design logic. That is the change needed for robotics to remain credible as it becomes more adaptive, more autonomous, and more deeply embedded in real work.</p>
+                </div>
+<section class="reference-panel"><span class="eyebrow">References</span>
+<p>[1] Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act). Official Journal of the European Union. <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng">https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng</a></p>
+<p>[2] ISO 10218-1:2025, <em>Robotics — Safety requirements — Part 1: Industrial robots</em>. <a href="https://www.iso.org/standard/73933.html">https://www.iso.org/standard/73933.html</a></p>
+<p>[3] ISO/TS 15066:2016, <em>Robots and robotic devices — Collaborative robots</em>. <a href="https://www.iso.org/standard/62996.html">https://www.iso.org/standard/62996.html</a></p>
+<p>[4] NIST, <em>Performance of Collaborative Robot Systems</em>. <a href="https://www.nist.gov/programs-projects/performance-collaborative-robot-systems">https://www.nist.gov/programs-projects/performance-collaborative-robot-systems</a></p>
+<p>[5] NIST, <em>Standard Test Methods for Response Robots: Ground Robot Tests</em>. <a href="https://www.nist.gov/el/intelligent-systems-division-73500/standard-test-methods-response-robots/ground-robot-tests">https://www.nist.gov/el/intelligent-systems-division-73500/standard-test-methods-response-robots/ground-robot-tests</a></p>
+<p>[6] V. Villani, F. Pini, F. Leali, and C. Secchi, "Survey on human-robot collaboration in industrial settings: Safety, intuitive interfaces and applications," <em>Mechatronics</em>, vol. 55, pp. 248-266, 2018. <a href="https://doi.org/10.1016/j.mechatronics.2018.02.009">https://doi.org/10.1016/j.mechatronics.2018.02.009</a></p>
+<p>[7] S. Haddadin and E. Croft, "Physical Human-Robot Interaction," in <em>Springer Handbook of Robotics</em>, 2016. <a href="https://doi.org/10.1007/978-3-319-32552-1_69">https://doi.org/10.1007/978-3-319-32552-1_69</a></p>
+<p>[8] NIST, <em>AI Risk Management Framework (AI RMF 1.0)</em>, 2023. <a href="https://www.nist.gov/itl/ai-risk-management-framework">https://www.nist.gov/itl/ai-risk-management-framework</a></p>
+</section>
+                <div class="article-footer-links">
+                    <a class="ghost-button" href="/topics/robotics/">More Robotics Notes</a>
+                </div>
+            </article>
+            <aside class="article-aside">
+                <div class="article-aside-card">
+                    <span class="eyebrow">Article Context</span>
+                    <dl class="article-aside-list">
+                        <div>
+                            <dt>Topic</dt>
+                            <dd>Action / Validation and Simulation</dd>
+                        </div>
+                        <div>
+                            <dt>Type</dt>
+                            <dd>Research Note</dd>
+                        </div>
+                        <div>
+                            <dt>Domain</dt>
+                            <dd>Evaluation / Learning-Enabled Robotics</dd>
+                        </div>
+                        <div>
+                            <dt>Author</dt>
+                            <dd>P. Tomar</dd>
+                        </div>
+                        <div>
+                            <dt>Published</dt>
+                            <dd>February 2026</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="article-aside-card">
+                    <span class="eyebrow">Keywords</span>
+                    <div class="article-keywords">
+                        <span>Evaluation-by-Design</span>
+                        <span>Learning-Enabled Robotics</span>
+                        <span>Trustworthy Robotics</span>
+                        <span>Safety Constraints</span>
+                        <span>Evidence Architecture</span>
+                        <span>Collaborative Robotics</span>
+                        <span>Validation</span>
+                    </div>
+                </div>
+                <a class="article-back-link" href="/topics/validation-and-simulation/">
+                    <span class="article-back-link-icon" aria-hidden="true">&#8592;</span>
+                    <span>Back to Validation and Simulation</span>
+                </a>
+            </aside>
+        </div>
+    </main>
+<footer class="site-footer"></footer>
+    <script src="/script.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] } };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

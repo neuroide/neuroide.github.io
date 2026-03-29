@@ -1,7 +1,7 @@
 [
   {
     "title": "Perception",
-    "url": "/perception.html",
+    "url": "/perception/",
     "pillar": "Perception",
     "topic": "Research Pillar",
     "type": "Pillar",
@@ -10,7 +10,7 @@
   },
   {
     "title": "Intelligence",
-    "url": "/intelligence.html",
+    "url": "/intelligence/",
     "pillar": "Intelligence",
     "topic": "Research Pillar",
     "type": "Pillar",
@@ -19,7 +19,7 @@
   },
   {
     "title": "Action",
-    "url": "/action.html",
+    "url": "/action/",
     "pillar": "Action",
     "topic": "Research Pillar",
     "type": "Pillar",
@@ -28,7 +28,7 @@
   },
   {
     "title": "Signals",
-    "url": "/topics/signals/index.html",
+    "url": "/topics/signals/",
     "pillar": "Perception",
     "topic": "Signals",
     "type": "Topic",
@@ -37,7 +37,7 @@
   },
   {
     "title": "Multimodal Sensing",
-    "url": "/topics/multimodal-sensing/index.html",
+    "url": "/topics/multimodal-sensing/",
     "pillar": "Perception",
     "topic": "Multimodal Sensing",
     "type": "Topic",
@@ -46,7 +46,7 @@
   },
   {
     "title": "Physiological Systems",
-    "url": "/topics/physiological-systems/index.html",
+    "url": "/topics/physiological-systems/",
     "pillar": "Perception",
     "topic": "Physiological Systems",
     "type": "Topic",
@@ -55,7 +55,7 @@
   },
   {
     "title": "Machine Learning",
-    "url": "/topics/ml/index.html",
+    "url": "/topics/ml/",
     "pillar": "Intelligence",
     "topic": "Machine Learning",
     "type": "Topic",
@@ -64,7 +64,7 @@
   },
   {
     "title": "Generative and Reasoning Systems",
-    "url": "/topics/genai/index.html",
+    "url": "/topics/genai/",
     "pillar": "Intelligence",
     "topic": "Generative and Reasoning Systems",
     "type": "Topic",
@@ -73,7 +73,7 @@
   },
   {
     "title": "Representation and Inference",
-    "url": "/topics/representation-and-inference/index.html",
+    "url": "/topics/representation-and-inference/",
     "pillar": "Intelligence",
     "topic": "Representation and Inference",
     "type": "Topic",
@@ -82,7 +82,7 @@
   },
   {
     "title": "Robotics",
-    "url": "/topics/robotics/index.html",
+    "url": "/topics/robotics/",
     "pillar": "Action",
     "topic": "Robotics",
     "type": "Topic",
@@ -91,7 +91,7 @@
   },
   {
     "title": "Control and Planning",
-    "url": "/topics/control-and-planning/index.html",
+    "url": "/topics/control-and-planning/",
     "pillar": "Action",
     "topic": "Control and Planning",
     "type": "Topic",
@@ -100,7 +100,7 @@
   },
   {
     "title": "Validation and Simulation",
-    "url": "/topics/validation-and-simulation/index.html",
+    "url": "/topics/validation-and-simulation/",
     "pillar": "Action",
     "topic": "Validation and Simulation",
     "type": "Topic",
@@ -109,7 +109,7 @@
   },
   {
     "title": "Multimodal Diffusion in Latent Space: Theory, Architectures, and Research Frontiers",
-    "url": "/topics/genai/latent-diffusion.html",
+    "url": "/topics/genai/latent-diffusion/",
     "pillar": "Intelligence",
     "topic": "Generative and Reasoning Systems",
     "type": "Article",
@@ -118,7 +118,7 @@
   },
   {
     "title": "Physiological Signals as Dynamic Systems",
-    "url": "/topics/signals/physiological-signals-as-systems.html",
+    "url": "/topics/signals/physiological-signals-as-systems/",
     "pillar": "Perception",
     "topic": "Physiological Systems",
     "type": "Article",
@@ -127,7 +127,7 @@
   },
   {
     "title": "Classical Signal Concepts for Physiological Data",
-    "url": "/topics/signals/classical-signal-concepts-for-physiology.html",
+    "url": "/topics/signals/classical-signal-concepts-for-physiology/",
     "pillar": "Perception",
     "topic": "Signals",
     "type": "Article",
@@ -136,7 +136,7 @@
   },
   {
     "title": "Self-Supervised Representation Learning for Human Physiological Data",
-    "url": "/topics/signals/self-supervised-representation-learning-for-human-physiological-data.html",
+    "url": "/topics/signals/self-supervised-representation-learning-for-human-physiological-data/",
     "pillar": "Intelligence",
     "topic": "Representation and Inference",
     "type": "Article",
@@ -145,7 +145,7 @@
   },
   {
     "title": "Multimodal Biosignal Foundation Models: From Cross-Modal Pretraining to Generalizable Health Inference",
-    "url": "/topics/signals/multimodal-biosignal-foundations.html",
+    "url": "/topics/signals/multimodal-biosignal-foundations/",
     "pillar": "Perception",
     "topic": "Multimodal Sensing",
     "type": "Article",
@@ -154,7 +154,7 @@
   },
   {
     "title": "Advanced Signal Processing for Physiological Data",
-    "url": "/topics/signals/advanced-signal-processing-for-physiological-data.html",
+    "url": "/topics/signals/advanced-signal-processing-for-physiological-data/",
     "pillar": "Perception",
     "topic": "Signals",
     "type": "Article",
@@ -163,7 +163,7 @@
   },
   {
     "title": "Robotics Tools and Software Ecosystem",
-    "url": "/topics/robotics/tools-and-ecosystem.html",
+    "url": "/topics/robotics/tools-and-ecosystem/",
     "pillar": "Action",
     "topic": "Robotics",
     "type": "Article",
@@ -172,7 +172,7 @@
   },
   {
     "title": "Robotics as a System-Level Control Problem",
-    "url": "/topics/robotics/intralogistics-control-system.html",
+    "url": "/topics/robotics/intralogistics-control-system/",
     "pillar": "Action",
     "topic": "Control and Planning",
     "type": "Article",
@@ -181,7 +181,7 @@
   },
   {
     "title": "Engineering Validation for Intelligent Collaborative Robots",
-    "url": "/topics/robotics/engineering-validation-for-intelligent-collaborative-robots.html",
+    "url": "/topics/robotics/engineering-validation-for-intelligent-collaborative-robots/",
     "pillar": "Action",
     "topic": "Validation and Simulation",
     "type": "Article",
@@ -190,7 +190,7 @@
   },
   {
     "title": "A Serious Learning Path for Modern Robotics",
-    "url": "/topics/robotics/a-serious-learning-path-for-modern-robotics.html",
+    "url": "/topics/robotics/a-serious-learning-path-for-modern-robotics/",
     "pillar": "Action",
     "topic": "Robotics",
     "type": "Article",
@@ -199,7 +199,7 @@
   },
   {
     "title": "Perception, Intelligence, Machine Learning, and Robotics: Toward Adaptive Embodied Systems",
-    "url": "/topics/robotics/toward-adaptive-embodied-systems.html",
+    "url": "/topics/robotics/toward-adaptive-embodied-systems/",
     "pillar": "Action",
     "topic": "Robotics",
     "type": "Research Idea",
@@ -208,7 +208,7 @@
   },
   {
     "title": "Benchmarking Open-Ended Collaborative Robot Systems",
-    "url": "/topics/robotics/benchmarking-open-ended-collaborative-robot-systems.html",
+    "url": "/topics/robotics/benchmarking-open-ended-collaborative-robot-systems/",
     "pillar": "Action",
     "topic": "Validation and Simulation",
     "type": "Article",
@@ -217,7 +217,7 @@
   },
   {
     "title": "Error Propagation and Distribution Shift in Embodied Robot Systems",
-    "url": "/topics/robotics/error-propagation-and-distribution-shift-in-embodied-robot-systems.html",
+    "url": "/topics/robotics/error-propagation-and-distribution-shift-in-embodied-robot-systems/",
     "pillar": "Action",
     "topic": "Validation and Simulation",
     "type": "Article",
@@ -226,7 +226,7 @@
   },
   {
     "title": "Evaluation-by-Design for Learning-Enabled Robotics",
-    "url": "/topics/robotics/evaluation-by-design-for-learning-enabled-robotics.html",
+    "url": "/topics/robotics/evaluation-by-design-for-learning-enabled-robotics/",
     "pillar": "Action",
     "topic": "Validation and Simulation",
     "type": "Article",
@@ -235,7 +235,7 @@
   },
   {
     "title": "Hybrid Learning Control for Safe Multi-Agent Intralogistics",
-    "url": "/topics/robotics/hybrid-learning-control-for-safe-multi-agent-intralogistics.html",
+    "url": "/topics/robotics/hybrid-learning-control-for-safe-multi-agent-intralogistics/",
     "pillar": "Action",
     "topic": "Control and Planning",
     "type": "Article",
@@ -244,7 +244,7 @@
   },
   {
     "title": "Runtime-Calibrated Digital Twins for Sim-to-Real Robotics",
-    "url": "/topics/robotics/runtime-calibrated-digital-twins-for-sim-to-real-robotics.html",
+    "url": "/topics/robotics/runtime-calibrated-digital-twins-for-sim-to-real-robotics/",
     "pillar": "Action",
     "topic": "Validation and Simulation",
     "type": "Article",
@@ -253,7 +253,7 @@
   },
   {
     "title": "About Neuroide",
-    "url": "/about.html",
+    "url": "/about/",
     "pillar": "About",
     "topic": "About",
     "type": "Page",

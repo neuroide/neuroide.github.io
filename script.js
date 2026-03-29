@@ -17,11 +17,11 @@ const SEARCH_STOPWORDS = new Set([
 ]);
 
 const NAV_ITEMS = [
-  { href: "/index.html", label: "Home", key: "home" },
-  { href: "/perception.html", label: "Perception", key: "perception" },
-  { href: "/intelligence.html", label: "Intelligence", key: "intelligence" },
-  { href: "/action.html", label: "Action", key: "action" },
-  { href: "/about.html", label: "About", key: "about" },
+  { href: "/", label: "Home", key: "home" },
+  { href: "/perception/", label: "Perception", key: "perception" },
+  { href: "/intelligence/", label: "Intelligence", key: "intelligence" },
+  { href: "/action/", label: "Action", key: "action" },
+  { href: "/about/", label: "About", key: "about" },
 ];
 
 const SOCIAL_LINKS = {
@@ -61,6 +61,7 @@ const SEARCH_ICON_MARKUP = `
 `;
 
 bootstrapInitialTheme();
+normalizeCurrentLocation();
 
 function bootstrapInitialTheme() {
   try {
@@ -80,8 +81,26 @@ function toggleMenu() {
 }
 
 function normalizePath(pathname) {
-  if (!pathname || pathname === "/") return "/index.html";
-  return pathname;
+  if (!pathname || pathname === "/") return "/";
+  let normalized = pathname.replace(/\/index\.html$/, "/");
+  if (
+    normalized !== "/" && !normalized.endsWith("/") &&
+    !normalized.split("/").pop().includes(".")
+  ) {
+    normalized += "/";
+  }
+  return normalized;
+}
+
+function normalizeCurrentLocation() {
+  if (typeof window === "undefined" || !window.history?.replaceState) return;
+  const normalized = normalizePath(window.location.pathname);
+  if (normalized === window.location.pathname) return;
+  window.history.replaceState(
+    {},
+    document.title,
+    `${normalized}${window.location.search}${window.location.hash}`,
+  );
 }
 
 function getDeclaredNavKey() {
@@ -100,11 +119,11 @@ function getActiveNavKey(pathname) {
   const declared = getDeclaredNavKey();
   if (declared) return declared;
   const normalized = normalizePath(pathname);
-  if (normalized === "/about.html") return "about";
-  if (normalized === "/search.html") return "search";
-  if (normalized === "/perception.html") return "perception";
-  if (normalized === "/intelligence.html") return "intelligence";
-  if (normalized === "/action.html") return "action";
+  if (normalized === "/about/") return "about";
+  if (normalized === "/search/") return "search";
+  if (normalized === "/perception/") return "perception";
+  if (normalized === "/intelligence/") return "intelligence";
+  if (normalized === "/action/") return "action";
   if (
     normalized.startsWith("/topics/signals/") ||
     normalized.startsWith("/topics/multimodal-sensing/") ||
@@ -127,7 +146,7 @@ function buildNavList(activeKey, includeSearch) {
   const items = [...NAV_ITEMS];
   if (includeSearch) {
     items.splice(items.length - 1, 0, {
-      href: "/search.html",
+      href: "/search/",
       label: "Search",
       key: "search",
       isSearch: true,
@@ -199,7 +218,7 @@ function initializeHeader() {
     "";
 
   nav.innerHTML = `
-        <a href="/index.html" class="logo" aria-label="Neuroide home">
+        <a href="/" class="logo" aria-label="Neuroide home">
             <img src="/fig/neuroide.png" alt="Neuroide">
         </a>
         <div class="nav-primary-shell" aria-label="Primary navigation">
@@ -446,13 +465,15 @@ function enhanceNoteItems(root = document) {
 
     const href = item.getAttribute("href") || "";
     const explicitKind = item.dataset.noteKind;
+    const meta = item.querySelector(".content-meta");
+    const metaKind = meta?.querySelector(":scope > span")?.textContent.trim() ||
+      "";
     const isProgram = explicitKind
       ? explicitKind === "program"
-      : href.endsWith("/index.html");
+      : metaKind === "Topic Program" || /^\/topics\/[^/]+\/$/.test(href);
     const label = isProgram ? "Topic Program" : "Article";
     const action = isProgram ? "Explore" : "Read";
     const kind = isProgram ? "program" : "article";
-    const meta = item.querySelector(".content-meta");
 
     item.classList.add(isProgram ? "note-item-program" : "note-item-article");
     item.dataset.noteKind = kind;
@@ -493,54 +514,54 @@ function enhanceNoteItems(root = document) {
 function getPillarHrefFromTopicSlug(slug) {
   if (
     ["signals", "multimodal-sensing", "physiological-systems"].includes(slug)
-  ) return "/perception.html";
+  ) return "/perception/";
   if (["ml", "genai", "representation-and-inference"].includes(slug)) {
-    return "/intelligence.html";
+    return "/intelligence/";
   }
   if (
     ["robotics", "control-and-planning", "validation-and-simulation"].includes(
       slug,
     )
-  ) return "/action.html";
-  return "/index.html";
+  ) return "/action/";
+  return "/";
 }
 
 function getTopicPageContext() {
-  const path = window.location.pathname;
-  if (path === "/perception.html") {
+  const path = normalizePath(window.location.pathname);
+  if (path === "/perception/") {
     return {
-      backHref: "/index.html",
+      backHref: "/",
       backLabel: "Back to Home",
       kind: "pillar",
       family: "Perception",
     };
   }
-  if (path === "/intelligence.html") {
+  if (path === "/intelligence/") {
     return {
-      backHref: "/index.html",
+      backHref: "/",
       backLabel: "Back to Home",
       kind: "pillar",
       family: "Intelligence",
     };
   }
-  if (path === "/action.html") {
+  if (path === "/action/") {
     return {
-      backHref: "/index.html",
+      backHref: "/",
       backLabel: "Back to Home",
       kind: "pillar",
       family: "Action",
     };
   }
 
-  const match = path.match(/^\/topics\/([^/]+)\/index\.html$/);
+  const match = path.match(/^\/topics\/([^/]+)\/$/);
   if (!match) return null;
 
   const slug = match[1];
   const backHref = getPillarHrefFromTopicSlug(slug);
-  const backLabel = backHref === "/index.html"
+  const backLabel = backHref === "/"
     ? "Back to Home"
     : `Back to ${
-      backHref.replace("/", "").replace(".html", "").replace(/-/g, " ").replace(
+      backHref.replace(/^\/|\/$/g, "").replace(/-/g, " ").replace(
         /\b\w/g,
         (char) => char.toUpperCase(),
       )
@@ -648,7 +669,8 @@ async function enhanceTopicLayouts(root = document) {
       layout.querySelectorAll(".note-list > .note-item"),
     );
     const programCount = noteItems.filter((item) =>
-      (item.getAttribute("href") || "").endsWith("/index.html")
+      item.querySelector(".content-meta > span")?.textContent.trim() ===
+        "Topic Program"
     ).length;
     const pillarArticleGroups = searchIndex
       ? getPillarArticleGroups(searchIndex, context.family)
@@ -892,8 +914,8 @@ async function initializeSearchPage() {
       const results = getRankedSearchResults(index, query);
       renderSearchResults(results, query);
       const nextUrl = query.trim()
-        ? `/search.html?q=${encodeURIComponent(query.trim())}`
-        : "/search.html";
+        ? `/search/?q=${encodeURIComponent(query.trim())}`
+        : "/search/";
       window.history.replaceState(null, "", nextUrl);
     };
 
@@ -1123,7 +1145,7 @@ function applyImageLoadingHints(root = document) {
   featuredImages.forEach((img, index) => {
     img.decoding = "async";
     if (
-      index === 0 && normalizePath(window.location.pathname) === "/index.html"
+      index === 0 && normalizePath(window.location.pathname) === "/"
     ) {
       img.loading = "eager";
       img.fetchPriority = "high";

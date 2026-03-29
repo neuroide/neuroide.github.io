@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmarking Open-Ended Collaborative Robot Systems | Neuroide</title>
+    <meta name="description" content="A Robotics article on scenario-distribution benchmarking, protocol design, safety metrics, and evidence-producing evaluation for collaborative robot systems.">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo" aria-label="Neuroide home">
+                <img src="/fig/neuroide.png" alt="Neuroide">
+            </a>
+            <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <ul id="navLinks" class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/topics/signals/">Signals</a></li>
+                <li><a href="/topics/ml/">Machine Learning</a></li>
+                <li><a href="/topics/genai/">GenAI</a></li>
+                <li><a href="/topics/robotics/" class="active">Robotics</a></li>
+                <li><a href="/search/" class="nav-search-link">Search</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
+    </header>
+        <main class="article-layout">
+        <div class="article-layout-grid">
+            <article class="article-shell">
+<div class="article-meta">
+                    <span>Action / Validation and Simulation</span>
+    <span>Research Note</span>
+    <span>Benchmarking / Collaborative Robotics</span>
+</div>
+<h1 class="article-title">Benchmarking Open-Ended Collaborative Robot Systems</h1>
+<div class="article-byline">
+    <span><strong>Author:</strong> P. Tomar</span>
+    <span><strong>Published:</strong> January 2026</span>
+</div>
+<p class="article-lead">Collaborative robot systems are often evaluated as if they were narrow automation devices executing fixed scripts in static cells. That assumption is increasingly wrong. Modern collaborative robots operate in settings shaped by human variability, occlusion, changing task order, sensing ambiguity, and adaptive control logic. Under these conditions, benchmarking must move beyond repeatability alone and account for open-endedness without surrendering rigor. This article develops a research-grade approach to benchmarking collaborative robot systems under structured variability. It formalizes benchmark design as a scenario-distribution problem with hard safety constraints, proposes implementation patterns for evidence-producing protocols, and explains why intervention-aware metrics are now as important as success metrics.</p>
+                <div class="article-body">
+<h2>Abstract</h2>
+<p>Collaborative robot systems are often evaluated as if they were narrow automation devices executing fixed scripts in static cells. That assumption is increasingly wrong. Modern collaborative robots operate in settings shaped by human variability, occlusion, changing task order, sensing ambiguity, and adaptive control logic. Under these conditions, benchmarking must move beyond repeatability alone and account for open-endedness without surrendering rigor. This article develops a research-grade approach to benchmarking collaborative robot systems under structured variability. It formalizes benchmark design as a scenario-distribution problem with hard safety constraints, proposes implementation patterns for evidence-producing protocols, and explains why intervention-aware metrics are now as important as success metrics.</p>
+<h2>Introduction</h2>
+<p>Benchmarking is often treated as a neutral activity: define a task, run the robot, report a score. In collaborative robotics, this is misleading. Benchmarks do not simply measure capability; they define what counts as capability. A benchmark that excludes human timing variability, occlusion, or adaptive behavior may produce beautiful numbers while failing to reveal brittle deployment behavior.</p>
+<p>This is especially important in collaborative settings because the robot is not evaluated in isolation. It is evaluated as part of a socio-technical loop that includes human motion, workspace sharing, task interruption, and supervisory responses. The benchmark must therefore do two things at once:</p>
+<ul>
+<li>remain repeatable enough to support comparison;</li>
+<li>remain rich enough to expose failure under realistic variation.</li>
+</ul>
+<p>That tension is the heart of open-ended benchmarking.</p>
+<figure class="article-figure"><img src="/fig/images/open_ended_benchmark_coverage_canvas.svg" alt="Benchmark coverage canvas for collaborative robotics"><figcaption>Benchmark coverage canvas for collaborative robotics</figcaption></figure>
+<h2>From first principles</h2>
+<p>At its simplest, a benchmark is a repeatable procedure for comparing systems. In collaborative robotics, however, repeatability is not enough. If the benchmark removes the very forms of variability that make collaboration difficult, it becomes precise but uninformative.</p>
+<p>The right progression is therefore from fixed task to structured variability. One begins with a clearly specified task, then introduces controlled axes of uncertainty that are relevant to actual collaborative work: human timing, visibility, interruption, and system latency. This produces a benchmark that is still reproducible, but no longer artificially narrow.</p>
+<h2>From fixed test case to scenario distribution</h2>
+<p>Let <span class="math inline">\(\theta\)</span> denote the vector of scenario parameters: human entry time, occlusion level, lighting, payload, sensing delay, task order, obstacle placement, and other controllable factors. In a narrow benchmark, <span class="math inline">\(\theta\)</span> is effectively fixed. In an open-ended benchmark, scenarios are sampled from a distribution</p>
+<div class="equation-block">\[
+\theta \sim p(\theta).
+\]</div>
+<p>For robot system <span class="math inline">\(m\)</span>, define benchmark score</p>
+<div class="equation-block">\[
+S_m = \sum_{k=1}^{K} w_k M_{m,k},
+\]</div>
+<p>where <span class="math inline">\(M_{m,k}\)</span> are metric summaries such as success rate, cycle time, handover smoothness, minimum distance, or intervention counts. However, collaborative robotics requires hard constraints in addition to weighted metrics:</p>
+<div class="equation-block">\[
+C_j(\tau) = 0 \quad \forall j \in \{1,\dots,r\},
+\]</div>
+<p>where <span class="math inline">\(C_j\)</span> may encode collision, unsafe stop failure, workspace incursion violation, or emergency-stop noncompliance over trajectory <span class="math inline">\(\tau\)</span>.</p>
+<p>The notation reflects a basic methodological distinction. The score <span class="math inline">\(S_m\)</span> summarizes desirable behavior. The constraint family <span class="math inline">\(C_j(\tau)\)</span> encodes behavior that is unacceptable regardless of score. This distinction becomes more important, not less, as collaborative systems become more adaptive.</p>
+<p>This separation is essential. Safety-critical failures should not be averaged away inside a convenience score.</p>
+<h2>Open-endedness must be structured</h2>
+<p>The phrase open-ended environment can sound vague. It should not. In benchmarking, open-endedness should be decomposed into explicit axes:</p>
+<h2>Table 1. Structured axes of open-endedness in collaborative robot benchmarks</h2>
+<div class="article-table-shell"><table class="article-table">
+<thead>
+<tr class="header">
+<th>Axis</th>
+<th>Example variation</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>human timing</td>
+<td>early entry, late entry, hesitation, re-entry</td>
+<td>affects prediction and stop behavior</td>
+</tr>
+<tr class="even">
+<td>visibility</td>
+<td>partial occlusion, sensor dropout, glare</td>
+<td>affects perception and uncertainty handling</td>
+</tr>
+<tr class="odd">
+<td>task sequencing</td>
+<td>changed assembly order, partial completion, interruptions</td>
+<td>affects replanning and recovery</td>
+</tr>
+<tr class="even">
+<td>physical context</td>
+<td>payload changes, table offset, clutter</td>
+<td>affects manipulation and motion safety</td>
+</tr>
+<tr class="odd">
+<td>system timing</td>
+<td>network delay, inference latency, asynchronous updates</td>
+<td>affects closed-loop safety margins</td>
+</tr>
+<tr class="even">
+<td>intervention logic</td>
+<td>monitor threshold changes, fallback timing</td>
+<td>affects safety-performance tradeoff</td>
+</tr>
+</tbody>
+</table></div>
+<p>Once these axes are explicit, the benchmark becomes a designed experiment rather than an anecdotal demo.</p>
+<h2>What should be measured</h2>
+<p>A credible benchmark for collaborative robotics should report at least four classes of metrics.</p>
+<p>First, task metrics: completion rate, cycle time, handover success, assembly correctness. Second, safety metrics: minimum distance, stop response, contact count, envelope violation. Third, robustness metrics: sensitivity to occlusion, timing perturbation, or unseen human behavior. Fourth, intervention metrics: how often monitoring or fallback logic had to override nominal behavior.</p>
+<p>The intervention layer matters because collaborative systems are increasingly designed with supervision. If the robot succeeds only because its safety logic fires constantly, that is a different system from one that succeeds smoothly with few interventions.</p>
+<p>One can formalize this explicitly. Let <span class="math inline">\(m_t\)</span> be a runtime monitor:</p>
+<div class="equation-block">\[
+m_t = \mathbf{1}[g(s_t) < \delta],
+\]</div>
+<p>where <span class="math inline">\(g(s_t)\)</span> is a safety margin and <span class="math inline">\(\delta\)</span> the intervention threshold. Then intervention burden for one run is</p>
+<div class="equation-block">\[
+I(\tau) = \sum_{t=0}^{T} m_t.
+\]</div>
+<p>This should be reported alongside task success, not buried in logs. At a basic level, the benchmark asks whether the robot completed the task. At a more advanced level, it asks how much protective intervention was needed to keep the run acceptable.</p>
+<h2>A protocol design pattern</h2>
+<p>The benchmark should be specified as a protocol, not as prose. A compact implementation pattern is shown below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>protocol <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;scenario_axes&quot;</span>: {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;human_entry_time&quot;</span>: [<span class="st">&quot;early&quot;</span>, <span class="st">&quot;nominal&quot;</span>, <span class="st">&quot;late&quot;</span>],</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;occlusion&quot;</span>: [<span class="st">&quot;none&quot;</span>, <span class="st">&quot;partial&quot;</span>],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;sensor_delay_ms&quot;</span>: [<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">80</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;task_order&quot;</span>: [<span class="st">&quot;nominal&quot;</span>, <span class="st">&quot;interrupted&quot;</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;repetitions_per_condition&quot;</span>: <span class="dv">30</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;metrics&quot;</span>: [</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;success&quot;</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;completion_time&quot;</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;minimum_distance&quot;</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;intervention_count&quot;</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;unsafe_event&quot;</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;hard_failures&quot;</span>: [</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;collision&quot;</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;stop_failure&quot;</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>This structure forces transparency. The scenario space, repetitions, measured quantities, and hard failures are all declared before the run.</p>
+<h2>Statistical validity matters</h2>
+<p>Collaborative robot results are still too often reported as single-run or best-run demonstrations. That is weak evidence. For a metric <span class="math inline">\(Y_{m,s,k}\)</span> measured under method <span class="math inline">\(m\)</span>, scenario family <span class="math inline">\(s\)</span>, and repetition <span class="math inline">\(k\)</span>, the benchmark should report at minimum</p>
+<div class="equation-block">\[
+\hat{\mu}_{m,s} = \frac{1}{K}\sum_{k=1}^{K} Y_{m,s,k},
+\qquad
+\mathrm{CI}_{95} =
+\hat{\mu}_{m,s} \pm 1.96 \frac{\hat{\sigma}_{m,s}}{\sqrt{K}}.
+\]</div>
+<p>Here <span class="math inline">\(\hat{\mu}_{m,s}\)</span> is the sample mean under method <span class="math inline">\(m\)</span> and scenario family <span class="math inline">\(s\)</span>, while <span class="math inline">\(\hat{\sigma}_{m,s}\)</span> is the sample standard deviation over repetitions. The interval is not a complete uncertainty model, but it is a strong minimum for public-facing scientific claims.</p>
+<p>These intervals do not solve every validity problem, but they are far stronger than screenshot-level evidence.</p>
+<p>NIST's robotics work is valuable here because it repeatedly emphasizes task-grounded, repeatable, statistically interpretable testing rather than vague capability claims [1, 2].</p>
+<h2>Implementation and instrumentation</h2>
+<p>A benchmark is only as good as its logging architecture. The robot system should expose:</p>
+<ul>
+<li>synchronized timestamps across sensing, control, and safety events;</li>
+<li>scenario identifiers and randomized seeds;</li>
+<li>intervention events and their reasons;</li>
+<li>task-state transitions;</li>
+<li>and failure labels linked to raw traces.</li>
+</ul>
+<p>Without this instrumentation, the benchmark cannot support diagnosis, only scoring. For research-quality work, diagnosis is the more valuable output.</p>
+<h2>Interpretation</h2>
+<p>The best benchmark is not the one that produces the highest scores. It is the one that most clearly separates robust systems from brittle systems. That often means exposing the robot to the kinds of structured variability that are usually sanitized away in demos.</p>
+<p>Open-ended benchmarking is therefore not anti-rigor. It is a more mature form of rigor. Instead of pretending that real-world variability is noise around an ideal task, it treats variability as part of the object being evaluated.</p>
+<h2>Common failure modes in benchmark design</h2>
+<p>Weak collaborative-robot benchmarks often fail in recognizable ways:</p>
+<ul>
+<li>the scenario set is too narrow to reveal brittleness;</li>
+<li>task metrics are reported without intervention metrics;</li>
+<li>safety violations are folded into a composite score;</li>
+<li>human behavior is scripted too rigidly to reflect collaboration;</li>
+<li>or the evaluation cannot be replayed because traceability is poor.</li>
+</ul>
+<p>These are not merely methodological imperfections. They change the meaning of the result.</p>
+<h2>Conclusion</h2>
+<p>Benchmarking open-ended collaborative robot systems requires a shift from fixed test cases to designed scenario distributions, from aggregate success to intervention-aware evidence, and from demos to statistically grounded protocols. That shift is necessary because collaborative robotics is no longer a question of whether a robot can repeat a nominal motion. It is a question of whether the robot remains acceptable as interaction and uncertainty expand.</p>
+<p>In that sense, open-ended benchmarking is not a luxury. It is the methodological core of serious collaborative robotics.</p>
+                </div>
+<section class="reference-panel"><span class="eyebrow">References</span>
+<p>[1] NIST, <em>Performance of Collaborative Robot Systems</em>. <a href="https://www.nist.gov/programs-projects/performance-collaborative-robot-systems">https://www.nist.gov/programs-projects/performance-collaborative-robot-systems</a></p>
+<p>[2] NIST, <em>Standard Test Methods for Response Robots: Ground Robot Tests</em>. <a href="https://www.nist.gov/el/intelligent-systems-division-73500/standard-test-methods-response-robots/ground-robot-tests">https://www.nist.gov/el/intelligent-systems-division-73500/standard-test-methods-response-robots/ground-robot-tests</a></p>
+<p>[3] ISO/TS 15066:2016, <em>Robots and robotic devices — Collaborative robots</em>. <a href="https://www.iso.org/standard/62996.html">https://www.iso.org/standard/62996.html</a></p>
+<p>[4] ISO 10218-2:2011, <em>Robots and robotic devices — Safety requirements for industrial robots — Part 2: Robot systems and integration</em>. <a href="https://www.iso.org/standard/41571.html">https://www.iso.org/standard/41571.html</a></p>
+<p>[5] V. Villani, F. Pini, F. Leali, and C. Secchi, "Survey on human-robot collaboration in industrial settings: Safety, intuitive interfaces and applications," <em>Mechatronics</em>, vol. 55, pp. 248-266, 2018. <a href="https://doi.org/10.1016/j.mechatronics.2018.02.009">https://doi.org/10.1016/j.mechatronics.2018.02.009</a></p>
+<p>[6] S. Haddadin and E. Croft, "Physical Human-Robot Interaction," in <em>Springer Handbook of Robotics</em>, 2016. <a href="https://doi.org/10.1007/978-3-319-32552-1_69">https://doi.org/10.1007/978-3-319-32552-1_69</a></p>
+<p>[7] V. Zacharaki, S. Kostavelis, A. Gasteratos, and I. Dokas, "Safety bounds in human robot interaction: A survey," <em>Safety Science</em>, vol. 127, 104667, 2020. <a href="https://doi.org/10.1016/j.ssci.2020.104667">https://doi.org/10.1016/j.ssci.2020.104667</a></p>
+<p>[8] P. Lin, N. Zeng, Q. Li, and K. Nübel, "A Review of Human-Robot Collaboration Safety in Construction," <em>Systems</em>, vol. 13, no. 10, 856, 2025. <a href="https://doi.org/10.3390/systems13100856">https://doi.org/10.3390/systems13100856</a></p>
+</section>
+                <div class="article-footer-links">
+                    <a class="ghost-button" href="/topics/robotics/">More Robotics Notes</a>
+                </div>
+            </article>
+            <aside class="article-aside">
+                <div class="article-aside-card">
+                    <span class="eyebrow">Article Context</span>
+                    <dl class="article-aside-list">
+                        <div>
+                            <dt>Topic</dt>
+                            <dd>Action / Validation and Simulation</dd>
+                        </div>
+                        <div>
+                            <dt>Type</dt>
+                            <dd>Research Note</dd>
+                        </div>
+                        <div>
+                            <dt>Domain</dt>
+                            <dd>Benchmarking / Collaborative Robotics</dd>
+                        </div>
+                        <div>
+                            <dt>Author</dt>
+                            <dd>P. Tomar</dd>
+                        </div>
+                        <div>
+                            <dt>Published</dt>
+                            <dd>January 2026</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="article-aside-card">
+                    <span class="eyebrow">Keywords</span>
+                    <div class="article-keywords">
+                        <span>Collaborative Robotics</span>
+                        <span>Benchmarking</span>
+                        <span>Open-Ended Environments</span>
+                        <span>Protocol Design</span>
+                        <span>Safety Metrics</span>
+                        <span>Human-Robot Interaction</span>
+                        <span>Validation</span>
+                    </div>
+                </div>
+                <a class="article-back-link" href="/topics/validation-and-simulation/">
+                    <span class="article-back-link-icon" aria-hidden="true">&#8592;</span>
+                    <span>Back to Validation and Simulation</span>
+                </a>
+            </aside>
+        </div>
+    </main>
+<footer class="site-footer"></footer>
+    <script src="/script.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] } };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

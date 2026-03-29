@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Propagation and Distribution Shift in Embodied Robot Systems | Neuroide</title>
+    <meta name="description" content="A Robotics article on coupled failure modes, closed-loop uncertainty propagation, distribution shift, and robustness measurement across embodied robot stacks.">
+    <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo" aria-label="Neuroide home">
+                <img src="/fig/neuroide.png" alt="Neuroide">
+            </a>
+            <button id="menuToggle" class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <ul id="navLinks" class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/topics/signals/">Signals</a></li>
+                <li><a href="/topics/ml/">Machine Learning</a></li>
+                <li><a href="/topics/genai/">GenAI</a></li>
+                <li><a href="/topics/robotics/" class="active">Robotics</a></li>
+                <li><a href="/search/" class="nav-search-link">Search</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
+    </header>
+        <main class="article-layout">
+        <div class="article-layout-grid">
+            <article class="article-shell">
+<div class="article-meta">
+                    <span>Action / Validation and Simulation</span>
+    <span>Research Note</span>
+    <span>Robustness / Embodied Systems</span>
+</div>
+<h1 class="article-title">Error Propagation and Distribution Shift in Embodied Robot Systems</h1>
+<div class="article-byline">
+    <span><strong>Author:</strong> P. Tomar</span>
+    <span><strong>Published:</strong> January 2026</span>
+</div>
+<p class="article-lead">Embodied robots do not fail in isolated modules. They fail as coupled systems. A small perception error can distort state estimation, bias planning, trigger poor control, and eventually produce a safety intervention or task failure. Likewise, a modest distribution shift between development and deployment can compound across the full stack because each downstream layer assumes that upstream outputs remain within expected limits. This article develops a systems view of error propagation and distribution shift in embodied robotics. It formalizes the coupling between modules, shows why closed-loop deployment differs from offline model evaluation, and outlines implementation patterns for measuring and reducing propagation risk.</p>
+                <div class="article-body">
+<h2>Abstract</h2>
+<p>Embodied robots do not fail in isolated modules. They fail as coupled systems. A small perception error can distort state estimation, bias planning, trigger poor control, and eventually produce a safety intervention or task failure. Likewise, a modest distribution shift between development and deployment can compound across the full stack because each downstream layer assumes that upstream outputs remain within expected limits. This article develops a systems view of error propagation and distribution shift in embodied robotics. It formalizes the coupling between modules, shows why closed-loop deployment differs from offline model evaluation, and outlines implementation patterns for measuring and reducing propagation risk.</p>
+<h2>Introduction</h2>
+<p>A common mistake in robotics development is to evaluate each module locally and then assume the full system will inherit that quality. A detector may show excellent offline precision, a state estimator may look stable in nominal logs, a planner may solve the benchmark map, and a controller may track reference trajectories in simulation. Yet the full robot still fails.</p>
+<p>The reason is structural. Embodied systems are sequential, stateful, and closed-loop. Upstream uncertainty is not merely passed downstream; it is acted upon. Once the robot acts, the future observations depend on earlier errors. This is why robotics inherits compounding-error phenomena from imitation learning [1] and sim-to-real sensitivity from domain shift [2, 3], but in a more operationally dangerous form.</p>
+<p>The central claim of this article is that error propagation should be treated as a first-class systems property. It is not enough to say that each module is accurate on average. One must understand how uncertainty, bias, and shift move through the stack and back through the environment.</p>
+<figure class="article-figure"><img src="/fig/images/error_propagation_embodied_stack.svg" alt="Error propagation in an embodied robot stack"><figcaption>Error propagation in an embodied robot stack</figcaption></figure>
+<h2>From first principles</h2>
+<p>The basic intuition is straightforward. If one subsystem makes a mistake and the next subsystem trusts that output, the second subsystem inherits a distorted view of the world. In an embodied robot, that distortion is then converted into action. Once the robot acts, the future sensing problem changes as well. This feedback loop is what turns local error into system-level failure.</p>
+<p>For that reason, the right object of study is not only module accuracy, but the sensitivity of the full closed loop.</p>
+<h2>A coupled-systems formulation</h2>
+<p>Let the robot stack be decomposed into modules for perception <span class="math inline">\(P\)</span>, estimation <span class="math inline">\(E\)</span>, planning <span class="math inline">\(R\)</span>, and control <span class="math inline">\(C\)</span>. A stylized closed-loop description is</p>
+<div class="equation-block">\[
+\hat{o}_t = P(y_t), \qquad
+\hat{x}_t = E(\hat{o}_{0:t}), \qquad
+\hat{u}_t = R(\hat{x}_t, g_t), \qquad
+u_t = C(\hat{u}_t),
+\]</div>
+<p>followed by the environment transition</p>
+<div class="equation-block">\[
+x_{t+1} = f(x_t, u_t, w_t).
+\]</div>
+<p>Now define module error terms</p>
+<div class="equation-block">\[
+e_t^P = \hat{o}_t - o_t^{\star}, \qquad
+e_t^E = \hat{x}_t - x_t^{\star}, \qquad
+e_t^R = \hat{u}_t - u_t^{\star}.
+\]</div>
+<p>Under local linearization, propagation can be approximated as</p>
+<div class="equation-block">\[
+e_{t+1}
+\approx
+A_t e_t + B_t \delta_t + \eta_t,
+\]</div>
+<p>where <span class="math inline">\(e_t\)</span> aggregates module errors, <span class="math inline">\(\delta_t\)</span> captures distribution shift or disturbance, and <span class="math inline">\(A_t\)</span> captures the coupling between modules and time steps.</p>
+<p>The notation is useful because it separates three ideas. The vector <span class="math inline">\(e_t\)</span> captures the robot's internal estimation and decision errors. The term <span class="math inline">\(\delta_t\)</span> captures external mismatch, such as deployment shift. The matrix <span class="math inline">\(A_t\)</span> tells us whether the architecture attenuates or amplifies those errors over time.</p>
+<p>This equation is simple, but it contains the key idea: the effect of an error depends not only on its size, but on the gain structure of the closed loop.</p>
+<h2>Distribution shift in robotics is operational, not only statistical</h2>
+<p>In machine learning, distribution shift is often written as</p>
+<div class="equation-block">\[
+p_{\mathrm{train}}(x, y) \neq p_{\mathrm{deploy}}(x, y).
+\]</div>
+<p>For robotics, this description is necessary but incomplete. A robot changes its own future inputs. Deployment shift therefore enters both through the environment and through the robot's response to that environment. The basic statistical view is still correct, but the more advanced systems view is that shift is operationally coupled to control.</p>
+<p>Examples include:</p>
+<ul>
+<li>lighting or viewpoint change that perturbs perception;</li>
+<li>a slightly different floor friction that changes control authority;</li>
+<li>new human timing patterns that invalidate prediction horizons;</li>
+<li>and policy-induced state drift that exposes the robot to states absent from the training data.</li>
+</ul>
+<p>This last point is the compounding-error logic made famous in DAgger: once the system deviates from expert-like or nominal states, future inputs become increasingly unfamiliar [1].</p>
+<h2>Table 1. Common shift modes in embodied robotics</h2>
+<div class="article-table-shell"><table class="article-table">
+<thead>
+<tr class="header">
+<th>Shift type</th>
+<th>Upstream origin</th>
+<th>Typical downstream effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sensory shift</td>
+<td>lighting, occlusion, sensor aging, calibration drift</td>
+<td>degraded perception, false objects, missed humans</td>
+</tr>
+<tr class="even">
+<td>dynamical shift</td>
+<td>payload, friction, actuator wear, battery state</td>
+<td>tracking error, delayed stopping, planner-model mismatch</td>
+</tr>
+<tr class="odd">
+<td>interaction shift</td>
+<td>new human timing, unexpected interruption, altered workflow</td>
+<td>invalid predictions, recovery failure</td>
+</tr>
+<tr class="even">
+<td>computational shift</td>
+<td>latency spikes, dropped frames, overloaded inference</td>
+<td>stale state estimates, missed control deadlines</td>
+</tr>
+<tr class="odd">
+<td>policy-induced shift</td>
+<td>exploration, accumulated error, off-nominal recovery</td>
+<td>unobserved states and compounding failure</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Why offline metrics often mislead</h2>
+<p>Suppose a perception model has low average error on a held-out set. That does not tell us whether the downstream planner is sensitive to the rare but structured errors that remain. For example, a planner may tolerate small pose noise but fail catastrophically when a human is intermittently undetected near a handover zone.</p>
+<p>The right quantity is therefore not only module error, but propagated risk:</p>
+<div class="equation-block">\[
+\mathcal{R}_{\mathrm{sys}}
+=
+\mathbb{E}\!\left[
+\sum_{t=0}^{T} \ell(x_t, u_t)
+\right]
+\]</div>
+<p>The loss <span class="math inline">\(\ell(x_t, u_t)\)</span> can represent tracking error, unsafe proximity, intervention burden, or any other operational penalty. The important point is that the risk is evaluated over trajectories of the full robot-environment loop rather than over isolated prediction errors, and under realistic perturbations and deployment distributions. A module can improve average prediction while worsening <span class="math inline">\(\mathcal{R}_{\mathrm{sys}}\)</span> if it changes the shape of rare failures in the wrong direction.</p>
+<h2>An implementation pattern for propagation analysis</h2>
+<p>A useful practical method is perturbation tracing: inject controlled disturbances at one layer, then measure how downstream quantities move.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rollout(system, perturbation_fn, num_runs<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    records <span class="op">=</span> []</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(num_runs):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        state <span class="op">=</span> system.reset()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        done <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="kw">not</span> done:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            obs <span class="op">=</span> system.observe(state)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            obs <span class="op">=</span> perturbation_fn(obs)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            action, diagnostics <span class="op">=</span> system.step_from_observation(obs)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            state, done, info <span class="op">=</span> system.transition(action)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            records.append({</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;unsafe&quot;</span>: info[<span class="st">&quot;unsafe&quot;</span>],</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;tracking_error&quot;</span>: info[<span class="st">&quot;tracking_error&quot;</span>],</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;control_latency_ms&quot;</span>: diagnostics[<span class="st">&quot;control_latency_ms&quot;</span>],</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;intervention&quot;</span>: diagnostics[<span class="st">&quot;intervention&quot;</span>],</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            })</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> records</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize(records):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;unsafe_rate&quot;</span>: np.mean([r[<span class="st">&quot;unsafe&quot;</span>] <span class="cf">for</span> r <span class="kw">in</span> records]),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;mean_tracking_error&quot;</span>: np.mean([r[<span class="st">&quot;tracking_error&quot;</span>] <span class="cf">for</span> r <span class="kw">in</span> records]),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;p95_latency_ms&quot;</span>: np.percentile([r[<span class="st">&quot;control_latency_ms&quot;</span>] <span class="cf">for</span> r <span class="kw">in</span> records], <span class="dv">95</span>),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;intervention_rate&quot;</span>: np.mean([r[<span class="st">&quot;intervention&quot;</span>] <span class="cf">for</span> r <span class="kw">in</span> records]),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div>
+<p>This pattern is powerful because it produces a propagation map instead of a local score. One can vary lighting, delay, localization drift, or dropout rate and observe which downstream quantities are most sensitive.</p>
+<h2>Design strategies that reduce propagation risk</h2>
+<p>Several engineering responses are consistently valuable.</p>
+<p>First, calibrate uncertainty rather than only point predictions. Second, make downstream modules aware of confidence and latency. Third, monitor the activation of recovery and fallback logic. Fourth, train or validate under structured perturbations, not only nominal data. Fifth, treat closed-loop replay and simulation as tools for measuring sensitivity, not only for debugging.</p>
+<p>Domain randomization and sim-to-real transfer help when the randomized variables align with true deployment shifts [2, 3]. Dataset aggregation and related interactive methods help when policy-induced state shift is the dominant problem [1]. Robust control and supervisory logic help when the system must remain bounded even as model error grows.</p>
+<h2>Interpretation</h2>
+<p>The deeper lesson is that robotics should be evaluated at the gain structure of the stack, not only at the quality of its parts. Some systems attenuate upstream error; others amplify it. Some recover gracefully from shift; others convert a small bias into a dangerous trajectory.</p>
+<p>This is why "better perception" or "better planning" is not automatically the right question. The stronger question is: does the full closed loop become less sensitive to uncertainty and shift?</p>
+<h2>Conclusion</h2>
+<p>Error propagation and distribution shift are central problems in embodied robotics because the robot does not only infer; it acts, and its actions shape future inputs. That coupling makes module-level evaluation insufficient. Serious robotics engineering therefore needs explicit propagation analysis, shift-aware validation, and stack-level mitigation strategies.</p>
+<p>A robot becomes trustworthy not when every module looks strong in isolation, but when the entire closed loop remains stable, safe, and interpretable under the kinds of deviations that real deployment inevitably produces.</p>
+                </div>
+<section class="reference-panel"><span class="eyebrow">References</span>
+<p>[1] S. Ross, G. Gordon, and D. Bagnell, "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning," <em>AISTATS</em>, 2011. <a href="https://proceedings.mlr.press/v15/ross11a.html">https://proceedings.mlr.press/v15/ross11a.html</a></p>
+<p>[2] J. Tobin et al., "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World," <em>IROS</em>, 2017. <a href="https://arxiv.org/abs/1703.06907">https://arxiv.org/abs/1703.06907</a></p>
+<p>[3] X. B. Peng et al., "Sim-to-Real Transfer of Robotic Control with Dynamics Randomization," <em>ICRA</em>, 2018. <a href="https://doi.org/10.1109/ICRA.2018.8460528">https://doi.org/10.1109/ICRA.2018.8460528</a></p>
+<p>[4] S. Thrun, W. Burgard, and D. Fox, <em>Probabilistic Robotics</em>. MIT Press, 2005. <a href="https://mitpress.mit.edu/9780262201629/probabilistic-robotics/">https://mitpress.mit.edu/9780262201629/probabilistic-robotics/</a></p>
+<p>[5] M. Alshiekh, R. Bloem, R. Ehlers, B. Konighofer, S. Niekum, and U. Topcu, "Safe Reinforcement Learning via Shielding," <em>AAAI</em>, 2018. <a href="https://doi.org/10.1609/aaai.v32i1.11716">https://doi.org/10.1609/aaai.v32i1.11716</a></p>
+<p>[6] Y. Chebotar et al., "Closing the Sim-to-Real Loop: Adapting Simulation Randomization with Real World Experience," <em>ICRA</em>, 2019. <a href="https://doi.org/10.1109/ICRA.2019.8793748">https://doi.org/10.1109/ICRA.2019.8793748</a></p>
+<p>[7] A. Dosovitskiy et al., "CARLA: An Open Urban Driving Simulator," <em>CoRL</em>, 2017. <a href="https://proceedings.mlr.press/v78/dosovitskiy17a.html">https://proceedings.mlr.press/v78/dosovitskiy17a.html</a></p>
+</section>
+                <div class="article-footer-links">
+                    <a class="ghost-button" href="/topics/robotics/">More Robotics Notes</a>
+                </div>
+            </article>
+            <aside class="article-aside">
+                <div class="article-aside-card">
+                    <span class="eyebrow">Article Context</span>
+                    <dl class="article-aside-list">
+                        <div>
+                            <dt>Topic</dt>
+                            <dd>Action / Validation and Simulation</dd>
+                        </div>
+                        <div>
+                            <dt>Type</dt>
+                            <dd>Research Note</dd>
+                        </div>
+                        <div>
+                            <dt>Domain</dt>
+                            <dd>Robustness / Embodied Systems</dd>
+                        </div>
+                        <div>
+                            <dt>Author</dt>
+                            <dd>P. Tomar</dd>
+                        </div>
+                        <div>
+                            <dt>Published</dt>
+                            <dd>January 2026</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="article-aside-card">
+                    <span class="eyebrow">Keywords</span>
+                    <div class="article-keywords">
+                        <span>Embodied Robotics</span>
+                        <span>Error Propagation</span>
+                        <span>Distribution Shift</span>
+                        <span>Closed-Loop Systems</span>
+                        <span>Robustness</span>
+                        <span>Sim-to-Real</span>
+                        <span>Uncertainty</span>
+                    </div>
+                </div>
+                <a class="article-back-link" href="/topics/validation-and-simulation/">
+                    <span class="article-back-link-icon" aria-hidden="true">&#8592;</span>
+                    <span>Back to Validation and Simulation</span>
+                </a>
+            </aside>
+        </div>
+    </main>
+<footer class="site-footer"></footer>
+    <script src="/script.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] } };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
