@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Neuroide Research Architecture</title>
-    <meta name="description" content="About Neuroide, a research lab organized around Perception, Intelligence, and Action.">
+    <title>About | Neuroide</title>
+    <meta name="description" content="About Neuroide, a systems-oriented research lab publishing technical work across perception, intelligence, and action.">
     <link rel="icon" type="image/svg+xml" href="/fig/favicon.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,59 +29,73 @@
         </nav>
     </header>
 
-    <main class="page-shell">
+    <main class="page-shell about-page">
         <div class="container topic-layout">
-            <section class="info-panel">
+            <section class="info-panel about-hero-panel">
                 <span class="eyebrow">About Neuroide</span>
-                <h1 class="page-title">Neuroide is a research lab organized around Perception, Intelligence, and Action.</h1>
-                <p class="page-intro">The lab studies how intelligent systems sense the world, form useful internal models, and act under real constraints. The public site is structured as a research architecture, with pillar pages, topic programs, technical notes, and systems-oriented articles.</p>
+                <h1 class="page-title">Neuroide is a systems-oriented research lab organized as Perception, Intelligence, and Action.</h1>
+                <p class="page-intro">The lab studies how intelligent systems observe the world, build useful internal structure, and survive contact with real constraints. The public site is organized as a research architecture rather than a loose archive, so readers can move from sensing to modeling to robotics, control, validation, and deployment.</p>
+                <div class="about-stat-strip" aria-label="About overview">
+                    <span>3 pillars</span>
+                    <span>9 topic programs</span>
+                    <span>16 published articles</span>
+                </div>
             </section>
 
             <section class="grid">
                 <article class="info-panel">
-                    <span class="eyebrow">What It Is</span>
-                    <h2>A research lab with a systems view of autonomy.</h2>
-                    <p class="small-text">Neuroide is not a general-interest AI blog. It is a focused research and publishing effort built around one idea: intelligent systems should be designed across the full stack, from sensing and representation to control and deployment.</p>
+                    <span class="eyebrow">What It Publishes</span>
+                    <h2>Technical work with a full-stack view of intelligent systems.</h2>
+                    <p class="small-text">Neuroide is not a general-interest AI blog. It publishes long-form technical notes, research syntheses, and systems articles on biosignals, representation learning, generative modeling, robotics, control, benchmarking, and simulation.</p>
                 </article>
                 <article class="info-panel">
-                    <span class="eyebrow">Why It Matters</span>
+                    <span class="eyebrow">Why The Structure Exists</span>
                     <h2>Most technical failures happen between layers.</h2>
-                    <p class="small-text">Strong models alone are not enough. Real systems fail at sensing, uncertainty, latency, control, validation, and recovery. Neuroide focuses on those interfaces because that is where research becomes a deployable system or collapses into a demo.</p>
+                    <p class="small-text">Strong models alone are not enough. Real systems fail at sensing, uncertainty, timing, control, validation, and recovery. The pillar structure exists to keep those transitions visible instead of treating each layer as an isolated specialty.</p>
                 </article>
             </section>
 
-            <section class="info-panel">
-                <span class="eyebrow">Research Programs</span>
+            <section class="info-panel about-footprint-panel">
+                <span class="eyebrow">Current Publishing Footprint</span>
                 <div class="topic-table">
-                    <div class="topic-row">
-                        <div class="eyebrow">Perception</div>
-                        <p class="small-text">Signals, multimodal sensing, and physiological systems as the measurement layer of Neuroide.</p>
+                    <div class="topic-row about-footprint-row">
+                        <div>
+                            <div class="eyebrow">Perception</div>
+                            <span class="about-row-count">4 articles</span>
+                        </div>
+                        <p class="small-text">Signals, multimodal sensing, and physiological systems. The current archive covers dynamic systems views of biosignals, classical signal foundations, advanced signal processing, and multimodal physiological modeling.</p>
                     </div>
-                    <div class="topic-row">
-                        <div class="eyebrow">Intelligence</div>
-                        <p class="small-text">Machine learning, generative and reasoning systems, and representation and inference as the modeling layer.</p>
+                    <div class="topic-row about-footprint-row">
+                        <div>
+                            <div class="eyebrow">Intelligence</div>
+                            <span class="about-row-count">2 articles</span>
+                        </div>
+                        <p class="small-text">Machine learning, generative and reasoning systems, and representation and inference. The current public work emphasizes latent diffusion and self-supervised representation learning for physiological data.</p>
                     </div>
-                    <div class="topic-row">
-                        <div class="eyebrow">Action</div>
-                        <p class="small-text">Robotics, control and planning, and validation and simulation as the execution and evidence layer.</p>
+                    <div class="topic-row about-footprint-row">
+                        <div>
+                            <div class="eyebrow">Action</div>
+                            <span class="about-row-count">10 articles</span>
+                        </div>
+                        <p class="small-text">Robotics, control and planning, and validation and simulation. The archive is currently deepest here, with work on embodied systems, intralogistics control, collaborative robot validation, benchmarking, error propagation, and digital twins.</p>
                     </div>
                 </div>
             </section>
 
             <section class="info-panel">
-                <span class="eyebrow">Architecture</span>
+                <span class="eyebrow">How To Read The Site</span>
                 <div class="topic-table">
                     <div class="topic-row">
-                        <div class="eyebrow">Perception</div>
-                        <p class="small-text">Perception is the boundary between a system and the world: signals, multimodal sensing, physiological systems, raw measurements, sensor fusion, and the work of extracting reliable information from noisy reality.</p>
+                        <div class="eyebrow">Pillar Pages</div>
+                        <p class="small-text">Start with Perception, Intelligence, or Action if you want the high-level map of the archive and the current article index for that layer.</p>
                     </div>
                     <div class="topic-row">
-                        <div class="eyebrow">Intelligence</div>
-                        <p class="small-text">Intelligence is the internal layer where structure is learned, uncertainty is managed, and decisions become possible. This includes machine learning, generative and reasoning systems, representation learning, and inference workflows.</p>
+                        <div class="eyebrow">Topic Programs</div>
+                        <p class="small-text">Use topic pages when you want a narrower program such as Signals, Representation and Inference, Robotics, or Validation and Simulation.</p>
                     </div>
                     <div class="topic-row">
-                        <div class="eyebrow">Action</div>
-                        <p class="small-text">Action is where computation becomes behavior. This includes robotics, control and planning, validation and simulation, multi-agent coordination, deployment, and the engineering needed to survive outside controlled demonstrations.</p>
+                        <div class="eyebrow">Search and Shelf</div>
+                        <p class="small-text">Use the homepage shelf for the strongest current reads, and the search page when you want to move by method, domain, or system concept rather than by pillar.</p>
                     </div>
                 </div>
             </section>
@@ -89,54 +103,38 @@
             <section class="grid">
                 <article class="info-panel">
                     <span class="eyebrow">Current Focus</span>
-                    <h2>Building a durable research base for deployable intelligence.</h2>
-                    <p class="small-text">The current focus is to publish rigorous technical work, sharpen a distinctive systems perspective, and develop a research base that can support future products, tooling, and venture-scale execution.</p>
+                    <h2>Building a durable technical archive for deployable intelligence.</h2>
+                    <p class="small-text">The current focus is to deepen the archive across representation learning, biosignal modeling, robotics validation, and systems-level control while maintaining a coherent full-stack research point of view.</p>
                 </article>
                 <article class="info-panel">
                     <span class="eyebrow">Standard</span>
                     <h2>Scientific where needed, practical where it counts.</h2>
-                    <p class="small-text">The standard is clarity of problem framing, technical depth, and the ability to connect theory with deployable systems. The goal is not novelty theater. It is useful intelligence built on serious engineering and defensible reasoning.</p>
+                    <p class="small-text">The standard is clarity of problem framing, technical depth, clean public-facing writing, and the ability to connect theory with deployable systems. The goal is not novelty theater. It is useful intelligence built on serious engineering and defensible reasoning.</p>
                 </article>
             </section>
 
             <section class="info-panel profile-panel">
                 <div class="profile-shell">
                     <div class="profile-image">
-                        <img src="/fig/profile.png" alt="Puneet Tomar, Founder and Research Lead of Neuroide">
+                        <img src="/fig/profile.png" alt="Puneet Tomar, Founder and Research Lead of Neuroide" width="1024" height="1536" loading="lazy" decoding="async">
                     </div>
 
                     <div class="profile-identity">
                         <span class="eyebrow">Founder / Authorship / Contact</span>
                         <h2>Puneet Tomar</h2>
                         <p class="profile-role">Founder and Research Lead</p>
-                        <p class="small-text">Puneet Tomar is building Neuroide as a startup research lab organized around Perception, Intelligence, and Action. The work emphasizes technical depth, system design, and the gap between impressive models and deployable systems.</p>
-                        <h3>For research, technical collaboration, and venture conversations.</h3>
-                        <p class="small-text">Direct contact: <a href="mailto:neuroide@proton.me">neuroide@proton.me</a></p>
+                        <p class="small-text">Puneet Tomar is building Neuroide as a startup research lab organized around Perception, Intelligence, and Action. The current public archive is authored by him and emphasizes technical depth, systems framing, and the gap between impressive models and deployable systems.</p>
+                        <div class="profile-contact">
+                            <p class="small-text">For research, technical collaboration, and venture conversations.</p>
+                            <p class="small-text">Contact Email: <a class="profile-contact-link" href="mailto:neuroide@proton.me">neuroide@proton.me</a></p>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
     </main>
 
-    <footer class="site-footer">
-        <div class="container footer-grid">
-            <div>&copy; 2026 Neuroide. All rights reserved.</div>
-            <div class="footer-social" aria-label="Social media links">
-                <a class="social-link" href="https://github.com/neuroide" aria-label="GitHub">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .08 1.53 1.05 1.53 1.05.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.64-1.38-2.22-.26-4.55-1.14-4.55-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.95-2.34 4.82-4.57 5.07.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/></svg>
-                </a>
-                <a class="social-link" href="https://youtube.com/neuroide" aria-label="YouTube">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.39.58A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.87.58 9.39.58 9.39.58s7.52 0 9.39-.58a3 3 0 0 0 2.11-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.7V8.3l6.3 3.7-6.3 3.7Z"/></svg>
-                </a>
-                <a class="social-link" href="https://www.linkedin.com/in/neuroide/" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A1.98 1.98 0 1 0 5 7.46a1.98 1.98 0 0 0-.02-3.96ZM3.5 8.75h3V20.5h-3V8.75Zm5.5 0h2.88v1.6h.04c.4-.76 1.38-1.56 2.84-1.56 3.03 0 3.59 2 3.59 4.59v7.12h-3v-6.31c0-1.5-.03-3.43-2.09-3.43-2.1 0-2.42 1.64-2.42 3.32v6.42H9V8.75Z"/></svg>
-                </a>
-                <a class="social-link" href="https://x.com/neuroide_" aria-label="Twitter or X">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.88-6.97L5.98 22H2.87l7.24-8.27L.5 2h6.4l4.4 6.3L18.9 2Zm-1.1 18h1.72L5.97 3.9H4.12L17.8 20Z"/></svg>
-                </a>
-            </div>
-        </div>
-    </footer>
+    <footer class="site-footer"></footer>
 
     <script src="/script.js"></script>
 </body>

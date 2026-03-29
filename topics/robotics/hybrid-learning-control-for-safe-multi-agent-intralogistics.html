@@ -40,7 +40,7 @@
 <h1 class="article-title">Hybrid Learning Control for Safe Multi-Agent Intralogistics</h1>
 <div class="article-byline">
     <span><strong>Author:</strong> P. Tomar</span>
-    <span><strong>Published:</strong> March 2026</span>
+    <span><strong>Published:</strong> February 2026</span>
 </div>
 <p class="article-lead">Intralogistics is one of the clearest settings in which the appeal and the limits of learning-based control become visible at once. Warehouses and material-flow systems are dynamic, congested, partially uncertain, and operationally expensive, so adaptive methods are attractive. At the same time, they are governed by hard constraints on collision avoidance, deadlock prevention, throughput, timing budgets, and maintainability, so unconstrained learning is rarely acceptable. This article argues that the right engineering object is neither a purely learned policy nor a purely hand-coded heuristic, but a hybrid controller in which learning is assigned a narrow and measurable role within a larger safety-preserving architecture. The article develops this position from graph-based formulation to practical implementation and evaluation.</p>
                 <div class="article-body">
@@ -201,160 +201,6 @@ a_t^{\mathrm{fallback}}, & \text{otherwise}.
 <p>Hybrid learning control is the most credible route for safe multi-agent intralogistics because it matches the structure of the engineering problem. The system needs adaptation, but it also needs hard envelopes on feasibility, safety, and control timing. Assigning those requirements to different layers is not a workaround. It is the architecture implied by the domain.</p>
 <p>The strongest future systems will likely become more learning-enabled, not less. But they will succeed only if the learned components are embedded inside measurable, reviewable, and operationally disciplined control stacks.</p>
                 </div>
-<h2>Abstract</h2>
-<p>Intralogistics is one of the clearest settings in which the appeal and the limits of learning-based control become visible at once. Warehouses and material-flow systems are dynamic, congested, partially uncertain, and operationally expensive, so adaptive methods are attractive. At the same time, they are governed by hard constraints on collision avoidance, deadlock prevention, throughput, timing budgets, and maintainability, so unconstrained learning is rarely acceptable. This article argues that the right engineering object is neither a purely learned policy nor a purely hand-coded heuristic, but a hybrid controller in which learning is assigned a narrow and measurable role within a larger safety-preserving architecture. The article develops this position from graph-based formulation to practical implementation and evaluation.</p>
-<h2>Introduction</h2>
-<p>Modern intralogistics systems are not abstract path-planning puzzles. They are real-time resource-allocation systems in physical space. Agents share lanes, merge points, buffers, charging constraints, and compute budgets. Congestion changes rapidly, disturbances occur continuously, and the cost of poor coordination is measured in throughput loss, queue growth, stop-start motion, and occasionally unsafe behavior.</p>
-<p>This is precisely why learning has become interesting in the domain. Static rules can be too brittle when traffic structure changes. But it is also why naive end-to-end learning is risky. A method that improves average reward while occasionally inducing deadlock or violating timing budgets is not a good intralogistics controller.</p>
-<p>The central claim of this article is that learning should be used where it has comparative advantage: local prioritization, congestion prediction, dispatch ranking, adaptive parameter tuning, or residual correction. Global feasibility, hard safety, and timing guarantees should remain anchored in classical planning, formal constraints, and supervisory logic.</p>
-<p><img src="/fig/images/hybrid_control_intralogistics_design_space.svg" alt="Hybrid control design space for intralogistics" /></p>
-<h2>From first principles</h2>
-<p>An intralogistics controller solves a flow problem before it solves a learning problem. Goods must move through a shared physical network. That network has bottlenecks, capacities, contention points, and timing constraints. If those structural facts are ignored, a learning system may appear adaptive while actually making the plant harder to reason about.</p>
-<p>This is why the article starts from graph structure and constraints rather than from reinforcement learning alone. The graph expresses what movement is possible; the controller then decides how that movement should be coordinated under demand, uncertainty, and congestion.</p>
-<h2>Problem formulation</h2>
-<p>Let the material-flow system be modeled as a capacitated directed graph</p>
-<p><span class="math display">\[
-G = (V, E, c),
-\]</span></p>
-<p>where <span class="math inline">\(V\)</span> is the set of locations, <span class="math inline">\(E\)</span> the admissible transitions, and <span class="math inline">\(c_e\)</span> the capacity of edge <span class="math inline">\(e\)</span>. Let <span class="math inline">\(N\)</span> agents move over the graph with states <span class="math inline">\(x_t^i\)</span> and actions <span class="math inline">\(u_t^i\)</span>. The joint system state is <span class="math inline">\(x_t = (x_t^1, \dots, x_t^N, q_t)\)</span>, where <span class="math inline">\(q_t\)</span> includes queue, reservation, and resource information.</p>
-<p>The operational objective is rarely a single reward. A more realistic formulation is</p>
-<p>$$ \max_{\pi} ; \mathbb{E}!\left[ \lambda_1 ,\text{Throughput}(T)</p>
-<ul>
-<li>\lambda_2 ,\overline{\tau}</li>
-<li>\lambda_3 ,\text{Energy} \right] $$</li>
-</ul>
-<p>subject to</p>
-<p><span class="math display">\[
-\text{DeadlockRate} = 0,
-\qquad
-\text{CollisionRate} = 0,
-\qquad
-\ell_{\max} \le L_{\max},
-\]</span></p>
-<p>where <span class="math inline">\(\overline{\tau}\)</span> is mean delay and <span class="math inline">\(\ell_{\max}\)</span> is worst-case controller latency.</p>
-<p>Here <span class="math inline">\(D(T)\)</span> is the number of completed deliveries over horizon <span class="math inline">\(T\)</span>, <span class="math inline">\(\overline{\tau}\)</span> summarizes delay across completed jobs, and the coefficients <span class="math inline">\(\lambda_1, \lambda_2, \lambda_3\)</span> express the operational tradeoff between productivity, delay, and energy or wear. The key point is that the optimization target is multi-objective, while the safety and timing constraints remain non-negotiable.</p>
-<p>This is already enough to explain why hybridization is natural. Throughput and delay reward adaptation. Deadlock, collision, and control timing demand explicit structure.</p>
-<h2>Where learning belongs</h2>
-<p>A hybrid controller decomposes the control problem into layers with different responsibilities.</p>
-<h2>Table 1. A practical role assignment for hybrid intralogistics control</h2>
-<div class="article-table-shell"><table class="article-table">
-<thead>
-<tr class="header">
-<th>Layer</th>
-<th>Main function</th>
-<th>Best implemented as</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>route feasibility</td>
-<td>graph-valid movement and reservation feasibility</td>
-<td>deterministic planner or optimizer</td>
-</tr>
-<tr class="even">
-<td>safety envelope</td>
-<td>collision, capacity, and deadlock prevention</td>
-<td>hard constraints, shield, supervisor</td>
-</tr>
-<tr class="odd">
-<td>local prioritization</td>
-<td>who moves first under congestion</td>
-<td>learned ranking or adaptive heuristic</td>
-</tr>
-<tr class="even">
-<td>demand adaptation</td>
-<td>dispatch weighting, release timing, local rerouting bias</td>
-<td>prediction model or learned policy</td>
-</tr>
-<tr class="odd">
-<td>performance auditing</td>
-<td>throughput, delay, intervention counts, latency budgets</td>
-<td>explicit evaluation pipeline</td>
-</tr>
-</tbody>
-</table></div>
-<p>This split is not arbitrary. It reflects the fact that different subproblems have different tolerances for uncertainty.</p>
-<p>The learned component should therefore be narrow enough that its effect can be measured. A good example is a learned prioritizer over feasible candidates. Let <span class="math inline">\(\mathcal{A}_{\text{safe}}(x_t)\)</span> be the set of actions that preserve safety and feasibility. Then the learning problem is not to produce any action at all, but to rank admissible actions:</p>
-<p><span class="math display">\[
-u_t = \arg\max_{a \in \mathcal{A}_{\text{safe}}(x_t)} Q_\phi(x_t, a).
-\]</span></p>
-<p>This is a much stronger formulation than unconstrained policy learning because the feasible set is already filtered by system logic.</p>
-<h2>Hybrid control as constrained decision making</h2>
-<p>One can express the architecture as a constrained Markov decision process,</p>
-<p><span class="math display">\[
-\max_{\pi} \; \mathbb{E}_\pi \left[\sum_t r_t \right]
-\quad \text{subject to} \quad
-\mathbb{E}_\pi \left[\sum_t c_j(s_t, a_t)\right] \le d_j,
-\]</span></p>
-<p>but in deployment the stronger engineering view is often a shielded controller:</p>
-<p><span class="math display">\[
-a_t^{\mathrm{exec}} =
-\begin{cases}
-a_t^{\mathrm{learned}}, &amp; a_t^{\mathrm{learned}} \in \mathcal{A}_{\text{safe}}(x_t), \\
-a_t^{\mathrm{fallback}}, &amp; \text{otherwise}.
-\end{cases}
-\]</span></p>
-<p>The notation makes the engineering logic explicit. The learned module is allowed to optimize only inside the admissible action set <span class="math inline">\(\mathcal{A}_{\text{safe}}(x_t)\)</span>. The supervisor therefore changes the problem from unrestricted action generation to constrained action selection.</p>
-<p>This representation is operationally important. It says the learned module does not own the full system. It proposes; the supervisory structure decides what may be executed.</p>
-<p>That idea connects directly to safe reinforcement learning via shielding [1]. It also aligns with how real warehouses are engineered: autonomy is allowed where it is beneficial, but the plant still requires bounded risk and recoverable failure modes.</p>
-<h2>Implementation sketch</h2>
-<p>The following toy example shows the right software pattern. The learner scores options, but the system only permits options that pass deterministic checks.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> admissible_actions(state, graph, reservations):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    candidates <span class="op">=</span> []</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> action <span class="kw">in</span> state[<span class="st">&quot;candidate_moves&quot;</span>]:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> respects_graph(action, graph) <span class="kw">and</span> respects_reservations(action, reservations):</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            candidates.append(action)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> candidates</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> select_action(state, learner, graph, reservations, fallback):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    safe_actions <span class="op">=</span> admissible_actions(state, graph, reservations)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> safe_actions:</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> fallback(state)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    scored <span class="op">=</span> [(learner.score(state, a), a) <span class="cf">for</span> a <span class="kw">in</span> safe_actions]</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    scored.sort(key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">0</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scored[<span class="dv">0</span>][<span class="dv">1</span>]</span></code></pre></div>
-<p>This design is intentionally conservative. In intralogistics that is usually a virtue. A learner that operates inside a feasibility envelope can still improve throughput, but it does so without silently taking ownership of safety-critical logic.</p>
-<h2>Evaluation and acceptance criteria</h2>
-<p>The correct benchmark is system-level, not policy-level. For controller <span class="math inline">\(m\)</span>, scenario family <span class="math inline">\(s\)</span>, and seed <span class="math inline">\(k\)</span>, let <span class="math inline">\(Y_{m,s,k}\)</span> denote one run outcome. Then strong evaluation includes</p>
-<p><span class="math display">\[
-\text{Throughput}(T) = \frac{D(T)}{T},
-\qquad
-\text{DeadlockRate}_{m,s} = \frac{1}{K}\sum_{k=1}^{K} d_k,
-\]</span></p>
-<p><span class="math display">\[
-\overline{\tau}_{m,s} = \frac{1}{|\mathcal{C}|}\sum_{i \in \mathcal{C}} \tau_i,
-\qquad
-\ell_{\max}^{m,s} = \max_k \ell_k.
-\]</span></p>
-<p>A practical decision rule can be written as</p>
-<p><span class="math display">\[
-\Delta \text{Throughput} &gt; 0,
-\qquad
-\Delta \text{DeadlockRate} \le 0,
-\qquad
-\ell_{\max} \le L_{\max}.
-\]</span></p>
-<p>This is a better acceptance rule than "the reward improved" because it respects the operational structure of the problem.</p>
-<p>It also makes the progression from basic to advanced reasoning clear. The basic question is whether more deliveries are completed. The more advanced question is whether that gain survives safety, deadlock, and compute-budget accounting. Serious intralogistics research must answer the second question, not only the first.</p>
-<h2>Interpretation</h2>
-<p>Hybrid control is sometimes described as a compromise. That undersells it. In intralogistics, it is better understood as a principled allocation of algorithmic responsibility.</p>
-<p>Learning is strongest where local adaptation matters and the search space is too large for fixed rules. Classical control and combinatorial structure are strongest where admissibility, interpretability, and timing discipline matter. A good hybrid controller therefore does not dilute rigor. It concentrates flexibility in the narrow region where flexibility is valuable.</p>
-<h2>What weak papers often miss</h2>
-<p>Several mistakes recur in the literature and in industrial prototypes:</p>
-<ul>
-<li>using simulation reward as a proxy for plant performance;</li>
-<li>failing to report control latency or compute variability;</li>
-<li>allowing a learned policy to generate infeasible actions and correcting them too late;</li>
-<li>reporting average throughput without deadlock and queue-tail statistics;</li>
-<li>and treating multi-agent coordination as if it were only a local navigation problem.</li>
-</ul>
-<p>These mistakes matter because intralogistics is a systems problem. The unit of success is the flow architecture, not the isolated agent.</p>
-<h2>Conclusion</h2>
-<p>Hybrid learning control is the most credible route for safe multi-agent intralogistics because it matches the structure of the engineering problem. The system needs adaptation, but it also needs hard envelopes on feasibility, safety, and control timing. Assigning those requirements to different layers is not a workaround. It is the architecture implied by the domain.</p>
-<p>The strongest future systems will likely become more learning-enabled, not less. But they will succeed only if the learned components are embedded inside measurable, reviewable, and operationally disciplined control stacks.</p>
-                </div>
 <section class="reference-panel"><span class="eyebrow">References</span>
 <p>[1] M. Alshiekh, R. Bloem, R. Ehlers, B. Konighofer, S. Niekum, and U. Topcu, "Safe Reinforcement Learning via Shielding," <em>AAAI</em>, 2018. <a href="https://doi.org/10.1609/aaai.v32i1.11716">https://doi.org/10.1609/aaai.v32i1.11716</a></p>
 <p>[2] R. Stern et al., "Multi-agent pathfinding: Definitions, variants, and benchmarks," <em>Proceedings of the International Symposium on Combinatorial Search</em>, vol. 10, no. 1, pp. 151-158, 2021. <a href="https://doi.org/10.1609/socs.v10i1.18510">https://doi.org/10.1609/socs.v10i1.18510</a></p>
@@ -390,7 +236,7 @@ a_t^{\mathrm{fallback}}, &amp; \text{otherwise}.
                         </div>
                         <div>
                             <dt>Published</dt>
-                            <dd>March 2026</dd>
+                            <dd>February 2026</dd>
                         </div>
                     </dl>
                 </div>
@@ -413,17 +259,7 @@ a_t^{\mathrm{fallback}}, &amp; \text{otherwise}.
             </aside>
         </div>
     </main>
-<footer class="site-footer">
-        <div class="container footer-grid">
-            <div>&copy; 2026 Neuroide. All rights reserved.</div>
-            <div class="footer-social" aria-label="Social media links">
-                <a class="social-link" href="https://github.com/neuroide" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .08 1.53 1.05 1.53 1.05.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.64-1.38-2.22-.26-4.55-1.14-4.55-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.95-2.34 4.82-4.57 5.07.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/></svg></a>
-                <a class="social-link" href="https://youtube.com/neuroide" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.39.58A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.87.58 9.39.58 9.39.58s7.52 0 9.39-.58a3 3 0 0 0 2.11-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.7V8.3l6.3 3.7-6.3 3.7Z"/></svg></a>
-                <a class="social-link" href="https://www.linkedin.com/in/neuroide/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A1.98 1.98 0 1 0 5 7.46a1.98 1.98 0 0 0-.02-3.96ZM3.5 8.75h3V20.5h-3V8.75Zm5.5 0h2.88v1.6h.04c.4-.76 1.38-1.56 2.84-1.56 3.03 0 3.59 2 3.59 4.59v7.12h-3v-6.31c0-1.5-.03-3.43-2.09-3.43-2.1 0-2.42 1.64-2.42 3.32v6.42H9V8.75Z"/></svg></a>
-                <a class="social-link" href="https://x.com/neuroide_" aria-label="Twitter or X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.88-6.97L5.98 22H2.87l7.24-8.27L.5 2h6.4l4.4 6.3L18.9 2Zm-1.1 18h1.72L5.97 3.9H4.12L17.8 20Z"/></svg></a>
-            </div>
-        </div>
-    </footer>
+<footer class="site-footer"></footer>
     <script src="/script.js"></script>
     <script>
         window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] } };

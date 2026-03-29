@@ -108,33 +108,6 @@
     "keywords": "validation simulation benchmarking safety digital twin evidence"
   },
   {
-    "title": "Variational Inference and the ELBO",
-    "url": "/topics/ml/variational-inference.html",
-    "pillar": "Intelligence",
-    "topic": "Representation and Inference",
-    "type": "Article",
-    "excerpt": "A technical note on variational inference, KL divergence, and the evidence lower bound.",
-    "keywords": "variational inference elbo kl latent variable bayesian"
-  },
-  {
-    "title": "Contrastive Representation Learning",
-    "url": "/topics/ml/contrastive-learning.html",
-    "pillar": "Intelligence",
-    "topic": "Representation and Inference",
-    "type": "Article",
-    "excerpt": "A technical note on InfoNCE, SimCLR, and the geometry of learned embeddings.",
-    "keywords": "contrastive learning infonce simclr embeddings representation"
-  },
-  {
-    "title": "Test-Time Compute for Reasoning Models",
-    "url": "/topics/genai/test-time-scaling.html",
-    "pillar": "Intelligence",
-    "topic": "Generative and Reasoning Systems",
-    "type": "Article",
-    "excerpt": "Inference-time scaling for reasoning models, including self-consistency and verifier-guided decoding.",
-    "keywords": "test-time compute reasoning llm self-consistency verifier"
-  },
-  {
     "title": "Multimodal Diffusion in Latent Space: Theory, Architectures, and Research Frontiers",
     "url": "/topics/genai/latent-diffusion.html",
     "pillar": "Intelligence",
@@ -187,15 +160,6 @@
     "type": "Article",
     "excerpt": "A research note on adaptive filtering, source separation, state-space models, nonlinear methods, and sparse inference for physiological data.",
     "keywords": "advanced signal processing physiology adaptive filtering wavelets ica state-space bayesian nonlinear sparse emd biosignals"
-  },
-  {
-    "title": "Useful Frameworks and Domains in Robotics",
-    "url": "/topics/robotics/frameworks-and-domains.html",
-    "pillar": "Action",
-    "topic": "Robotics",
-    "type": "Article",
-    "excerpt": "A structured overview of useful frameworks and application domains in robotics.",
-    "keywords": "robotics frameworks domains control planning perception systems"
   },
   {
     "title": "Robotics Tools and Software Ecosystem",
